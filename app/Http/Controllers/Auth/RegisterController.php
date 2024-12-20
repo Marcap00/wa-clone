@@ -51,10 +51,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'confirmed'],
             'phone_number' => ['required', 'string', 'min:9', 'unique:users'],
-            'avatar' => ['nullable', 'text'],
-            'biography' => ['nullable', 'string'],
+            'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp,PNG,JPG,JPEG,GIF,SVG,WEBP', 'max:2048'],
+            'biography' => ['nullable', 'string', 'max:255'],
         ]);
     }
 
@@ -66,12 +66,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $imagePath = request()->file('avatar')->store('avatars', 'public');
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone_number' => $data['phone_number'],
-            'avatar' => $data['avatar'],
+            'avatar' => url('storage/' . $imagePath),
             'biography' => $data['biography'],
         ]);
     }
