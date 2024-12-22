@@ -38,6 +38,12 @@
 }
 
 /* % GENERAL */
+a {
+    text-decoration: none;
+    color: #000;
+    display: inline-block;
+}
+
 ul {
     list-style: none;
 }
@@ -54,6 +60,10 @@ time {
 
 input:focus {
     outline: .1rem solid #a7a7a7;
+}
+
+.h-main {
+    height: calc(100vh - 140px);
 }
 
 /* % Icons Style */

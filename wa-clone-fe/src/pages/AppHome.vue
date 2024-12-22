@@ -6,7 +6,7 @@ import AppFooter from '../components/general/AppFooter.vue'
 
 <template>
     <AppHeader />
-    <main class="vh-100">
+    <main class="h-main">
         <AppHomeMain />
     </main>
     <AppFooter />
