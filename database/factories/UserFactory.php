@@ -27,7 +27,8 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            /* 'password' => static::$password ??= Hash::make('password'), */
+            'password' => "user",
             'remember_token' => Str::random(10),
             'phone_number' => fake()->phoneNumber(),
             'avatar' => 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
