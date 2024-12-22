@@ -3,10 +3,7 @@ import { useActiveIndexStore } from '../js/stores/active_index'
 import { useContactsStore } from '../js/stores/contacts'
 
 const contactsStore = useContactsStore()
-
 const activeIndexStore = useActiveIndexStore()
-
-/* activeIndexStore.activeIndex = props.activeIndex */
 
 function getImagePath(imagePath) {
     return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
@@ -16,6 +13,7 @@ function setActiveContact(i) {
     activeIndexStore.activeIndex = i
     console.log(activeIndexStore.activeIndex)
 }
+
 </script>
 
 <template>

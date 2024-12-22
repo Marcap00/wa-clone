@@ -1,6 +1,12 @@
 <script setup>
-import { ref } from 'vue';
-const textToFind = ref('');
+import { useContactsStore } from '../js/stores/contacts';
+import { onBeforeUpdate, onMounted } from 'vue';
+const contactsStore = useContactsStore();
+
+onBeforeUpdate(() => {
+    console.log(contactsStore.textToFind);
+    contactsStore.searchContacts();
+});
 </script>
 
 <template>
@@ -8,7 +14,7 @@ const textToFind = ref('');
         <!-- Icons Search Bar -->
         <i class="fas fa-search bg-white border border-light px-3"></i>
         <!-- Input search -->
-        <input v-model="textToFind" name="textToFind" type="text" class="w-100 border border-light p-2"
+        <input v-model="contactsStore.textToFind" name="textToFind" type="text" class="w-100 border border-light p-2"
             placeholder="Cerca o inizia una nuova chat">
     </div>
 </template>

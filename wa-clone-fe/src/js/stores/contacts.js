@@ -3,7 +3,8 @@ import axios from 'axios';
 export const useContactsStore = defineStore('contacts', {
     state: () => ({
         contacts: [],
-        apiUrlContacts: 'http://localhost:8000/api/contacts'
+        apiUrlContacts: 'http://localhost:8000/api/contacts',
+        textToFind: ''
     }),
     actions: {
         async getContacts() {
@@ -14,6 +15,20 @@ export const useContactsStore = defineStore('contacts', {
             } catch (error) {
                 console.error('Errore nel caricamento dei contatti:', error);
             }
+        },
+        capitalize(text) {
+            return text.charAt(0).toUpperCase() + text.substring(1);
+        },
+        isInclude(text, textToFind) {
+            text = text.toLowerCase();
+            textToFind = textToFind.toLowerCase();
+            return text.includes(textToFind);
+        },
+        searchContacts() {
+            this.contacts.forEach(contact => {
+                contact.visible = this.isInclude(contact.name, this.textToFind);
+                contact.name = this.capitalize(contact.name);
+            });
         }
     }
 });
