@@ -1,4 +1,8 @@
 <script setup>
+
+function reload() {
+    location.reload();
+}
 </script>
 
 <template>
