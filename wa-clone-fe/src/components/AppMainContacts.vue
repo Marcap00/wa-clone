@@ -7,10 +7,6 @@ const props = defineProps({
     contacts: {
         type: Array,
         required: true
-    },
-    activeIndex: {
-        type: Number,
-        required: true
     }
 });
 
@@ -28,7 +24,7 @@ const props = defineProps({
             <AppMainContactsSearchbar />
         </div>
         <!-- Section contacts list -->
-        <AppMainContactsList :contacts="contacts" :activeIndex="activeIndex" />
+        <AppMainContactsList :contacts="contacts" />
     </div>
 </template>
 

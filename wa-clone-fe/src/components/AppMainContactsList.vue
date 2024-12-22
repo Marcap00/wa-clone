@@ -1,17 +1,24 @@
 <script setup>
+import { useActiveIndexStore } from '../js/stores/active_index'
+
+
 const props = defineProps({
     contacts: {
         type: Array,
         required: true
     },
-    activeIndex: {
-        type: Number,
-        required: true
-    }
 });
+const activeIndexStore = useActiveIndexStore()
+
+/* activeIndexStore.activeIndex = props.activeIndex */
 
 function getImagePath(imagePath) {
     return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
+}
+
+function setActiveContact(i) {
+    activeIndexStore.activeIndex = i
+    console.log(activeIndexStore.activeIndex)
 }
 </script>
 
@@ -21,7 +28,7 @@ function getImagePath(imagePath) {
         <ul class="p-0 m-0">
             <!-- Contact -->
             <li v-for="(contact, i) in contacts" @click="setActiveContact(i)"
-                :class="i === activeIndex ? 'active' : '', !contact.visible ? 'd-none' : ''"
+                :class="i === activeIndexStore.activeIndex ? 'active' : '', !contact.visible ? 'd-none' : ''"
                 class="d-flex align-items-center p-2">
                 <img class="img-avatar me-2" :src="getImagePath(contact.avatar)" alt="#">
                 <ul class="flex-grow-1">

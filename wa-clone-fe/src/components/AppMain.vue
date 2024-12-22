@@ -4,9 +4,10 @@ import AppMainChat from './AppMainChat.vue';
 import axios from 'axios';
 import { ref } from 'vue';
 import { onMounted } from 'vue';
+
+
 const contacts = ref([]);
 const apiUrlContacts = 'http://localhost:8000/api/contacts';
-const activeIndex = ref(0);
 
 async function getContacts() {
     try {
@@ -32,9 +33,9 @@ onMounted(async () => {
             <!-- Wrapper -->
             <div class="wrapper d-flex h-100">
                 <!-- Left Column -->
-                <AppMainContacts :contacts="contacts" :activeIndex="activeIndex" />
+                <AppMainContacts :contacts="contacts" />
                 <!-- Right Column -->
-                <AppMainChat :contacts="contacts" :activeIndex="activeIndex" />
+                <AppMainChat :contacts="contacts" />
             </div>
         </div>
     </main>

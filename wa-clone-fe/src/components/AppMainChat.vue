@@ -8,10 +8,6 @@ const props = defineProps({
         type: Array,
         required: true
     },
-    activeIndex: {
-        type: Number,
-        required: true
-    }
 });
 
 </script>
@@ -19,9 +15,9 @@ const props = defineProps({
 <template>
     <div class="col-rght">
         <!-- Header Right -->
-        <AppMainChatHeader :contacts="contacts" :activeIndex="activeIndex" />
+        <AppMainChatHeader :contacts="contacts" />
         <!-- Section of chat -->
-        <AppMainChatElement :contacts="contacts" :activeIndex="activeIndex" />
+        <AppMainChatElement :contacts="contacts" />
         <!-- Input -->
         <AppMainChatInput />
     </div>
