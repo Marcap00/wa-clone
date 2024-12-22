@@ -13,11 +13,11 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::with('messages')->get();
 
         return response()->json([
             'success' => true,
-            'data' => $contacts,
+            'results' => $contacts,
         ]);
     }
 
@@ -44,7 +44,7 @@ class ContactController extends Controller
     {
         return response()->json([
             'success' => true,
-            'data' => $contact,
+            'results' => $contact,
         ]);
     }
 
