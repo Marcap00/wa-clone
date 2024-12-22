@@ -16,7 +16,8 @@ const errorServerMessage = ref('')
 function login() {
     axios.post(ApiUrl, {
         email: email.value,
-        password: password.value
+        password: password.value,
+        user_id: 1
     })
         .then((response) => {
             console.log(response);

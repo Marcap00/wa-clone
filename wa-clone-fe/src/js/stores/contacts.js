@@ -9,7 +9,11 @@ export const useContactsStore = defineStore('contacts', {
     actions: {
         async getContacts() {
             try {
-                const response = await axios.get(this.apiUrlContacts);
+                const response = await axios.get(this.apiUrlContacts, {
+                    params: {
+                        user_id: 2
+                    }
+                });
                 this.contacts = response.data.results;
                 console.log(this.contacts);
             } catch (error) {

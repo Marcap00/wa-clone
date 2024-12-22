@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -11,9 +12,12 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $contacts = Contact::with('messages')->get();
+        $contacts = User::find($request->user_id)->contacts()->with('messages')->get();
+        /* $contacts = Contact::with('messages')->get(); */
+        /* $contacts = User::find(1)->contacts()->with('messages')->get(); */
+        /* $contacts = Contact::with('messages')->where('user_id', auth()->user()->id)->get(); */
 
         return response()->json([
             'success' => true,
