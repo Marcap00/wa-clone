@@ -33,4 +33,9 @@ function getImagePath(imagePath) {
 
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+header {
+    height: 50px;
+    background-color: #eaeaea;
+}
+</style>
