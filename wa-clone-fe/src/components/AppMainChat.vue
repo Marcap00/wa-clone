@@ -1,7 +1,7 @@
 <script setup>
 import AppMainChatHeader from './AppMainChatHeader.vue';
 import AppMainChatInput from './AppMainChatInput.vue';
-import AppMainChatElement from './AppMainChatElement.vue';
+import AppMainChatMessagesList from './AppMainChatMessagesList.vue';
 
 </script>
 
@@ -10,7 +10,7 @@ import AppMainChatElement from './AppMainChatElement.vue';
         <!-- Header Right -->
         <AppMainChatHeader />
         <!-- Section of chat -->
-        <AppMainChatElement />
+        <AppMainChatMessagesList />
         <!-- Input -->
         <AppMainChatInput />
     </div>
