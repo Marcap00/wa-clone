@@ -1,9 +1,9 @@
 <script setup>
-import AppMain from './components/AppMain.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-    <AppMain />
+    <RouterView />
 </template>
 
 <style lang="scss">
