@@ -1,14 +1,11 @@
 <script setup>
 import { useActiveIndexStore } from '../js/stores/active_index'
+import { useContactsStore } from '../js/stores/contacts'
 
+const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 
-const props = defineProps({
-    contacts: {
-        type: Array,
-        required: true
-    },
-});
+
 function getImagePath(imagePath) {
     return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
 }
@@ -16,13 +13,13 @@ function getImagePath(imagePath) {
 
 <template>
 
-    <header v-if="contacts.length" class="sticky d-flex align-items-center p-2">
-        <img class="img-avatar me-2" :src="getImagePath(contacts[activeIndexStore.activeIndex]?.avatar)"
+    <header v-if="contactsStore.contacts.length" class="sticky d-flex align-items-center p-2">
+        <img class="img-avatar me-2" :src="getImagePath(contactsStore.contacts[activeIndexStore.activeIndex]?.avatar)"
             alt="Avatar utente">
         <!-- Information avatar -->
         <ul class="flex-grow-1">
             <li>
-                <h3>{{ contacts[activeIndexStore.activeIndex]?.name }}</h3>
+                <h3>{{ contactsStore.contacts[activeIndexStore.activeIndex]?.name }}</h3>
             </li>
             <li class="text-small text-lightgrey">Ultimo accesso oggi alle 12:00</li>
         </ul>

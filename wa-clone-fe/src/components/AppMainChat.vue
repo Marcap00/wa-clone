@@ -3,21 +3,14 @@ import AppMainChatHeader from './AppMainChatHeader.vue';
 import AppMainChatInput from './AppMainChatInput.vue';
 import AppMainChatElement from './AppMainChatElement.vue';
 
-const props = defineProps({
-    contacts: {
-        type: Array,
-        required: true
-    },
-});
-
 </script>
 
 <template>
     <div class="col-rght">
         <!-- Header Right -->
-        <AppMainChatHeader :contacts="contacts" />
+        <AppMainChatHeader />
         <!-- Section of chat -->
-        <AppMainChatElement :contacts="contacts" />
+        <AppMainChatElement />
         <!-- Input -->
         <AppMainChatInput />
     </div>

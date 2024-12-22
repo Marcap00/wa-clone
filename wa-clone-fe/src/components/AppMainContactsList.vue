@@ -1,13 +1,9 @@
 <script setup>
 import { useActiveIndexStore } from '../js/stores/active_index'
+import { useContactsStore } from '../js/stores/contacts'
 
+const contactsStore = useContactsStore()
 
-const props = defineProps({
-    contacts: {
-        type: Array,
-        required: true
-    },
-});
 const activeIndexStore = useActiveIndexStore()
 
 /* activeIndexStore.activeIndex = props.activeIndex */
@@ -27,7 +23,7 @@ function setActiveContact(i) {
         <!-- Contacts List -->
         <ul class="p-0 m-0">
             <!-- Contact -->
-            <li v-for="(contact, i) in contacts" @click="setActiveContact(i)"
+            <li v-for="(contact, i) in contactsStore.contacts" @click="setActiveContact(i)"
                 :class="i === activeIndexStore.activeIndex ? 'active' : '', !contact.visible ? 'd-none' : ''"
                 class="d-flex align-items-center p-2">
                 <img class="img-avatar me-2" :src="getImagePath(contact.avatar)" alt="#">

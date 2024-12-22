@@ -1,14 +1,9 @@
 <script setup>
 import { useActiveIndexStore } from '../js/stores/active_index'
+import { useContactsStore } from '../js/stores/contacts'
 
+const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
-
-const props = defineProps({
-    contacts: {
-        type: Array,
-        required: true
-    },
-});
 
 function getImagePath(imagePath) {
     return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
@@ -17,13 +12,13 @@ function getImagePath(imagePath) {
 
 <template>
     <div class="chat overflow-y-scroll py-4 px-5">
-        <ul v-if="contacts[activeIndexStore.activeIndex]?.messages" class="p-0 m-0">
+        <ul v-if="contactsStore.contacts[activeIndexStore.activeIndex]?.messages" class="p-0 m-0">
             <!-- Message -->
-            <li v-for="(message, index) in contacts[activeIndexStore.activeIndex]?.messages" class="my-2">
+            <li v-for="(message, index) in contactsStore.contacts[activeIndexStore.activeIndex]?.messages" class="my-2">
                 <!-- If sent -->
                 <div :class="message.status === 'sent' ? 'justify-content-end' : ''" class="row-message d-flex ">
                     <img v-if="message.status === 'received'" class="img-avatar me-2"
-                        :src="getImagePath(contacts[activeIndexStore.activeIndex]?.avatar)" alt="Avatar">
+                        :src="getImagePath(contactsStore.contacts[activeIndexStore.activeIndex]?.avatar)" alt="Avatar">
                     <img v-else src="../assets/img/avatar_io.png" alt="Avatar">
                     <div class="message-chat">
                         <div :class="message.status" class="message rounded-3 text-md">

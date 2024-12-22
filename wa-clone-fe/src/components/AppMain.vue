@@ -1,26 +1,13 @@
 <script setup>
 import AppMainContacts from './AppMainContacts.vue';
 import AppMainChat from './AppMainChat.vue';
-import axios from 'axios';
-import { ref } from 'vue';
 import { onMounted } from 'vue';
+import { useContactsStore } from '../js/stores/contacts';
 
-
-const contacts = ref([]);
-const apiUrlContacts = 'http://localhost:8000/api/contacts';
-
-async function getContacts() {
-    try {
-        const response = await axios.get(apiUrlContacts);
-        contacts.value = response.data.results;
-        console.log(contacts.value);
-    } catch (error) {
-        console.error('Errore nel caricamento dei contatti:', error);
-    }
-}
+const contactsStore = useContactsStore();
 
 onMounted(async () => {
-    await getContacts();
+    await contactsStore.getContacts();
 });
 
 </script>
@@ -33,9 +20,9 @@ onMounted(async () => {
             <!-- Wrapper -->
             <div class="wrapper d-flex h-100">
                 <!-- Left Column -->
-                <AppMainContacts :contacts="contacts" />
+                <AppMainContacts />
                 <!-- Right Column -->
-                <AppMainChat :contacts="contacts" />
+                <AppMainChat />
             </div>
         </div>
     </main>

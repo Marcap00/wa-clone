@@ -3,12 +3,7 @@ import AppMainContactsHeader from './AppMainContactsHeader.vue';
 import AppMainContactsDesktopAlerts from './AppMainContactsDesktopAlerts.vue';
 import AppMainContactsSearchbar from './AppMainContactsSearchbar.vue';
 import AppMainContactsList from './AppMainContactsList.vue';
-const props = defineProps({
-    contacts: {
-        type: Array,
-        required: true
-    }
-});
+
 
 </script>
 
@@ -24,7 +19,7 @@ const props = defineProps({
             <AppMainContactsSearchbar />
         </div>
         <!-- Section contacts list -->
-        <AppMainContactsList :contacts="contacts" />
+        <AppMainContactsList />
     </div>
 </template>
 
