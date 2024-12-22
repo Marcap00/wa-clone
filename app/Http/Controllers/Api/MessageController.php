@@ -17,7 +17,7 @@ class MessageController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $messages,
+            'results' => $messages,
         ]);
     }
 
@@ -44,7 +44,7 @@ class MessageController extends Controller
     {
         return response()->json([
             'success' => true,
-            'data' => $message,
+            'results' => $message,
         ]);
     }
 
