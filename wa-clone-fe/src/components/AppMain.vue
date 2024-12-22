@@ -28,4 +28,14 @@ onMounted(async () => {
     </main>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+main {
+    background: linear-gradient(to bottom,
+            #009688 15%,
+            #dcdbd3 15% 100%);
+
+    .wrapper>* {
+        background-color: #fff;
+    }
+}
+</style>

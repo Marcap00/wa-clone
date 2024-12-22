@@ -13,4 +13,23 @@ const textToFind = ref('');
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.search-bar {
+    height: 40px;
+    background-color: #f9f9f9;
+}
+
+.search-bar i.fa-search {
+    border-radius: 5px 0px 0px 5px;
+    font-size: .75em;
+    line-height: 32px;
+}
+
+.search-bar input {
+    border-radius: 0px 5px 5px 0px;
+}
+
+.search-bar input::placeholder {
+    font-size: 12px;
+}
+</style>

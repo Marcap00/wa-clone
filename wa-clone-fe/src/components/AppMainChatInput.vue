@@ -15,4 +15,13 @@ const newMessage = ref('');
 
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.input-message {
+    height: 50px;
+    background-color: #f3eeea;
+}
+
+.input-message input {
+    line-height: 36px;
+}
+</style>

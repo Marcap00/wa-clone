@@ -24,4 +24,11 @@ const activeIndexStore = useActiveIndexStore()
 
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.chat {
+    height: calc(100% - 100px);
+    /* background-image: url('../assets/img/mine.png'); */
+    background: #DCDBD3;
+    background-image: url('../assets/img/mine.png');
+}
+</style>

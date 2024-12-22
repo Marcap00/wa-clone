@@ -43,4 +43,24 @@ function setActiveContact(i) {
 
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.contacts-list>ul li.active {
+    background-color: #e9ebeb;
+}
+
+.contacts-list {
+    height: calc(100% - 150px);
+    background-color: #fff;
+}
+
+.contacts-list li {
+    position: relative;
+    cursor: pointer;
+}
+
+.contacts-list time {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+</style>

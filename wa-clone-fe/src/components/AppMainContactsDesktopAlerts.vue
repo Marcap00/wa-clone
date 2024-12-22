@@ -12,4 +12,23 @@
 
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.desktop-alerts {
+    height: 60px;
+    background-color: #8edafc;
+}
+
+.desktop-alerts a {
+    color: grey;
+}
+
+i.fa-bell-slash {
+    background-color: white;
+    color: #8edafc;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+}
+</style>

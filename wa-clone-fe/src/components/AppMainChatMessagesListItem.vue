@@ -45,4 +45,60 @@ defineProps({
 
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.message-chat .message {
+    width: 250px;
+    padding: .8rem 1rem;
+
+    position: relative;
+}
+
+.message-chat .sent {
+    background-color: #d5f9ba;
+}
+
+.message-chat .received {
+    background-color: #fff;
+}
+
+.message-chat .message time {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.message-chat .message i {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #b1b1b1;
+    cursor: pointer;
+
+    display: none;
+}
+
+.message-chat .message:hover i {
+    display: block;
+}
+
+.message-chat ul {
+    position: absolute;
+    top: 20px;
+    right: 5px;
+    background-color: #fff;
+    width: 180px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    display: none;
+}
+
+.message-chat ul.active {
+    display: block;
+}
+
+.message-chat ul li {
+    cursor: pointer;
+}
+</style>

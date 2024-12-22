@@ -17,4 +17,8 @@ import AppMainChatMessagesList from './AppMainChatMessagesList.vue';
 
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.col-rght {
+    width: 65%;
+}
+</style>
