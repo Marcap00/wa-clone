@@ -18,10 +18,6 @@ async function getContacts() {
     }
 }
 
-function getImagePath(imagePath) {
-    return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
-}
-
 onMounted(async () => {
     await getContacts();
 });

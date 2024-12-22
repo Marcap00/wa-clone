@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import AppMainChatHeader from './AppMainChatHeader.vue';
 import AppMainChatInput from './AppMainChatInput.vue';
 import AppMainChatElement from './AppMainChatElement.vue';
