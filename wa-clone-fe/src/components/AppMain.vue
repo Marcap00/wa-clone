@@ -72,6 +72,7 @@ onMounted(async () => {
                                             {{ message.message }}
                                             <time>
                                                 <!-- {{ formatDate(message.date) }} -->
+                                                13:04
                                             </time>
                                             <i @click="openMenu(index)" class="fas fa-chevron-down"></i>
                                             <ul class="menu">
