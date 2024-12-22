@@ -4,8 +4,11 @@ import AppFooter from '../components/general/AppFooter.vue'
 import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '../js/stores/auth';
+import { onMounted } from 'vue';
 
 const router = useRouter();
+const authStore = useAuthStore();
 const ApiUrl = "http://127.0.0.1:8000/api/login"
 const email = ref('')
 const password = ref('')
@@ -13,11 +16,14 @@ const successMessage = ref('')
 const errorMessage = ref('')
 const errorServerMessage = ref('')
 
+/* onMounted(() => {
+    authStore.logout();
+});
+ */
 function login() {
     axios.post(ApiUrl, {
         email: email.value,
         password: password.value,
-        user_id: 1
     })
         .then((response) => {
             console.log(response);
@@ -26,6 +32,15 @@ function login() {
                     localStorage.setItem('token', JSON.stringify(response.data.token));
                 }
                 successMessage.value = response.data.message;
+                authStore.setUser({
+                    id: response.data.user.id,
+                    name: response.data.user.name,
+                    email: response.data.user.email,
+                    avatar: response.data.user.avatar,
+                    phone_number: response.data.user.phone_number,
+                    biography: response.data.user.biography,
+                    visible: response.data.user.visible
+                });
                 setTimeout(() => {
                     router.push('/dashboard');
                 }, 1000);

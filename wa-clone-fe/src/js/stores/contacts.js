@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { useAuthStore } from './auth';
 import axios from 'axios';
 export const useContactsStore = defineStore('contacts', {
     state: () => ({
@@ -9,12 +10,13 @@ export const useContactsStore = defineStore('contacts', {
     actions: {
         async getContacts() {
             try {
+                const authStore = useAuthStore();
                 const response = await axios.get(this.apiUrlContacts, {
                     params: {
-                        user_id: 2
+                        user_id: authStore.userId
                     }
                 });
-                this.contacts = response.data.results;
+                this.contacts = response.data?.results;
                 console.log(this.contacts);
             } catch (error) {
                 console.error('Errore nel caricamento dei contatti:', error);
