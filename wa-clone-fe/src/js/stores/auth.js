@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-
+import axios from 'axios';
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: null,
@@ -32,6 +32,26 @@ export const useAuthStore = defineStore('auth', {
                 this.user = JSON.parse(storedUser);
                 this.userId = JSON.parse(storedUserId);
                 this.isAuthenticated = true;
+            }
+        },
+        async register(form) {
+            try {
+                const response = await axios.post('http://localhost:8000/api/register', form, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Accept': 'application/json'
+                    }
+                });
+
+                /* if (response.data.user) {
+                    this.setUser(response.data.user);
+                    localStorage.setItem('token', response.data.access_token);
+                } */
+
+                return response;
+            } catch (error) {
+                console.error('Errore di registrazione:', error.response?.data?.message || error.message);
+                throw error;
             }
         }
     }

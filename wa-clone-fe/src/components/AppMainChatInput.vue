@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue';
+import { useContactsStore } from '../js/stores/contacts';
+const contactsStore = useContactsStore()
 const newMessage = ref('');
 
 </script>
 
 <template>
-    <div class="input-message d-flex  align-items-center p-2">
+    <div v-if="contactsStore.contacts.length" class="input-message d-flex  align-items-center p-2">
         <i class="far fa-smile fa-lg mx-3"></i>
 
         <input v-model="newMessage" name="newMessage" @keyup.enter="addMessage(newMessage, activeIndex)"

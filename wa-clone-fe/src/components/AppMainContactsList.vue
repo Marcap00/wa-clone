@@ -19,7 +19,7 @@ function setActiveContact(i) {
 <template>
     <div class="contacts-list overflow-y-scroll">
         <!-- Contacts List -->
-        <ul class="p-0 m-0">
+        <ul v-if="contactsStore.contacts.length" class="p-0 m-0">
             <!-- Contact -->
             <li v-for="(contact, i) in contactsStore.contacts" @click="setActiveContact(i)"
                 :class="i === activeIndexStore.activeIndex ? 'active' : '', !contact.visible ? 'd-none' : ''"
@@ -37,8 +37,12 @@ function setActiveContact(i) {
                 </time>
             </li>
         </ul>
+        <div v-else class="d-flex justify-content-center align-items-center h-100">
+            <p class="text-secondary">Aggiungi un nuovo contatto
+                <i class="fa-solid fa-user-plus text-secondary"></i>
+            </p>
+        </div>
     </div>
-
 </template>
 
 <style lang="scss" scoped>
