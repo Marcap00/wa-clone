@@ -25,4 +25,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::apiResource('contacts', ContactController::class);
-Route::apiResource('messages', MessageController::class);
+/* Route::apiResource('messages', MessageController::class); */
+
+Route::post('/messages/store', [MessageController::class, 'store']);

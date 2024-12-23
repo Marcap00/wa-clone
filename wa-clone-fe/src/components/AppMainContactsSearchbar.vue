@@ -28,7 +28,7 @@ onBeforeUpdate(() => {
 }
 
 .search-bar i.fa-search {
-    border-radius: 5px 0px 0px 5px;
+    border-radius: 10px 0px 0px 10px;
     font-size: .75em;
     line-height: 33.6px;
     background-color: $bg-dark-searchbar;
@@ -37,9 +37,10 @@ onBeforeUpdate(() => {
 }
 
 .search-bar input {
-    border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 10px 10px 0px;
     background-color: $bg-dark-searchbar;
     border: 1px solid $bg-dark-searchbar !important;
+    color: $text-contacts;
 }
 
 .search-bar input::placeholder {

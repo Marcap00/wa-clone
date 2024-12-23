@@ -2,6 +2,7 @@
 import { useActiveIndexStore } from '../js/stores/active_index'
 import { useContactsStore } from '../js/stores/contacts'
 import { useAuthStore } from '../js/stores/auth'
+import { ref } from 'vue';
 
 const authStore = useAuthStore()
 const contactsStore = useContactsStore()
@@ -9,16 +10,31 @@ const activeIndexStore = useActiveIndexStore()
 
 const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user;
 
-function getImagePath(imagePath) {
-    return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
-}
-
 defineProps({
     message: {
         type: Object,
         required: true
+    },
+    index: {
+        type: Number,
+        required: true
     }
 })
+
+function getImagePath(imagePath) {
+    return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
+}
+
+function formatDate(date) {
+    return new Date(date).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+}
+
+function toggleMenuActive(index) {
+    const menu = document.querySelectorAll('.menu');
+    menu[index].classList.toggle('active');
+}
+
+
 </script>
 
 <template>
@@ -32,10 +48,9 @@ defineProps({
                 <div :class="message.status" class="message rounded-3 text-md">
                     {{ message.message }}
                     <time>
-                        <!-- {{ formatDate(message.date) }} -->
-                        13:04
+                        {{ formatDate(message.date) }}
                     </time>
-                    <i @click="openMenu(index)" class="fas fa-chevron-down"></i>
+                    <i @click="toggleMenuActive(index)" class="fas fa-chevron-down"></i>
                     <ul class="menu">
                         <li class="mb-3">Info messaggio</li>
                         <li @click="deleteMessage(index)" class="mb-2 text-danger">
@@ -73,6 +88,7 @@ defineProps({
     position: absolute;
     bottom: 5px;
     right: 5px;
+    font-weight: 600;
 }
 
 .message-chat .message i {
@@ -89,11 +105,11 @@ defineProps({
     display: block;
 }
 
-.message-chat ul {
+.message-chat .menu {
     position: absolute;
     top: 20px;
     right: 5px;
-    background-color: #fff;
+    background-color: $bg-dark-contacts;
     width: 180px;
     padding: 20px;
     border-radius: 10px;
@@ -102,11 +118,11 @@ defineProps({
     display: none;
 }
 
-.message-chat ul.active {
+.message-chat .menu.active {
     display: block;
 }
 
-.message-chat ul li {
+.message-chat .menu li {
     cursor: pointer;
 }
 </style>

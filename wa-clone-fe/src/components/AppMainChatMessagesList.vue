@@ -13,7 +13,7 @@ const activeIndexStore = useActiveIndexStore()
         <ul v-if="contactsStore.contacts[activeIndexStore.activeIndex].messages" class="p-0 m-0">
             <AppMainChatMessagesListItem
                 v-for="(message, index) in contactsStore.contacts[activeIndexStore.activeIndex].messages" :key="index"
-                :message="message" />
+                :message="message" :index="index" />
         </ul>
         <div v-if="contactsStore.contacts[activeIndexStore.activeIndex].messages.length == 0"
             class="d-flex justify-content-center align-items-center h-100">

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Message;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MessageController extends Controller
 {
@@ -34,7 +36,36 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'message' => 'required|string',
+                'contact_id' => 'nullable|exists:contacts,id',
+                'status' => 'nullable|string|in:sent,received',
+                'date' => 'nullable|date',
+            ]);
+
+            $message = Message::create([
+                'message' => $validated['message'],
+                'contact_id' => $validated['contact_id'],
+                'status' => $validated['status'],
+                'date' => $validated['date'] ?? now(),
+            ]);
+
+            $message->contact()->attach($validated['contact_id']);
+
+            return response()->json([
+                'success' => true,
+                'data' => $message,
+            ], 201);
+        } catch (Exception $e) {
+            /* Log::error('Errore durante il salvataggio del messaggio: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Errore durante il salvataggio del messaggio',
+                'error' => $e->getMessage()
+            ], 500); */
+        }
     }
 
     /**
