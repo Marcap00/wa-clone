@@ -1,9 +1,13 @@
 <script setup>
 import { useActiveIndexStore } from '../js/stores/active_index'
 import { useContactsStore } from '../js/stores/contacts'
+import { useAuthStore } from '../js/stores/auth'
 
+const authStore = useAuthStore()
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
+
+const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user;
 
 function getImagePath(imagePath) {
     return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
@@ -23,7 +27,7 @@ defineProps({
         <div :class="{ 'flex-row-reverse': message.status === 'sent' }" class="row-message d-flex ">
             <img v-if="message.status === 'received'" class="img-avatar me-2"
                 :src="getImagePath(contactsStore.contacts[activeIndexStore.activeIndex]?.avatar)" alt="Avatar">
-            <img v-else src="../assets/img/avatar_io.png" alt="Avatar" class="img-avatar ms-2">
+            <img v-else :src="user.avatar" alt="Avatar" class="img-avatar ms-2">
             <div class="message-chat">
                 <div :class="message.status" class="message rounded-3 text-md">
                     {{ message.message }}

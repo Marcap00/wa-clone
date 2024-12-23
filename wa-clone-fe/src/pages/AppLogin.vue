@@ -5,12 +5,10 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../js/stores/auth';
-import { useContactsStore } from '../js/stores/contacts';
-import { onMounted } from 'vue';
+
 
 const router = useRouter();
 const authStore = useAuthStore();
-const contactsStore = useContactsStore();
 const ApiUrl = "http://127.0.0.1:8000/api/login"
 const email = ref('')
 const password = ref('')
@@ -18,10 +16,6 @@ const successMessage = ref('')
 const errorMessage = ref('')
 const errorServerMessage = ref('')
 
-/* onMounted(() => {
-    authStore.logout();
-});
- */
 async function login() {
     try {
         const response = await axios.post(ApiUrl, {

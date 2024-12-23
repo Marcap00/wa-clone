@@ -5,7 +5,6 @@ import { useContactsStore } from '../js/stores/contacts'
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 
-
 function getImagePath(imagePath) {
     return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
 }

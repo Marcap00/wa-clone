@@ -6,10 +6,6 @@ import { useContactsStore } from '../js/stores/contacts';
 
 const contactsStore = useContactsStore();
 
-/* onMounted(async () => {
-    await contactsStore.getContacts();
-}); */
-
 onMounted(() => {
     contactsStore.getContacts();
 });
