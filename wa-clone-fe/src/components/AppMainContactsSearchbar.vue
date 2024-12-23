@@ -12,7 +12,7 @@ onBeforeUpdate(() => {
 <template>
     <div class="search-bar d-flex align-items-center p-2">
         <!-- Icons Search Bar -->
-        <i class="fas fa-search bg-white border border-light px-3"></i>
+        <i class="fas fa-search px-3"></i>
         <!-- Input search -->
         <input v-model="contactsStore.textToFind" name="textToFind" type="text" class="w-100 border border-light p-2"
             placeholder="Cerca o inizia una nuova chat">
@@ -20,22 +20,30 @@ onBeforeUpdate(() => {
 </template>
 
 <style lang="scss" scoped>
+@use "../scss/_variables.scss" as *;
+
 .search-bar {
     height: 40px;
-    background-color: #f9f9f9;
+    background-color: $bg-dark-contacts;
 }
 
 .search-bar i.fa-search {
     border-radius: 5px 0px 0px 5px;
     font-size: .75em;
-    line-height: 32px;
+    line-height: 33.6px;
+    background-color: $bg-dark-searchbar;
+    color: $text-secondary;
+    border: 1px solid $bg-dark-searchbar !important;
 }
 
 .search-bar input {
     border-radius: 0px 5px 5px 0px;
+    background-color: $bg-dark-searchbar;
+    border: 1px solid $bg-dark-searchbar !important;
 }
 
 .search-bar input::placeholder {
+    color: $text-secondary;
     font-size: 12px;
 }
 </style>

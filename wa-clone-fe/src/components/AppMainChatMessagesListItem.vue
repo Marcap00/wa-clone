@@ -50,6 +50,8 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
+@use "../scss/_variables.scss" as *;
+
 .message-chat .message {
     width: 250px;
     padding: .8rem 1rem;
@@ -58,11 +60,13 @@ defineProps({
 }
 
 .message-chat .sent {
-    background-color: #d5f9ba;
+    background-color: $bg-sent-message;
+    color: $text-title;
 }
 
 .message-chat .received {
-    background-color: #fff;
+    background-color: $bg-dark-searchbar;
+    color: $text-title;
 }
 
 .message-chat .message time {

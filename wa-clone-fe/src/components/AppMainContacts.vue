@@ -13,10 +13,10 @@ import AppMainContactsList from './AppMainContactsList.vue';
         <div class="col-lft-top sticky">
             <!-- Left Header -->
             <AppMainContactsHeader />
-            <!-- Section desktop alerts -->
-            <AppMainContactsDesktopAlerts />
             <!-- Section Search Bar -->
             <AppMainContactsSearchbar />
+            <!-- Section desktop alerts -->
+            <AppMainContactsDesktopAlerts />
         </div>
         <!-- Section contacts list -->
         <AppMainContactsList />

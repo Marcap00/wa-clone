@@ -23,8 +23,16 @@ const activeIndexStore = useActiveIndexStore()
 </template>
 
 <style lang="scss" scoped>
+@use "../scss/_variables.scss" as *;
+
 .chat {
     height: calc(100% - 100px);
-    background-image: url('../assets/img/mine.png');
+    background-image: url('../assets/img/mine-dark.jpg');
+    background-size: contain;
+
+}
+
+h3 {
+    color: $text-contacts;
 }
 </style>

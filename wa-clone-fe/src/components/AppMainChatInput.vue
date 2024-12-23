@@ -18,12 +18,19 @@ const newMessage = ref('');
 </template>
 
 <style lang="scss" scoped>
+@use "../scss/_variables.scss" as *;
+
 .input-message {
     height: 50px;
-    background-color: #f3eeea;
+    background-color: $bg-dark-searchbar;
 }
 
 .input-message input {
     line-height: 36px;
+    background-color: $bg-dark-input-chat;
+
+    &::placeholder {
+        color: $text-contacts;
+    }
 }
 </style>

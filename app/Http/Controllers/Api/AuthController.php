@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|string',
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -39,27 +39,33 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users|max:255',
-            'password' => 'required|string|min:8|max:255',
+            'password' => 'required|string|max:255',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'phone_number' => 'required|string|unique:users|max:255',
             'biography' => 'nullable|string|max:255',
         ]);
-
+        function getAvatar($request)
+        {
+            $avatar = "";
+            $placeholder = "";
+            if ($request->hasFile('avatar')) {
+                $path = $request->file('avatar')->store('avatars', 'public');
+                $avatar = url('/storage/' . $path);
+                return $avatar;
+            } else {
+                $placeholder = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+                return $placeholder;
+            }
+        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-
             'phone_number' => $request->phone_number,
             'biography' => $request->biography,
+            'avatar' => getAvatar($request),
         ]);
 
-        if ($request->hasFile('avatar')) {
-            $path = $request->file('avatar')->store('avatars', 'public');
-            $user->avatar = url('/storage/' . $path);
-        } else {
-            $user->avatar = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-        }
 
         $token = $user->createToken('auth_token')->plainTextToken;
 

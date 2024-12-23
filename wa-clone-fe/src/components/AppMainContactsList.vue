@@ -29,7 +29,7 @@ function setActiveContact(i) {
                     <li>
                         <h3> {{ contact.name }} </h3>
                     </li>
-                    <li class="text-small text-lightgrey">Ultimo messaggio inviato</li>
+                    <li class="text-small last-message">Ultimo messaggio inviato</li>
                 </ul>
                 <time>
                     <!-- {{ formatDate(contact.messages[lastMessageIndex(i)].date) }} -->
@@ -46,13 +46,15 @@ function setActiveContact(i) {
 </template>
 
 <style lang="scss" scoped>
+@use "../scss/_variables.scss" as *;
+
 .contacts-list>ul li.active {
-    background-color: #e9ebeb;
+    background-color: $bg-dark-contacts-active;
 }
 
 .contacts-list {
     height: calc(100% - 150px);
-    background-color: #fff;
+    background-color: $bg-dark-contacts;
 }
 
 .contacts-list li {
@@ -64,5 +66,16 @@ function setActiveContact(i) {
     position: absolute;
     top: 5px;
     right: 5px;
+    font-weight: 600;
+}
+
+.contacts-list .last-message {
+    color: $text-contacts;
+    font-weight: 600;
+}
+
+h3 {
+    color: $text-contacts;
+    font-weight: 600;
 }
 </style>

@@ -16,7 +16,7 @@ onMounted(() => {
     <!-- Main -->
     <main class="vh-100">
         <!-- Container -->
-        <div class="container h-100 py-4">
+        <div class="container-fluid h-100 py-4">
             <!-- Wrapper -->
             <div class="wrapper d-flex h-100">
                 <!-- Left Column -->
@@ -29,10 +29,14 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
+@use "../scss/_variables.scss" as *;
+
 main {
-    background: linear-gradient(to bottom,
+    /* background: linear-gradient(to bottom,
             #009688 15%,
-            #dcdbd3 15% 100%);
+            #dcdbd3 15% 100%); */
+
+    background-color: $bg-body;
 
     .wrapper>* {
         background-color: #fff;

@@ -20,7 +20,7 @@ function getImagePath(imagePath) {
             <li>
                 <h3>{{ contactsStore.contacts[activeIndexStore.activeIndex]?.name }}</h3>
             </li>
-            <li class="text-small text-lightgrey">Ultimo accesso oggi alle 12:00</li>
+            <li class="text-small last-access">Ultimo accesso oggi alle 12:00</li>
         </ul>
         <!-- Icon header right -->
         <div class="icons">
@@ -33,8 +33,20 @@ function getImagePath(imagePath) {
 </template>
 
 <style lang="scss" scoped>
+@use "../scss/_variables.scss" as *;
+
 header {
     height: 50px;
-    background-color: #eaeaea;
+    background-color: $bg-dark-searchbar;
+
+    h3 {
+        color: $text-contacts;
+        font-weight: 600;
+    }
+
+    .last-access {
+        color: $text-contacts;
+        font-weight: 600;
+    }
 }
 </style>

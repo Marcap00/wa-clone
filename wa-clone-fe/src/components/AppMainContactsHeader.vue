@@ -46,9 +46,15 @@ onMounted(async () => {
 </template>
 
 <style lang="scss" scoped>
+@use "../scss/_variables.scss" as *;
+
 header {
     height: 50px;
-    background-color: #eaeaea;
+    background-color: $bg-dark-contacts;
+}
+
+h3 {
+    color: $text-title;
 }
 
 i {
