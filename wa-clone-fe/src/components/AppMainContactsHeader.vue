@@ -1,7 +1,15 @@
 <script setup>
-
+import { useAuthStore } from '../js/stores/auth';
+import { useRouter } from 'vue-router';
+const authStore = useAuthStore();
+const router = useRouter();
 function reload() {
     location.reload();
+}
+
+function logout() {
+    authStore.logout();
+    router.push({ name: 'login' });
 }
 </script>
 
@@ -18,7 +26,7 @@ function reload() {
         <div class="icons">
             <i @click="reload()" class="fas fa-circle-notch mx-2"></i>
             <i class="fas fa-message mx-2"></i>
-            <i class="fas fa-ellipsis-v mx-2"></i>
+            <i @click="logout()" class="fas fa-ellipsis-v mx-2"></i>
         </div>
     </header>
 
@@ -28,5 +36,9 @@ function reload() {
 header {
     height: 50px;
     background-color: #eaeaea;
+}
+
+i {
+    cursor: pointer;
 }
 </style>

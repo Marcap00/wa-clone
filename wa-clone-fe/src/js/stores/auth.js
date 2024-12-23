@@ -2,23 +2,37 @@ import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
+        user: null,
+        userId: null,
+        isAuthenticated: false
     }),
-    getters: {
-        isAuthenticated: (state) => state.user !== null,
-        userId: (state) => localStorage.getItem('userId') ? JSON.parse(localStorage.getItem('userId')) : state.user?.id,
-        user: (state) => localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : state.user
-    },
     actions: {
         setUser(user) {
             this.user = user;
-            localStorage.setItem('userId', JSON.stringify(user.id));
+            this.userId = user.id;
+            this.isAuthenticated = true;
+
+            localStorage.setItem('user_id', JSON.stringify(user.id));
             localStorage.setItem('user', JSON.stringify(user));
         },
         logout() {
             this.user = null;
-            localStorage.removeItem('userId');
+            this.userId = null;
+            this.isAuthenticated = false;
+
+            localStorage.removeItem('token');
+            localStorage.removeItem('user_id');
             localStorage.removeItem('user');
+        },
+        initializeFromStorage() {
+            const storedUser = localStorage.getItem('user');
+            const storedUserId = localStorage.getItem('user_id');
+
+            if (storedUser && storedUserId) {
+                this.user = JSON.parse(storedUser);
+                this.userId = JSON.parse(storedUserId);
+                this.isAuthenticated = true;
+            }
         }
     }
 });

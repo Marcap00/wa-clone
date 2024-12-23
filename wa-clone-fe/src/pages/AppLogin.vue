@@ -5,10 +5,12 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../js/stores/auth';
+import { useContactsStore } from '../js/stores/contacts';
 import { onMounted } from 'vue';
 
 const router = useRouter();
 const authStore = useAuthStore();
+const contactsStore = useContactsStore();
 const ApiUrl = "http://127.0.0.1:8000/api/login"
 const email = ref('')
 const password = ref('')
@@ -20,46 +22,38 @@ const errorServerMessage = ref('')
     authStore.logout();
 });
  */
-function login() {
-    axios.post(ApiUrl, {
-        email: email.value,
-        password: password.value,
-    })
-        .then((response) => {
-            console.log(response);
-            if (response.status === 200) {
-                if (response.data.token) {
-                    localStorage.setItem('token', JSON.stringify(response.data.token));
-                }
-                successMessage.value = response.data.message;
-                authStore.setUser({
-                    id: response.data.user.id,
-                    name: response.data.user.name,
-                    email: response.data.user.email,
-                    avatar: response.data.user.avatar,
-                    phone_number: response.data.user.phone_number,
-                    biography: response.data.user.biography,
-                    visible: response.data.user.visible
-                });
-                setTimeout(() => {
-                    router.push('/dashboard');
-                }, 1000);
-            }
-        })
-        .catch(function (error) {
-            console.error('Errore durante il login:', error);
-            errorMessage.value = "Errore durante il login";
-            if (error.response) {
-                console.error('Errore dal server:', error.response.data);
-                errorServerMessage.value += "Errore dal server" + error.response.data.message;
-            } else if (error.request) {
-                console.error('Nessuna risposta dal server');
-                errorServerMessage.value += "Nessuna risposta dal server";
-            } else {
-                console.error('Errore di configurazione:', error.message);
-                errorMessage.value = "Errore di configurazione";
-            }
+async function login() {
+    try {
+        const response = await axios.post(ApiUrl, {
+            email: email.value,
+            password: password.value,
         });
+
+        if (response.status === 200) {
+            const { token, user } = response.data;
+
+            // Salva il token
+            localStorage.setItem('token', token);
+
+            // Imposta l'utente nello store
+            authStore.setUser(user);
+
+            successMessage.value = "Login effettuato con successo";
+
+            setTimeout(() => {
+                router.push('/dashboard');
+            }, 1000);
+        }
+    } catch (error) {
+        console.error('Errore durante il login:', error);
+        errorMessage.value = "Errore durante il login";
+
+        if (error.response?.data?.message) {
+            errorServerMessage.value = error.response.data.message;
+        } else {
+            errorServerMessage.value = "Errore di connessione al server";
+        }
+    }
 }
 </script>
 

@@ -9,20 +9,29 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
-        $contacts = User::find($request->user_id)->contacts()->with('messages')->get();
-        /* $contacts = Contact::with('messages')->get(); */
-        /* $contacts = User::find(1)->contacts()->with('messages')->get(); */
-        /* $contacts = Contact::with('messages')->where('user_id', auth()->user()->id)->get(); */
+        try {
+            $userId = $request->query('user_id');
 
-        return response()->json([
-            'success' => true,
-            'results' => $contacts,
-        ]);
+            if (!$userId) {
+                return response()->json([
+                    'error' => 'User ID non fornito'
+                ], 400);
+            }
+
+            $contacts = User::find($userId)->contacts()->with('messages')->get();
+
+            return response()->json([
+                'results' => $contacts,
+                'success' => true
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Errore nel recupero dei contatti',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
