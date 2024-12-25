@@ -1,13 +1,22 @@
 <script setup>
 import { useActiveIndexStore } from '../js/stores/active_index'
 import { useContactsStore } from '../js/stores/contacts'
-
+import { computed } from 'vue'
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 
 function getImagePath(imagePath) {
     return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
 }
+
+function formatDate(date) {
+    return new Date(date).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+}
+
+const lastMessage = computed(() => {
+    const lastMessage = contactsStore.contacts[activeIndexStore.activeIndex].messages.filter(message => message.status === 'received')
+    return lastMessage[lastMessage.length - 1]?.date
+})
 </script>
 
 <template>
@@ -20,7 +29,7 @@ function getImagePath(imagePath) {
             <li>
                 <h3>{{ contactsStore.contacts[activeIndexStore.activeIndex]?.name }}</h3>
             </li>
-            <li class="text-small last-access">Ultimo accesso oggi alle 12:00</li>
+            <li class="text-small last-access">Ultimo accesso oggi alle {{ formatDate(lastMessage) }}</li>
         </ul>
         <!-- Icon header right -->
         <div class="icons">
