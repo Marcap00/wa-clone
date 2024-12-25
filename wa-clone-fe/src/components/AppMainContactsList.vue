@@ -78,4 +78,21 @@ h3 {
     color: $text-contacts;
     font-weight: 600;
 }
+
+.contacts-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.contacts-list::-webkit-scrollbar-track {
+    background: $bg-dark-scrollbar;
+}
+
+.contacts-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.contacts-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 </style>

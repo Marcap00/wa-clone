@@ -2,31 +2,34 @@
 import { ref } from 'vue';
 import { useContactsStore } from '../js/stores/contacts';
 import { useActiveIndexStore } from '../js/stores/active_index';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { onUpdated } from 'vue';
 
+const router = useRouter();
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 const newMessage = ref('');
 const ApiUrl = 'http://localhost:8000/api/messages/store';
 
-onUpdated(() => {
+/* onUpdated(() => {
     console.log(newMessage);
-})
+}) */
+
+function getContacts() {
+    contactsStore.getContacts(router);
+}
 
 
-
-function addMessage(message, index) {
+async function addMessage(message, index) {
     try {
-        axios.post(ApiUrl, {
+        await axios.post(ApiUrl, {
             message: message,
             date: null,
             status: 'sent',
             contact_id: contactsStore.contacts[index].id,
         })
-        setTimeout(() => {
-            location.reload();
-        }, 1000);
+        getContacts();
         newMessage.value = '';
     } catch (error) {
         console.error(error);

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { useAuthStore } from './auth';
-import { useRouter } from 'vue-router';
 import axios from 'axios';
+
 
 export const useContactsStore = defineStore('contacts', {
     state: () => ({
@@ -10,15 +10,16 @@ export const useContactsStore = defineStore('contacts', {
         textToFind: ''
     }),
     actions: {
-        async getContacts() {
+        async getContacts(router = null) {
             try {
                 const authStore = useAuthStore();
-                const router = useRouter();
                 const userId = localStorage.getItem('user_id') ? JSON.parse(localStorage.getItem('user_id')) : authStore.userId;
 
                 if (!userId) {
                     console.error('Nessun utente autenticato');
-                    router.push({ name: 'unauthorized' });
+                    if (router) {
+                        router.push({ name: 'unauthorized' });
+                    }
                     return;
                 }
 

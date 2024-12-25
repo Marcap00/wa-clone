@@ -3,11 +3,13 @@ import AppMainContacts from './AppMainContacts.vue';
 import AppMainChat from './AppMainChat.vue';
 import { onMounted } from 'vue';
 import { useContactsStore } from '../js/stores/contacts';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const contactsStore = useContactsStore();
 
 onMounted(() => {
-    contactsStore.getContacts();
+    contactsStore.getContacts(router);
 });
 
 </script>
