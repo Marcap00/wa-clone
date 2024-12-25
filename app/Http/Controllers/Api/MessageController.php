@@ -58,9 +58,9 @@ class MessageController extends Controller
                 'data' => $message,
             ], 201);
         } catch (Exception $e) {
-            /* Log::error('Errore durante il salvataggio del messaggio: ' . $e->getMessage());
+            /* Log::error('Errore durante il salvataggio del messaggio: ' . $e->getMessage()); */
 
-            return response()->json([
+            /* return response()->json([
                 'success' => false,
                 'message' => 'Errore durante il salvataggio del messaggio',
                 'error' => $e->getMessage()

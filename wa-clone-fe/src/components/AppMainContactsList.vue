@@ -1,6 +1,8 @@
 <script setup>
 import { useActiveIndexStore } from '../js/stores/active_index'
 import { useContactsStore } from '../js/stores/contacts'
+import { onMounted } from 'vue'
+import { computed } from 'vue'
 
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
@@ -14,6 +16,19 @@ function setActiveContact(i) {
     console.log(activeIndexStore.activeIndex)
 }
 
+function lastMessageTime(i) {
+    const lastMessage = contactsStore.contacts[i].messages.filter(message => message.status === 'received')
+    return lastMessage[lastMessage.length - 1]?.date
+}
+
+function formatDate(date) {
+    return new Date(date).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })
+}
+
+
+onMounted(() => {
+    console.log('contactsStore.contacts', contactsStore.contacts)
+})
 </script>
 
 <template>
@@ -29,11 +44,11 @@ function setActiveContact(i) {
                     <li>
                         <h3> {{ contact.name }} </h3>
                     </li>
-                    <li class="text-small last-message">Ultimo messaggio inviato</li>
+                    <li v-if="contact.messages.length" class="text-small last-message">{{
+                        contact.messages[contact.messages.length - 1].message }}</li>
                 </ul>
-                <time>
-                    <!-- {{ formatDate(contact.messages[lastMessageIndex(i)].date) }} -->
-                    13:04
+                <time v-if="contact.messages.length">
+                    {{ formatDate(contact.messages[contact.messages.length - 1].date) }}
                 </time>
             </li>
         </ul>
@@ -72,6 +87,10 @@ function setActiveContact(i) {
 .contacts-list .last-message {
     color: $text-contacts;
     font-weight: 600;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 200px;
 }
 
 h3 {

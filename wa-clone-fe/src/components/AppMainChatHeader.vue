@@ -13,7 +13,7 @@ function formatDate(date) {
     return new Date(date).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
 }
 
-const lastMessage = computed(() => {
+const lastMessageTime = computed(() => {
     const lastMessage = contactsStore.contacts[activeIndexStore.activeIndex].messages.filter(message => message.status === 'received')
     return lastMessage[lastMessage.length - 1]?.date
 })
@@ -29,7 +29,7 @@ const lastMessage = computed(() => {
             <li>
                 <h3>{{ contactsStore.contacts[activeIndexStore.activeIndex]?.name }}</h3>
             </li>
-            <li class="text-small last-access">Ultimo accesso oggi alle {{ formatDate(lastMessage) }}</li>
+            <li class="text-small last-access">Ultimo accesso oggi alle {{ formatDate(lastMessageTime) }}</li>
         </ul>
         <!-- Icon header right -->
         <div class="icons">
