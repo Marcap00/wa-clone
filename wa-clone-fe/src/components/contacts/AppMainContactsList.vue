@@ -6,7 +6,7 @@ import { onMounted } from 'vue'
 const contactsStore = useContactsStore()
 
 onMounted(() => {
-    console.log('contactsStore.contacts', contactsStore.contacts)
+    // console.log('contactsStore.contacts', contactsStore.contacts)
 })
 </script>
 
@@ -33,6 +33,10 @@ onMounted(() => {
     background-color: $bg-dark-contacts-active;
 }
 
+.contacts-list>ul li:hover {
+    background-color: $bg-dark-contacts-hover;
+}
+
 .contacts-list {
     height: calc(100% - 150px);
     background-color: $bg-dark-contacts;
@@ -52,7 +56,7 @@ onMounted(() => {
 
 .number-last-message-received {
     position: absolute;
-    bottom: 5px;
+    bottom: 7px;
     right: 7px;
     font-weight: 600;
     background-color: $text-last-message-received;
