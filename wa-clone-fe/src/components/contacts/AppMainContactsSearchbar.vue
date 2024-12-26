@@ -1,10 +1,10 @@
 <script setup>
-import { useContactsStore } from '../js/stores/contacts';
+import { useContactsStore } from '../../js/stores/contacts';
 import { onBeforeUpdate, onMounted } from 'vue';
 const contactsStore = useContactsStore();
 
 onBeforeUpdate(() => {
-    console.log(contactsStore.textToFind);
+    // console.log(contactsStore.textToFind);
     contactsStore.searchContacts();
 });
 </script>
@@ -20,7 +20,7 @@ onBeforeUpdate(() => {
 </template>
 
 <style lang="scss" scoped>
-@use "../scss/_variables.scss" as *;
+@use "../../scss/_variables.scss" as *;
 
 .search-bar {
     height: 40px;

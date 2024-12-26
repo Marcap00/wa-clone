@@ -1,16 +1,15 @@
 <script setup>
-import { useActiveIndexStore } from '../js/stores/active_index'
-import { useContactsStore } from '../js/stores/contacts'
-import { useAuthStore } from '../js/stores/auth'
-import { ref } from 'vue';
-
+import { useActiveIndexStore } from '../../js/stores/active_index'
+import { useContactsStore } from '../../js/stores/contacts'
+import { useAuthStore } from '../../js/stores/auth'
+import { computed } from 'vue';
 const authStore = useAuthStore()
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 
 const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user;
 
-defineProps({
+const props = defineProps({
     message: {
         type: Object,
         required: true
@@ -22,7 +21,7 @@ defineProps({
 })
 
 function getImagePath(imagePath) {
-    return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
+    return new URL(`../../assets/img/${imagePath}`, import.meta.url).href;
 }
 
 function formatDate(date) {
@@ -34,26 +33,38 @@ function toggleMenuActive(index) {
     menu[index].classList.toggle('active');
 }
 
+const ActiveContact = computed(() => {
+    return contactsStore.contacts[activeIndexStore.activeIndex]
+})
+
+const isMessageReceived = computed(() => {
+    return props.message.status === 'received'
+})
+
+const isMessageSent = computed(() => {
+    return props.message.status === 'sent'
+})
+
 
 </script>
 
 <template>
     <li class="my-2">
         <!-- If sent -->
-        <div :class="{ 'flex-row-reverse': message.status === 'sent' }" class="row-message d-flex ">
-            <img v-if="message.status === 'received'" class="img-avatar me-2"
-                :src="getImagePath(contactsStore.contacts[activeIndexStore.activeIndex]?.avatar)" alt="Avatar">
+        <div :class="{ 'flex-row-reverse': isMessageSent }" class="row-message d-flex ">
+            <img v-if="isMessageReceived" class="img-avatar me-2" :src="getImagePath(ActiveContact?.avatar)"
+                alt="Avatar">
             <img v-else :src="user.avatar" alt="Avatar" class="img-avatar ms-2">
             <div class="message-chat">
-                <div :class="message.status" class="message rounded-3 text-md">
-                    {{ message.message }}
+                <div :class="props.message.status" class="message rounded-3 text-md">
+                    {{ props.message.message }}
                     <time>
-                        {{ formatDate(message.date) }}
+                        {{ formatDate(props.message.date) }}
                     </time>
-                    <i @click="toggleMenuActive(index)" class="fas fa-chevron-down"></i>
+                    <i @click="toggleMenuActive(props.index)" class="fas fa-chevron-down"></i>
                     <ul class="menu">
                         <li class="mb-3">Info messaggio</li>
-                        <li @click="deleteMessage(index)" class="mb-2 text-danger">
+                        <li @click="deleteMessage(props.index)" class="mb-2 text-danger">
                             Elimina
                             messaggio</li>
                     </ul>
@@ -65,7 +76,7 @@ function toggleMenuActive(index) {
 </template>
 
 <style lang="scss" scoped>
-@use "../scss/_variables.scss" as *;
+@use "../../scss/_variables.scss" as *;
 
 .message-chat .message {
     width: 250px;

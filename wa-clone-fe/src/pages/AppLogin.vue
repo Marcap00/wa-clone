@@ -76,10 +76,10 @@ async function login() {
                         required autocomplete="current-password" v-model="password">
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary">Accedi</button>
                 </div>
                 <div class="col">
-                    <p>Don't have an account? <RouterLink to="/register">Register</RouterLink>
+                    <p>Non hai un account? <RouterLink to="/register">Registrati</RouterLink>
                     </p>
                 </div>
             </form>

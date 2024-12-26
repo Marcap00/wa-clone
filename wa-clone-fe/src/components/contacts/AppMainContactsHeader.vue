@@ -1,5 +1,5 @@
 <script setup>
-import { useAuthStore } from '../js/stores/auth';
+import { useAuthStore } from '../../js/stores/auth';
 import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
 
@@ -22,7 +22,7 @@ function logout() {
 }
 
 onMounted(async () => {
-    console.log(authStore.user);
+    // console.log(authStore.user);
 });
 </script>
 
@@ -46,7 +46,7 @@ onMounted(async () => {
 </template>
 
 <style lang="scss" scoped>
-@use "../scss/_variables.scss" as *;
+@use "../../scss/_variables.scss" as *;
 
 header {
     height: 50px;

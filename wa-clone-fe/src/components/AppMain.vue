@@ -1,6 +1,6 @@
 <script setup>
-import AppMainContacts from './AppMainContacts.vue';
-import AppMainChat from './AppMainChat.vue';
+import AppMainContacts from './contacts/AppMainContacts.vue';
+import AppMainChat from './chat/AppMainChat.vue';
 import { onMounted } from 'vue';
 import { useContactsStore } from '../js/stores/contacts';
 import { useRouter } from 'vue-router';

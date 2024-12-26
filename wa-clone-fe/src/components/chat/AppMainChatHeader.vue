@@ -1,12 +1,12 @@
 <script setup>
-import { useActiveIndexStore } from '../js/stores/active_index'
-import { useContactsStore } from '../js/stores/contacts'
+import { useActiveIndexStore } from '../../js/stores/active_index'
+import { useContactsStore } from '../../js/stores/contacts'
 import { computed } from 'vue'
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 
 function getImagePath(imagePath) {
-    return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
+    return new URL(`../../assets/img/${imagePath}`, import.meta.url).href;
 }
 
 function formatDate(date) {
@@ -16,6 +16,10 @@ function formatDate(date) {
 const lastMessageTime = computed(() => {
     const lastMessage = contactsStore.contacts[activeIndexStore.activeIndex].messages.filter(message => message.status === 'received')
     return lastMessage[lastMessage.length - 1]?.date
+})
+
+const activeContactName = computed(() => {
+    return contactsStore.contacts[activeIndexStore.activeIndex]?.name
 })
 </script>
 
@@ -27,9 +31,10 @@ const lastMessageTime = computed(() => {
         <!-- Information avatar -->
         <ul class="flex-grow-1">
             <li>
-                <h3>{{ contactsStore.contacts[activeIndexStore.activeIndex]?.name }}</h3>
+                <h3>{{ activeContactName }}</h3>
             </li>
-            <li class="text-small last-access">Ultimo accesso oggi alle {{ formatDate(lastMessageTime) }}</li>
+            <li v-if="lastMessageTime" class="text-small last-access">Ultimo accesso oggi alle {{
+                formatDate(lastMessageTime) }}</li>
         </ul>
         <!-- Icon header right -->
         <div class="icons">
@@ -42,7 +47,7 @@ const lastMessageTime = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-@use "../scss/_variables.scss" as *;
+@use "../../scss/_variables.scss" as *;
 
 header {
     height: 50px;

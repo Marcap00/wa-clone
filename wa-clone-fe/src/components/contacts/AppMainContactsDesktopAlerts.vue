@@ -16,7 +16,7 @@
 </template>
 
 <style lang="scss" scoped>
-@use "../scss/_variables.scss" as *;
+@use "../../scss/_variables.scss" as *;
 
 .desktop-alerts {
     height: 60px;

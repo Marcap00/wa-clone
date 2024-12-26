@@ -26,7 +26,7 @@ const register = async () => {
         /* setTimeout(() => {
             router.push('/login');
         }, 1000); */
-        console.log(response)
+        // console.log(response)
     } catch (error) {
         errorMessage.value = error.response?.data?.message || error.message
     }
@@ -44,11 +44,11 @@ const handleAvatarChange = (event) => {
     <main class="h-main">
         <div class="container">
             <div class="title">
-                <h1>Register</h1>
+                <h1>Registrati</h1>
             </div>
             <form class="row" @submit.prevent="register" enctype="multipart/form-data">
                 <div class="col-6 mb-3">
-                    <label for="name">Name</label>
+                    <label for="name">Nome</label>
                     <input type="text" class="form-control" id="name" name="name" v-model="form.name" required
                         autocomplete="name">
                 </div>
@@ -66,13 +66,13 @@ const handleAvatarChange = (event) => {
                 </div>
 
                 <div class="col-6 mb-3">
-                    <label for="phone_number">Phone Number</label>
+                    <label for="phone_number">Numero di telefono</label>
                     <input type="text" class="form-control" id="phone_number" name="phone_number"
                         v-model="form.phone_number" required>
                 </div>
 
                 <div class="col-6 mb-3">
-                    <label for="biography">Biography</label>
+                    <label for="biography">Biografia</label>
                     <textarea class="form-control" id="biography" name="biography" v-model="form.biography"></textarea>
                 </div>
 

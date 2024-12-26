@@ -1,10 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { useContactsStore } from '../js/stores/contacts';
-import { useActiveIndexStore } from '../js/stores/active_index';
+import { useContactsStore } from '../../js/stores/contacts';
+import { useActiveIndexStore } from '../../js/stores/active_index';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-import { onUpdated } from 'vue';
 
 const router = useRouter();
 const contactsStore = useContactsStore()
@@ -12,14 +11,9 @@ const activeIndexStore = useActiveIndexStore()
 const newMessage = ref('');
 const ApiUrl = 'http://localhost:8000/api/messages/store';
 
-/* onUpdated(() => {
-    console.log(newMessage);
-}) */
-
 function getContacts() {
     contactsStore.getContacts(router);
 }
-
 
 async function addMessage(message, index) {
     try {
@@ -52,7 +46,7 @@ async function addMessage(message, index) {
 </template>
 
 <style lang="scss" scoped>
-@use "../scss/_variables.scss" as *;
+@use "../../scss/_variables.scss" as *;
 
 .input-message {
     height: 50px;
