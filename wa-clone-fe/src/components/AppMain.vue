@@ -1,4 +1,5 @@
 <script setup>
+import AppMainSidebar from './sidebar/AppMainSidebar.vue';
 import AppMainContacts from './contacts/AppMainContacts.vue';
 import AppMainChat from './chat/AppMainChat.vue';
 import { onMounted } from 'vue';
@@ -21,6 +22,8 @@ onMounted(() => {
         <div class="container-fluid h-100 py-4">
             <!-- Wrapper -->
             <div class="wrapper d-flex h-100">
+                <!-- Sidebar -->
+                <AppMainSidebar />
                 <!-- Left Column -->
                 <AppMainContacts />
                 <!-- Right Column -->
@@ -40,8 +43,8 @@ main {
 
     background-color: $bg-body;
 
-    .wrapper>* {
+    /* .wrapper>* {
         background-color: #fff;
-    }
+    } */
 }
 </style>

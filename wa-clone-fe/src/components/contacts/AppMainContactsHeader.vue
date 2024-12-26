@@ -39,7 +39,7 @@ onMounted(async () => {
         <!-- Icons Column Left -->
         <div class="icons">
             <i @click="reload()" class="fas fa-circle-notch mx-2"></i>
-            <i class="fas fa-message mx-2"></i>
+            <i class="far fa-message mx-2"></i>
             <i @click="logout()" class="fas fa-ellipsis-v mx-2"></i>
         </div>
     </header>
@@ -61,5 +61,6 @@ h3 {
 
 i {
     cursor: pointer;
+    color: $color-icon;
 }
 </style>

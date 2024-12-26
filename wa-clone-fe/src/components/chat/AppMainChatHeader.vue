@@ -38,9 +38,8 @@ const activeContactName = computed(() => {
         </ul>
         <!-- Icon header right -->
         <div class="icons">
-            <i class="fas fa-search mx-2"></i>
-            <i class="fas fa-message mx-2"></i>
-            <i class="fas fa-paperclip mx-2"></i>
+            <i class="fas fa-search mx-3"></i>
+            <i class="fas fa-ellipsis-v mx-3"></i>
         </div>
     </header>
 
@@ -61,6 +60,10 @@ header {
     .last-access {
         color: $text-contacts;
         font-weight: 600;
+    }
+
+    .icons {
+        color: $color-icon;
     }
 }
 </style>
