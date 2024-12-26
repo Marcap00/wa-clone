@@ -30,13 +30,15 @@ function formatDate(date) {
     return new Date(date).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })
 }
 
+const lastMessage = computed(() => {
+    if (!props.contact.messages.length) return
+    return props.contact.messages[props.contact.messages.length - 1]
+})
+
 function numberLastMessageReceived(i) {
     return contactsStore.contacts[i].messages.filter(message => message.status === 'received').length
 }
 
-const lastMessage = computed(() => {
-    return props.contact.messages[props.contact.messages.length - 1]
-})
 
 </script>
 
@@ -59,7 +61,8 @@ const lastMessage = computed(() => {
         <time v-if="props.contact.messages.length" :class="{ 'highlighted-text': lastMessage.status === 'received' }">
             {{ formatDate(lastMessage.date) }}
         </time>
-        <div v-if="lastMessage.status === 'received'" class="number-last-message-received">
+        <div v-if="props.contact.messages.length && lastMessage.status === 'received'"
+            class="number-last-message-received">
             {{ numberLastMessageReceived(props.i) }}
         </div>
     </li>
