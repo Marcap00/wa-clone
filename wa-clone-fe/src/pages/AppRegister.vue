@@ -3,7 +3,9 @@ import AppHeader from '../components/general/AppHeader.vue'
 import AppFooter from '../components/general/AppFooter.vue'
 import { useAuthStore } from '../js/stores/auth'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const authStore = useAuthStore()
 
 const form = ref({
@@ -12,7 +14,7 @@ const form = ref({
     password: '',
     phone_number: '',
     biography: '',
-    avatar: '',
+    avatar: null,
 })
 
 const errorMessage = ref('')
@@ -23,9 +25,9 @@ const register = async () => {
         console.log(form.value)
         const response = await authStore.register(form.value)
         successMessage.value = "Registrazione effettuata con successo"
-        /* setTimeout(() => {
+        setTimeout(() => {
             router.push('/login');
-        }, 1000); */
+        }, 1000);
         // console.log(response)
     } catch (error) {
         errorMessage.value = error.response?.data?.message || error.message
@@ -33,8 +35,14 @@ const register = async () => {
 }
 
 const handleAvatarChange = (event) => {
-    form.avatar = event.target.files[0]
+    const file = event.target.files[0]
+    if (file) {
+        form.value.avatar = file
+    } else {
+        form.value.avatar = null
+    }
 }
+
 
 </script>
 
@@ -42,6 +50,12 @@ const handleAvatarChange = (event) => {
     <AppHeader />
     <main class="h-main">
         <div class="container">
+            <div class="alert alert-success" v-if="successMessage">
+                {{ successMessage }}
+            </div>
+            <div class="alert alert-danger" v-if="errorMessage">
+                {{ errorMessage }}
+            </div>
             <div class="title">
                 <h1>Registrati</h1>
             </div>
@@ -77,7 +91,11 @@ const handleAvatarChange = (event) => {
 
                 <div class="col-6 mb-3">
                     <label for="avatar">Avatar</label>
-                    <input type="file" class="form-control" id="avatar" name="avatar" @change="handleAvatarChange">
+                    <input type="file" class="form-control" id="avatar" name="avatar" @change="handleAvatarChange"
+                        accept="image/*">
+                    <div v-if="form.avatar" class="mt-2">
+                        File selezionato: {{ form.avatar.name }}
+                    </div>
                 </div>
                 <div class="col-6">
                     <button type="submit" class="btn btn-primary me-2">Register</button>

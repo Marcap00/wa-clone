@@ -9,7 +9,7 @@ const router = useRouter();
 const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user;
 
 function getImagePath(imagePath) {
-    return new URL(`../assets/img/${imagePath}`, import.meta.url).href;
+    return new URL(`../../assets/img/${imagePath}`, import.meta.url).href;
 }
 
 function reload() {
@@ -31,7 +31,8 @@ onMounted(async () => {
         <!-- Avatar -->
         <div class="avatar d-flex align-items-center">
             <!-- Avatar Image -->
-            <img class="img-avatar me-2" :src="user.avatar" alt="Avatar">
+            <img v-if="user.avatar" class="img-avatar me-2" :src="user.avatar" alt="Avatar">
+            <img v-else class="img-avatar me-2" :src="user.avatar_placeholder" alt="Avatar">
             <!-- Name Avatar -->
             <h3>{{ user.name }}</h3>
         </div>
@@ -55,6 +56,7 @@ header {
 
 h3 {
     color: $text-title;
+    font-weight: 600;
 }
 
 i {

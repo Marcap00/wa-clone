@@ -44,26 +44,22 @@ class AuthController extends Controller
             'phone_number' => 'required|string|unique:users|max:255',
             'biography' => 'nullable|string|max:255',
         ]);
-        function getAvatar($request)
-        {
-            $avatar = "";
-            $placeholder = "";
-            if ($request->hasFile('avatar')) {
-                $path = $request->file('avatar')->store('avatars', 'public');
-                $avatar = url('/storage/' . $path);
-                return $avatar;
-            } else {
-                $placeholder = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-                return $placeholder;
-            }
+
+        if ($request->hasFile('avatar')) {
+            $imagePath = $request->file('avatar')->store('avatars', 'public');
+        } else {
+            $imagePath = null;
         }
+
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone_number' => $request->phone_number,
             'biography' => $request->biography,
-            'avatar' => getAvatar($request),
+            'avatar' => url('storage/' . $imagePath),
+            'avatar_placeholder' => "https://cdn-icons-png.flaticon.com/512/149/149071.png",
         ]);
 
 

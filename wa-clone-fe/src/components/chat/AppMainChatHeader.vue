@@ -26,7 +26,7 @@ const activeContactName = computed(() => {
 <template>
 
     <header v-if="contactsStore.contacts.length" class="sticky d-flex align-items-center p-2">
-        <img class="img-avatar me-2" :src="getImagePath(contactsStore.contacts[activeIndexStore.activeIndex]?.avatar)"
+        <img class="img-avatar me-2" :src="contactsStore.contacts[activeIndexStore.activeIndex]?.avatar"
             alt="Avatar utente">
         <!-- Information avatar -->
         <ul class="flex-grow-1">

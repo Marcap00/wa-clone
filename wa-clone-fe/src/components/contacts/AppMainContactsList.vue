@@ -56,7 +56,7 @@ onMounted(() => {
 
 .number-last-message-received {
     position: absolute;
-    bottom: 7px;
+    bottom: 9px;
     right: 7px;
     font-weight: 600;
     background-color: $text-last-message-received;
@@ -76,7 +76,7 @@ onMounted(() => {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    max-width: 200px;
+    max-width: 350px;
 }
 
 .contacts-list h3 {

@@ -46,7 +46,7 @@ function numberLastMessageReceived(i) {
     <li @click="setActiveContact(props.i)"
         :class="props.i === activeIndexStore.activeIndex ? 'active' : '', !props.contact.visible ? 'd-none' : ''"
         class="d-flex align-items-center p-2">
-        <img class="img-avatar me-2" :src="getImagePath(props.contact.avatar)" alt="#">
+        <img class="img-avatar me-2" :src="props.contact.avatar" alt="#">
         <ul class="flex-grow-1">
             <li>
                 <h3>

@@ -28,21 +28,5 @@ const contactsStore = useContactsStore()
 
 .col-rght {
     width: 65%;
-
-    .logo-empty {
-        width: 50px;
-    }
-}
-
-.background-empty {
-    background-color: $bg-dark-chat;
-}
-
-h1 {
-    color: $text-title;
-}
-
-p {
-    color: $text-secondary;
 }
 </style>

@@ -70,3 +70,19 @@
     </div>
 
 </template>
+
+<style lang="scss" scoped>
+@use "../../scss/_variables.scss" as *;
+
+.background-empty {
+    background-color: $bg-dark-chat;
+}
+
+h1 {
+    color: $text-title;
+}
+
+p {
+    color: $text-secondary;
+}
+</style>

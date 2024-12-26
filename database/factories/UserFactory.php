@@ -23,15 +23,52 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $avatarPlaceholders = [
+            "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://images.pexels.com/photos/1212984/pexels-photo-1212984.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://images.pexels.com/photos/1121796/pexels-photo-1121796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://images.pexels.com/photos/1090387/pexels-photo-1090387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://images.pexels.com/photos/842548/pexels-photo-842548.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://images.pexels.com/photos/227294/pexels-photo-227294.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "https://images.pexels.com/photos/211050/pexels-photo-211050.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        ];
+        $userNames = [
+            "Alexander Thompson",
+            "Benjamin Walker",
+            "Charlotte Hughes",
+            "Daniel Mitchell",
+            "Elizabeth Parker",
+            "Frederick Collins",
+            "Grace Anderson",
+            "Henry Wilson",
+            "Isabella Foster",
+            "James Bennett",
+            "Katherine Stewart",
+            "Lawrence Richardson",
+            "Margaret Campbell",
+            "Nathan Harrison",
+            "Oliver Brooks",
+            "Penelope Wright",
+            "Quinn Fletcher",
+            "Rebecca Morrison",
+            "Samuel Cooper",
+            "Thomas Baldwin"
+        ];
+        $randomName = fake()->randomElement($userNames);
         return [
-            'name' => fake()->name(),
+            'name' => $randomName,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             /* 'password' => static::$password ??= Hash::make('password'), */
             'password' => "user",
             'remember_token' => Str::random(10),
             'phone_number' => fake()->phoneNumber(),
-            'avatar' => 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+            'avatar' => null,
+            'avatar_placeholder' => fake()->randomElement($avatarPlaceholders),
             'biography' => fake()->text(),
         ];
     }
