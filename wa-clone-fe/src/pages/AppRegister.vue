@@ -36,7 +36,6 @@ const handleAvatarChange = (event) => {
     form.avatar = event.target.files[0]
 }
 
-
 </script>
 
 <template>
