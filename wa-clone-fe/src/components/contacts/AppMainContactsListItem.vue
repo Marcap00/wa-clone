@@ -1,6 +1,7 @@
 <script setup>
-import { useActiveIndexStore } from '../../js/stores/active_index'
 import { useContactsStore } from '../../js/stores/contacts'
+import { useActiveIndexStore } from '../../js/stores/active_index'
+import BaseNumbLastMessReceived from '../general/BaseNumbLastMessReceived.vue'
 import { computed } from 'vue'
 
 const contactsStore = useContactsStore()
@@ -15,6 +16,10 @@ const props = defineProps({
         type: Number,
         required: true
     }
+})
+
+const classNumberLastMessageReceived = computed(() => {
+    return 'number-last-message-received-position'
 })
 
 function getImagePath(imagePath) {
@@ -36,9 +41,30 @@ const lastMessage = computed(() => {
 })
 
 function numberLastMessageReceived(i) {
-    return contactsStore.contacts[i].messages.filter(message => message.status === 'received').length
+    const messages = props.contact.messages;
+
+    // Se non ci sono messaggi, ritorna 0
+    if (!messages.length) return 0;
+
+    // Trova l'indice dell'ultimo messaggio inviato
+    const lastSentIndex = messages
+        .map((msg, index) => ({ status: msg.status, index }))
+        .filter(msg => msg.status === 'sent')
+        .sort((a, b) => b.index - a.index)[0]?.index ?? -1;
+
+    // Se non ci sono messaggi inviati, conta tutti i ricevuti
+    if (lastSentIndex === -1) {
+        return messages.filter(msg => msg.status === 'received').length;
+    }
+
+    // Conta solo i messaggi ricevuti che vengono dopo l'ultimo inviato
+    return messages
+        .slice(lastSentIndex + 1)
+        .filter(msg => msg.status === 'received')
+        .length;
 }
 
+contactsStore.totalNumberLastMessageReceived += parseInt(numberLastMessageReceived(props.i))
 
 </script>
 
@@ -49,7 +75,7 @@ function numberLastMessageReceived(i) {
         <img class="img-avatar me-2" :src="props.contact.avatar" alt="#">
         <ul class="flex-grow-1">
             <li>
-                <h3>
+                <h3 :class="{ 'fw-semibold': lastMessage.status === 'received' }">
                     {{ props.contact.name }}
                 </h3>
             </li>
@@ -61,10 +87,12 @@ function numberLastMessageReceived(i) {
         <time v-if="props.contact.messages.length" :class="{ 'highlighted-text': lastMessage.status === 'received' }">
             {{ formatDate(lastMessage.date) }}
         </time>
-        <div v-if="props.contact.messages.length && lastMessage.status === 'received'"
+        <!-- <div v-if="props.contact.messages.length && lastMessage.status === 'received'"
             class="number-last-message-received">
             {{ numberLastMessageReceived(props.i) }}
-        </div>
+        </div> -->
+        <BaseNumbLastMessReceived v-if="props.contact.messages.length && lastMessage.status === 'received'"
+            :class="classNumberLastMessageReceived" :numberLastMessageReceived="numberLastMessageReceived(props.i)" />
     </li>
 
 </template>

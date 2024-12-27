@@ -7,7 +7,8 @@ export const useContactsStore = defineStore('contacts', {
     state: () => ({
         contacts: [],
         apiUrlContacts: 'http://localhost:8000/api/contacts',
-        textToFind: ''
+        textToFind: '',
+        totalNumberLastMessageReceived: 0
     }),
     actions: {
         async getContacts(router = null) {
