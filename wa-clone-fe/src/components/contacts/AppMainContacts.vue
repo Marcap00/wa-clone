@@ -25,6 +25,6 @@ import AppMainContactsList from './AppMainContactsList.vue';
 
 <style lang="scss" scoped>
 .col-lft {
-    width: 35%;
+    width: 30%;
 }
 </style>
