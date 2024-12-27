@@ -75,7 +75,7 @@ contactsStore.totalNumberLastMessageReceived += parseInt(numberLastMessageReceiv
         <img class="img-avatar me-2" :src="props.contact.avatar" alt="#">
         <ul class="flex-grow-1">
             <li>
-                <h3 :class="{ 'fw-semibold': lastMessage.status === 'received' }">
+                <h3 :class="{ 'fw-semibold': lastMessage?.status === 'received' }">
                     {{ props.contact.name }}
                 </h3>
             </li>
