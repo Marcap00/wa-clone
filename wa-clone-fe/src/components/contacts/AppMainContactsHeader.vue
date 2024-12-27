@@ -27,14 +27,15 @@ onMounted(async () => {
 </script>
 
 <template>
-    <header v-if="user" class="d-flex justify-content-between align-items-center p-2">
+    <header v-if="user" class="d-flex justify-content-between align-items-center p-3">
         <!-- Avatar -->
         <div class="avatar d-flex align-items-center">
             <!-- Avatar Image -->
-            <img v-if="user.avatar" class="img-avatar me-2" :src="user.avatar" alt="Avatar">
-            <img v-else class="img-avatar me-2" :src="user.avatar_placeholder" alt="Avatar">
+            <!-- <img v-if="user.avatar" class="img-avatar me-2" :src="user.avatar" alt="Avatar">
+            <img v-else class="img-avatar me-2" :src="user.avatar_placeholder" alt="Avatar"> -->
             <!-- Name Avatar -->
-            <h3>{{ user.name }}</h3>
+            <!-- <h3>{{ user.name }}</h3> -->
+            <h2>Chats</h2>
         </div>
         <!-- Icons Column Left -->
         <div class="icons">
@@ -50,13 +51,13 @@ onMounted(async () => {
 @use "../../scss/_variables.scss" as *;
 
 header {
-    height: 50px;
+    height: 70px;
     background-color: $bg-dark-contacts;
 }
 
-h3 {
-    color: $text-title;
-    font-weight: 600;
+h2 {
+    color: #fff;
+    font-weight: 700;
 }
 
 i {
