@@ -5,9 +5,10 @@
     <div class="desktop-alerts d-flex align-items-center gap-2 p-2">
         <i class="fas fa-bell-slash fa-sm"></i>
         <div class="text-alerts">
-            <p class="text-small fw-semibold">Ricevi notifiche di nuovi messaggi</p>
+            <p class="text-white">Turn on notifications</p>
+            <p class="text-small fw-semibold">Get notified of new messages on your computer.</p>
             <a class="text-small" href="#">
-                Attiva notifiche desktop
+                Turn on desktop notifications
                 <i class="fas fa-chevron-right fa-xs align-middle"></i>
             </a>
         </div>
@@ -19,7 +20,7 @@
 @use "../../scss/_variables.scss" as *;
 
 .desktop-alerts {
-    height: 60px;
+    height: 80px;
     // background-color: #8edafc;
     background-color: $bg-dark-desktop-alerts;
 }
@@ -27,8 +28,8 @@
 .desktop-alerts {
 
     a,
-    p {
-
+    p,
+    i {
         color: $text-secondary;
     }
 
@@ -48,6 +49,6 @@ i.fa-bell-slash {
 }
 
 .fa-chevron-right {
-    margin-top: 2px;
+    margin-top: 1.5px;
 }
 </style>
