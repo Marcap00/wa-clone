@@ -38,8 +38,9 @@ onMounted(() => {
 }
 
 .contacts-list {
-    height: calc(100% - 150px);
+    height: calc(100% - 190px);
     background-color: $bg-dark-contacts;
+    overflow-x: hidden;
 }
 
 .contacts-list li {
@@ -54,22 +55,6 @@ onMounted(() => {
     font-weight: 600;
 }
 
-.number-last-message-received {
-    position: absolute;
-    bottom: 9px;
-    right: 7px;
-    font-weight: 600;
-    background-color: $text-last-message-received;
-    color: #fff;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-}
-
 .contacts-list .last-message {
     color: $text-contacts;
     font-weight: 600;
@@ -77,11 +62,18 @@ onMounted(() => {
     overflow: hidden;
     white-space: nowrap;
     max-width: 350px;
+
+    @media (max-width: 1500px) {
+        max-width: 250px;
+    }
+
+    @media (max-width: 1160px) {
+        max-width: 150px;
+    }
 }
 
 .contacts-list h3 {
     color: $text-contacts;
-    font-weight: 600;
 }
 
 .contacts-list .highlighted-text {

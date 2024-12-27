@@ -15,7 +15,7 @@ onBeforeUpdate(() => {
         <i class="fas fa-search px-3"></i>
         <!-- Input search -->
         <input v-model="contactsStore.textToFind" name="textToFind" type="text" class="w-100 border border-light p-2"
-            placeholder="Cerca o inizia una nuova chat">
+            placeholder="Search">
     </div>
 </template>
 
@@ -45,6 +45,6 @@ onBeforeUpdate(() => {
 
 .search-bar input::placeholder {
     color: $text-secondary;
-    font-size: 12px;
+    font-size: 16px;
 }
 </style>
