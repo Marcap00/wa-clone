@@ -36,7 +36,7 @@ const activeContact = computed(() => {
 @use "../../scss/_variables.scss" as *;
 
 .chat {
-    height: calc(100% - 100px);
+    height: calc(100% - 120px);
     background-image: url('../../assets/img/mine-dark.jpg');
     background-size: contain;
 

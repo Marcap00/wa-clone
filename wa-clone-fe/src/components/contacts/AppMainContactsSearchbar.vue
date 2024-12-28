@@ -41,6 +41,7 @@ onBeforeUpdate(() => {
     background-color: $bg-dark-searchbar;
     border: 1px solid $bg-dark-searchbar !important;
     color: $text-contacts;
+    font-size: 16px;
 }
 
 .search-bar input::placeholder {

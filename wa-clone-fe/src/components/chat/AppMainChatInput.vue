@@ -37,7 +37,7 @@ async function addMessage(message, index) {
 
         <!-- <form class="flex-grow-1"> -->
         <input v-model="newMessage" name="message" class="w-100 border-0 rounded-3 ps-3" type="text"
-            placeholder="Scrivi un messaggio" @keyup.enter="addMessage(newMessage, activeIndexStore.activeIndex)">
+            placeholder="Type a message" @keyup.enter="addMessage(newMessage, activeIndexStore.activeIndex)">
         <!-- </form> -->
 
         <i class="fas fa-microphone mx-3"></i>
@@ -57,9 +57,11 @@ async function addMessage(message, index) {
     line-height: 36px;
     background-color: $bg-dark-input-chat;
     color: $text-contacts;
+    font-size: 16px;
 
     &::placeholder {
-        color: $text-contacts;
+        color: $text-secondary;
+        font-size: 16px;
     }
 }
 </style>

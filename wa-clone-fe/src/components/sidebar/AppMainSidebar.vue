@@ -16,7 +16,7 @@ const classNumberLastMessageReceived = computed(() => {
         <div class="d-flex flex-column align-items-center gap-3">
             <span class="active position-relative">
                 <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" fill="none">
-                    <title>chats-filled</title>
+                    <title>Chats</title>
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M4.8384 8.45501L5 8.70356V9V17.8333C5 18.7538 5.7462 19.5 6.6667 19.5H20.3333C21.2538 19.5 22 18.7538 22 17.8333V6.66667C22 5.74619 21.2538 5 20.3333 5H2.5927L4.8384 8.45501ZM8 14.5C8 13.6716 8.67157 13 9.5 13H14.5C15.3284 13 16 13.6716 16 14.5C16 15.3284 15.3284 16 14.5 16H9.5C8.67157 16 8 15.3284 8 14.5ZM9.5 8C8.67157 8 8 8.67157 8 9.5C8 10.3284 8.67157 11 9.5 11H16.5C17.3284 11 18 10.3284 18 9.5C18 8.67157 17.3284 8 16.5 8H9.5Z"
                         fill="currentColor"></path>
@@ -30,7 +30,7 @@ const classNumberLastMessageReceived = computed(() => {
             <span>
                 <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class=""
                     fill="none">
-                    <title>status-outline</title>
+                    <title>Status</title>
                     <path
                         d="M13.5627 3.13663C13.6586 2.59273 14.1793 2.22466 14.7109 2.37438C15.7904 2.67842 16.8134 3.16256 17.7359 3.80858C18.9322 4.64624 19.9304 5.73574 20.6605 7.0005C21.3906 8.26526 21.8348 9.67457 21.9619 11.1294C22.06 12.2513 21.9676 13.3794 21.691 14.4662C21.5548 15.0014 20.9756 15.2682 20.4567 15.0793C19.9377 14.8903 19.6769 14.317 19.7996 13.7785C19.9842 12.9693 20.0421 12.1343 19.9695 11.3035C19.8678 10.1396 19.5124 9.01218 18.9284 8.00038C18.3443 6.98857 17.5457 6.11697 16.5887 5.44684C15.9055 4.96844 15.1535 4.601 14.3605 4.3561C13.8328 4.19314 13.4668 3.68052 13.5627 3.13663Z"
                         fill="currentColor"></path>
@@ -48,7 +48,7 @@ const classNumberLastMessageReceived = computed(() => {
             <span>
                 <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class=""
                     fill="none">
-                    <title>newsletter-outline</title>
+                    <title>Newsletter</title>
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M15.8301 8.63404C16.3081 8.35745 16.9198 8.52076 17.1964 8.9988C17.7077 9.88244 18 10.9086 18 12C18 13.0914 17.7077 14.1176 17.1964 15.0012C16.9198 15.4792 16.3081 15.6425 15.8301 15.366C15.352 15.0894 15.1887 14.4776 15.4653 13.9996C15.8052 13.4122 16 12.7304 16 12C16 11.2696 15.8052 10.5878 15.4653 10.0004C15.1887 9.52237 15.352 8.91063 15.8301 8.63404ZM8.16995 8.63404C8.64798 8.91063 8.81129 9.52237 8.5347 10.0004C8.19484 10.5878 8 11.2696 8 12C8 12.7304 8.19484 13.4122 8.5347 13.9996C8.81129 14.4776 8.64798 15.0894 8.16995 15.366C7.69191 15.6425 7.08017 15.4792 6.80358 15.0012C6.29231 14.1176 6 13.0914 6 12C6 10.9086 6.29231 9.88244 6.80358 8.9988C7.08017 8.52076 7.69191 8.35745 8.16995 8.63404Z"
                         fill="currentColor"></path>
@@ -63,7 +63,7 @@ const classNumberLastMessageReceived = computed(() => {
             <span>
                 <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class=""
                     fill="none">
-                    <title>community-outline</title>
+                    <title>Community</title>
                     <path
                         d="M19.992 17C20.0031 16.2628 20.0099 15.9937 19.9606 15.4041C19.9559 15.347 19.9506 15.2962 19.9447 15.253C19.9007 14.9282 19.8237 14.6238 19.7226 14.3419C19.68 14.2233 19.6332 14.1094 19.5828 13.9999C19.5738 13.9805 19.5647 13.9611 19.5555 13.942C19.4612 13.7454 19.355 13.5636 19.2404 13.3956C19.3264 13.392 19.4137 13.3898 19.5023 13.3892L19.5555 13.389C20.2632 13.389 20.8883 13.4899 21.401 13.6205C21.4627 13.6362 21.5228 13.6523 21.5813 13.6688L21.5915 13.6717L21.6087 13.6766C22.069 13.8088 22.5875 14.0227 23.0245 14.3595C23.4788 14.7097 23.8921 15.2338 23.9736 15.9559C24.0117 16.2932 24 16.0153 23.9908 16.4244C23.9744 17.1535 23.3769 19 22.6608 19H19.6869C19.8643 18.6252 19.9692 17.9298 19.9822 17.4856C19.985 17.3925 19.9887 17.2199 19.992 17Z"
                         fill="currentColor"></path>
@@ -104,7 +104,7 @@ const classNumberLastMessageReceived = computed(() => {
             <span>
                 <svg viewBox="0 0 24 24" height="26" width="26" preserveAspectRatio="xMidYMid meet" class=""
                     fill="none">
-                    <title>business-tools-outline</title>
+                    <title>Business Tools</title>
                     <g clip-path="url(#clip0_49_15709)">
                         <path
                             d="M18.36 9L18.96 12H5.04L5.64 9H18.36ZM20 5C20 4.44772 19.5523 4 19 4H5C4.44772 4 4 4.44772 4 5C4 5.55228 4.44772 6 5 6H19C19.5523 6 20 5.55228 20 5ZM20.1608 7.80388C20.0673 7.33646 19.6569 7 19.1802 7H4.8198C4.34312 7 3.93271 7.33646 3.83922 7.80388L3.01942 11.9029C3.0065 11.9675 3 12.0332 3 12.099V13C3 13.5523 3.44772 14 4 14V18C4 19.1046 4.89543 20 6 20H12C13.1046 20 14 19.1046 14 18V14H18V19C18 19.5523 18.4477 20 19 20C19.5523 20 20 19.5523 20 19V14C20.5523 14 21 13.5523 21 13V12.099C21 12.0332 20.9935 11.9675 20.9806 11.9029L20.1608 7.80388ZM6 18V14H12V18H6Z"
@@ -120,7 +120,7 @@ const classNumberLastMessageReceived = computed(() => {
             <span>
                 <svg viewBox="0 0 24 24" height="26" width="26" preserveAspectRatio="xMidYMid meet" class=""
                     fill="none">
-                    <title>business-advertise-outline</title>
+                    <title>Business Advertise</title>
                     <g clip-path="url(#clip0_49_15701)">
                         <path
                             d="M18.9999 11C18.4476 11 18 11.4477 18 12C18 12.5523 18.4476 13 18.9999 13C19.6495 13 20.342 13 21.0001 13C21.5523 13 22 12.5523 22 12C22 11.4477 21.5523 11 21.0001 11C20.342 11 19.6495 11 18.9999 11Z"
@@ -150,7 +150,7 @@ const classNumberLastMessageReceived = computed(() => {
             <span>
                 <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class=""
                     fill="none">
-                    <title>settings-outline</title>
+                    <title>Settings</title>
                     <path
                         d="M11.75 14.5C13.1307 14.5 14.25 13.3807 14.25 12C14.25 10.6193 13.1307 9.5 11.75 9.5C10.3693 9.5 9.25 10.6193 9.25 12C9.25 13.3807 10.3693 14.5 11.75 14.5Z"
                         stroke="currentColor" stroke-width="2"></path>
@@ -201,6 +201,10 @@ div.sidebar {
     span.active {
         background-color: #bebebe28;
         border-radius: 50%;
+    }
+
+    img.img-avatar {
+        cursor: pointer;
     }
 }
 </style>

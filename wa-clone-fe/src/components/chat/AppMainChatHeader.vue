@@ -1,9 +1,11 @@
 <script setup>
 import { useActiveIndexStore } from '../../js/stores/active_index'
 import { useContactsStore } from '../../js/stores/contacts'
+import { useContactInfoStore } from '../../js/stores/contactInfo'
 import { computed } from 'vue'
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
+const contactInfoStore = useContactInfoStore()
 
 function getImagePath(imagePath) {
     return new URL(`../../assets/img/${imagePath}`, import.meta.url).href;
@@ -21,6 +23,10 @@ const lastMessageTime = computed(() => {
 const activeContactName = computed(() => {
     return contactsStore.contacts[activeIndexStore.activeIndex]?.name
 })
+
+const openContactInfo = () => {
+    contactInfoStore.contactInfo = true;
+};
 </script>
 
 <template>
@@ -29,7 +35,7 @@ const activeContactName = computed(() => {
         <img class="img-avatar me-2" :src="contactsStore.contacts[activeIndexStore.activeIndex]?.avatar"
             alt="Avatar utente">
         <!-- Information avatar -->
-        <ul class="flex-grow-1">
+        <ul class="flex-grow-1" @click="openContactInfo">
             <li>
                 <h3>{{ activeContactName }}</h3>
             </li>
@@ -49,7 +55,7 @@ const activeContactName = computed(() => {
 @use "../../scss/_variables.scss" as *;
 
 header {
-    height: 50px;
+    height: 70px;
     background-color: $bg-dark-searchbar;
 
     h3 {
@@ -64,6 +70,10 @@ header {
 
     .icons {
         color: $color-icon;
+    }
+
+    ul {
+        cursor: pointer;
     }
 }
 </style>

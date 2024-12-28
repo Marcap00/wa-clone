@@ -2,13 +2,15 @@
 import AppMainSidebar from './sidebar/AppMainSidebar.vue';
 import AppMainContacts from './contacts/AppMainContacts.vue';
 import AppMainChat from './chat/AppMainChat.vue';
+import AppMainContactInfo from './contact-info/AppMainContactInfo.vue';
 import { onMounted } from 'vue';
 import { useContactsStore } from '../js/stores/contacts';
+import { useContactInfoStore } from '../js/stores/contactInfo';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const contactsStore = useContactsStore();
-
+const contactInfoStore = useContactInfoStore();
 onMounted(() => {
     contactsStore.getContacts(router);
 });
@@ -28,6 +30,8 @@ onMounted(() => {
                 <AppMainContacts />
                 <!-- Right Column -->
                 <AppMainChat />
+                <!-- Contact Info -->
+                <AppMainContactInfo v-if="contactInfoStore.contactInfo" />
             </div>
         </div>
     </main>
