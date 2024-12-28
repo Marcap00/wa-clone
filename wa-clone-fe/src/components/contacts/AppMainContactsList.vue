@@ -2,7 +2,7 @@
 import AppMainContactsListItem from './AppMainContactsListItem.vue'
 import { useContactsStore } from '../../js/stores/contacts'
 import { useLabelsStore } from '../../js/stores/labels'
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 
 const contactsStore = useContactsStore()
 const labelsStore = useLabelsStore()
