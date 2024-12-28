@@ -1,17 +1,28 @@
 <script setup>
+import { useContactsStore } from '../../js/stores/contacts';
+
+const contactsStore = useContactsStore();
+
+const closeAlerts = () => {
+    contactsStore.showAlerts = false;
+}
 </script>
 
 <template>
-    <div class="desktop-alerts d-flex align-items-center gap-2 p-2">
-        <i class="fas fa-bell-slash fa-sm"></i>
-        <div class="text-alerts">
-            <p class="text-white">Turn on notifications</p>
-            <p class="text-small fw-semibold">Get notified of new messages on your computer.</p>
-            <a class="text-small" href="#">
-                Turn on desktop notifications
-                <i class="fas fa-chevron-right fa-xs align-middle"></i>
-            </a>
+    <div v-if="contactsStore.showAlerts"
+        class="desktop-alerts-container d-flex align-items-center justify-content-between">
+        <div class="desktop-alerts d-flex align-items-center gap-2 p-3">
+            <i class="fas fa-bell-slash fa-sm"></i>
+            <div class="text-alerts">
+                <p class="text-white mb-1">Turn on notifications</p>
+                <p class="text-md">Get notified of new messages on your computer.</p>
+                <a class="text-md" href="#">
+                    Turn on desktop notifications
+                    <i class="fas fa-chevron-right fa-xs align-middle"></i>
+                </a>
+            </div>
         </div>
+        <i @click="closeAlerts()" class="fas fa-xmark p-3 fa-lg color-icon"></i>
     </div>
 
 </template>
@@ -20,9 +31,13 @@
 @use "../../scss/_variables.scss" as *;
 
 .desktop-alerts {
-    height: 80px;
+    height: 90px;
     // background-color: #8edafc;
+}
+
+.desktop-alerts-container {
     background-color: $bg-dark-desktop-alerts;
+    cursor: pointer;
 }
 
 .desktop-alerts {
@@ -50,5 +65,13 @@ i.fa-bell-slash {
 
 .fa-chevron-right {
     margin-top: 1.5px;
+}
+
+i.fa-xmark {
+    cursor: pointer;
+}
+
+.color-icon {
+    color: $text-secondary;
 }
 </style>

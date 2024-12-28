@@ -3,7 +3,7 @@ import AppMainContactsHeader from './AppMainContactsHeader.vue';
 import AppMainContactsDesktopAlerts from './AppMainContactsDesktopAlerts.vue';
 import AppMainContactsSearchbar from './AppMainContactsSearchbar.vue';
 import AppMainContactsList from './AppMainContactsList.vue';
-
+import AppMainContactsFilterLabels from './AppMainContactsFilterLabels.vue';
 
 </script>
 
@@ -15,6 +15,8 @@ import AppMainContactsList from './AppMainContactsList.vue';
             <AppMainContactsHeader />
             <!-- Section Search Bar -->
             <AppMainContactsSearchbar />
+            <!-- Section Filter Labels -->
+            <AppMainContactsFilterLabels />
             <!-- Section desktop alerts -->
             <AppMainContactsDesktopAlerts />
         </div>

@@ -39,7 +39,6 @@ const activeContact = computed(() => {
     height: calc(100% - 120px);
     background-image: url('../../assets/img/mine-dark.jpg');
     background-size: contain;
-
 }
 
 h3 {

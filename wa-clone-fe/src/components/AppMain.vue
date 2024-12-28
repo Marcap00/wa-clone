@@ -46,7 +46,6 @@ main {
             #dcdbd3 15% 100%); */
 
     background-color: $bg-body;
-
     /* .wrapper>* {
         background-color: #fff;
     } */

@@ -2,10 +2,12 @@
 import { useActiveIndexStore } from '../../js/stores/active_index'
 import { useContactsStore } from '../../js/stores/contacts'
 import { useContactInfoStore } from '../../js/stores/contactInfo'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 const contactInfoStore = useContactInfoStore()
+
+const isDropdownMenuOpen = ref(false);
 
 function getImagePath(imagePath) {
     return new URL(`../../assets/img/${imagePath}`, import.meta.url).href;
@@ -27,11 +29,12 @@ const activeContactName = computed(() => {
 const openContactInfo = () => {
     contactInfoStore.contactInfo = true;
 };
+
 </script>
 
 <template>
 
-    <header v-if="contactsStore.contacts.length" class="sticky d-flex align-items-center p-2">
+    <header v-if="contactsStore.contacts.length" class="sticky d-flex align-items-center py-2 px-3">
         <img class="img-avatar me-2" :src="contactsStore.contacts[activeIndexStore.activeIndex]?.avatar"
             alt="Avatar utente">
         <!-- Information avatar -->
@@ -43,9 +46,36 @@ const openContactInfo = () => {
                 formatDate(lastMessageTime) }}</li>
         </ul>
         <!-- Icon header right -->
-        <div class="icons">
-            <i class="fas fa-search mx-3"></i>
-            <i class="fas fa-ellipsis-v mx-3"></i>
+        <div class="icons d-flex align-items-center">
+            <i class="fas fa-search mx-2" title="Search..."></i>
+            <div class="dropdown-menu" :class="{ 'bg-custom-icon': isDropdownMenuOpen }"
+                @click="isDropdownMenuOpen = !isDropdownMenuOpen">
+                <i class="fas fa-ellipsis-v" title="Menu"></i>
+                <ul class="dropdown-menu-list mt-2" v-if="isDropdownMenuOpen">
+                    <li @click="openContactInfo">
+                        <p>Contact info</p>
+                    </li>
+                    <li class="d-flex align-items-center gap-2">
+                        <p>Add to favorites</p>
+                        <i class="fas fa-plus mt-1"></i>
+                    </li>
+                    <li>
+                        <p>Close chat</p>
+                    </li>
+                    <li>
+                        <p class="text-danger">Report {{ activeContactName }}</p>
+                    </li>
+                    <li>
+                        <p class="text-danger">Block {{ activeContactName }}</p>
+                    </li>
+                    <li>
+                        <p>Clear chat</p>
+                    </li>
+                    <li>
+                        <p class="text-danger">Delete chat</p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </header>
 
@@ -70,10 +100,44 @@ header {
 
     .icons {
         color: $color-icon;
+        cursor: pointer;
     }
 
     ul {
         cursor: pointer;
+    }
+
+    .dropdown-menu {
+        position: relative;
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dropdown-menu-list {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: $bg-dark-contacts;
+        border-radius: 10px;
+        width: 250px;
+        z-index: 1000;
+
+        li {
+            margin: 5px 0;
+            padding: 5px 15px;
+
+            &:hover {
+                background-color: $bg-dark-contacts-active;
+            }
+        }
+    }
+
+    .bg-custom-icon {
+        background-color: #bebebe28;
+        border-radius: 50%;
     }
 }
 </style>

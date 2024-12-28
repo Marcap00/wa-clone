@@ -2,9 +2,11 @@
 import { useAuthStore } from '../../js/stores/auth';
 import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
-
+import { ref } from 'vue';
 const authStore = useAuthStore();
 const router = useRouter();
+
+const isDropdownMenuOpen = ref(false);
 
 const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user;
 
@@ -38,10 +40,24 @@ onMounted(async () => {
             <h2>Chats</h2>
         </div>
         <!-- Icons Column Left -->
-        <div class="icons">
-            <i @click="reload()" class="fas fa-circle-notch mx-2"></i>
-            <i class="far fa-message mx-2"></i>
-            <i @click="logout()" class="fas fa-ellipsis-v mx-2"></i>
+        <div class="icons d-flex align-items-center">
+            <i @click="reload()" class="fas fa-circle-notch mx-3" title="Reload"></i>
+            <i class="far fa-message mx-3" title="New chat"></i>
+            <div class="dropdown-menu" :class="{ 'bg-custom-icon': isDropdownMenuOpen }"
+                @click="isDropdownMenuOpen = !isDropdownMenuOpen">
+                <i class="fas fa-ellipsis-v" title="Menu"></i>
+                <ul class="dropdown-menu-list mt-2" v-if="isDropdownMenuOpen">
+                    <li class="d-flex align-items-center gap-2">
+                        <p class="text-white">New group</p>
+                    </li>
+                    <li>
+                        <p class="text-white">Starred messages</p>
+                    </li>
+                    <li @click="logout()">
+                        <p class="text-danger">Log out</p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </header>
 
@@ -63,5 +79,40 @@ h2 {
 i {
     cursor: pointer;
     color: $color-icon;
+}
+
+.dropdown-menu {
+    position: relative;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+.dropdown-menu-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: $bg-dark-searchbar;
+    border-radius: 10px;
+    width: 250px;
+    z-index: 10000;
+
+    li {
+        margin: 5px 0;
+        padding: 5px 15px;
+
+        &:hover {
+            background-color: $bg-dark-contacts-active;
+        }
+    }
+}
+
+.bg-custom-icon {
+    background-color: #bebebe28;
+    border-radius: 50%;
 }
 </style>

@@ -1,9 +1,26 @@
 <script setup>
 import AppMainContactsListItem from './AppMainContactsListItem.vue'
 import { useContactsStore } from '../../js/stores/contacts'
+import { useLabelsStore } from '../../js/stores/labels'
 import { onMounted } from 'vue'
 
 const contactsStore = useContactsStore()
+const labelsStore = useLabelsStore()
+
+const label = computed(() => {
+    return labelsStore.labels.find(label => label.active)
+})
+
+// Ritorno tutti i contatti se la label è 'All'
+// Ritorno i contatti con la i messaggi non letti se la label è 'Unread'
+// Ritorno i contatti preferiti se la label è 'Favorites'
+function filterContacts() {
+    if (label.value.name === 'All') {
+        return contactsStore.contacts
+    } else if (label.value.name === 'Unread') {
+        return contactsStore.contacts.filter(contact => lastMessage.status === 'received')
+    }
+}
 
 onMounted(() => {
     // console.log('contactsStore.contacts', contactsStore.contacts)
@@ -11,7 +28,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="contacts-list overflow-y-scroll">
+    <div class="contacts-list overflow-y-scroll" :class="{ 'closed-alert': !contactsStore.showAlerts }">
         <!-- Contacts List -->
         <ul v-if="contactsStore.contacts.length" class="p-0 m-0">
             <!-- Contact -->
@@ -38,20 +55,25 @@ onMounted(() => {
 }
 
 .contacts-list {
-    height: calc(100% - 190px);
+    height: calc(100% - 245px);
     background-color: $bg-dark-contacts;
     overflow-x: hidden;
+
+    &.closed-alert {
+        height: calc(100% - 155px);
+    }
 }
 
 .contacts-list li {
     position: relative;
     cursor: pointer;
+    z-index: 1;
 }
 
 .contacts-list time {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 10px;
     font-weight: 600;
 }
 

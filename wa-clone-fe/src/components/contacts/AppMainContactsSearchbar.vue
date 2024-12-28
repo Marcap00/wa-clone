@@ -30,7 +30,7 @@ onBeforeUpdate(() => {
 .search-bar i.fa-search {
     border-radius: 10px 0px 0px 10px;
     font-size: .75em;
-    line-height: 33.6px;
+    line-height: 37px;
     background-color: $bg-dark-searchbar;
     color: $text-secondary;
     border: 1px solid $bg-dark-searchbar !important;

@@ -6,9 +6,11 @@ import axios from 'axios';
 export const useContactsStore = defineStore('contacts', {
     state: () => ({
         contacts: [],
+        unreadContacts: [],
         apiUrlContacts: 'http://localhost:8000/api/contacts',
         textToFind: '',
-        totalNumberLastMessageReceived: 0
+        totalNumberLastMessageReceived: 0,
+        showAlerts: true
     }),
     actions: {
         async getContacts(router = null) {

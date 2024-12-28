@@ -37,8 +37,8 @@ const props = defineProps({
 }
 
 .number-last-message-received-position {
-    bottom: 9px;
-    right: 7px;
+    bottom: 18px;
+    right: 10px;
 }
 
 .number-last-message-received-position-2 {

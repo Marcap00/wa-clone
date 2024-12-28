@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 export const useContactInfoStore = defineStore('contactInfo', {
     state: () => ({
-        contactInfo: true,
+        contactInfo: false,
         contact: {},
     }),
 });

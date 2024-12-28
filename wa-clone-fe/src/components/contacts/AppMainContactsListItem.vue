@@ -1,11 +1,16 @@
 <script setup>
 import { useContactsStore } from '../../js/stores/contacts'
 import { useActiveIndexStore } from '../../js/stores/active_index'
+import { useLabelsStore } from '../../js/stores/labels'
 import BaseNumbLastMessReceived from '../general/BaseNumbLastMessReceived.vue'
-import { computed } from 'vue'
+import { computed, onMounted, ref, onUpdated } from 'vue'
+import { useRouter } from 'vue-router'
 
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
+const labelsStore = useLabelsStore()
+const router = useRouter()
+const displayedOnlyUnread = ref(false)
 
 const props = defineProps({
     contact: {
@@ -64,18 +69,37 @@ function numberLastMessageReceived(i) {
         .length;
 }
 
-contactsStore.totalNumberLastMessageReceived += parseInt(numberLastMessageReceived(props.i))
+const label = computed(() => {
+    return labelsStore.labels.find(label => label.active)
+})
+
+
+onMounted(() => {
+    contactsStore.totalNumberLastMessageReceived += parseInt(numberLastMessageReceived(props.i))
+    if (label.value.name === 'Unread') {
+        displayedOnlyUnread.value = true
+        console.log('displayedOnlyUnread', displayedOnlyUnread.value)
+    }
+})
+
+onUpdated(() => {
+    if (label.value.name === 'Unread') {
+        displayedOnlyUnread.value = true
+        console.log('displayedOnlyUnread', displayedOnlyUnread.value)
+        contactsStore.getContacts(router)
+    }
+})
 
 </script>
 
 <template>
-    <li @click="setActiveContact(props.i)"
+    <li v-if="!displayedOnlyUnread" @click="setActiveContact(props.i)"
         :class="props.i === activeIndexStore.activeIndex ? 'active' : '', !props.contact.visible ? 'd-none' : ''"
-        class="d-flex align-items-center p-2">
+        class="d-flex align-items-center p-3">
         <img class="img-avatar me-2" :src="props.contact.avatar" alt="#">
         <ul class="flex-grow-1">
             <li>
-                <h3 :class="{ 'fw-semibold': lastMessage?.status === 'received' }">
+                <h3 :class="{ 'fw-semibold': lastMessage?.status === 'received' }" class="mb-1">
                     {{ props.contact.name }}
                 </h3>
             </li>
