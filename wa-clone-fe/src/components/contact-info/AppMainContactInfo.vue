@@ -8,7 +8,7 @@ const activeIndexStore = useActiveIndexStore();
 const contactInfoStore = useContactInfoStore();
 
 const contact = computed(() => {
-    console.log(contactsStore.contacts[activeIndexStore.activeIndex]);
+    // console.log(contactsStore.contacts[activeIndexStore.activeIndex]);
     return contactsStore.contacts[activeIndexStore.activeIndex];
 });
 
