@@ -6,7 +6,7 @@ const labelsStore = useLabelsStore()
 const labels = reactive([
     { id: 1, name: 'All', active: true },
     { id: 2, name: 'Unread', active: false },
-    // { id: 3, name: 'Favorites', active: false }
+    { id: 3, name: 'Favorites', active: false }
 ])
 
 // Solo un label può essere attivo
@@ -55,8 +55,8 @@ onMounted(() => {
         cursor: pointer;
 
         &.active {
-            background-color: $text-last-message-received;
-            color: #fff
+            background-color: $bg-label-active;
+            color: $text-label-active;
         }
     }
 

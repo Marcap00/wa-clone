@@ -2,10 +2,13 @@
 import { useActiveIndexStore } from '../../js/stores/active_index'
 import { useContactsStore } from '../../js/stores/contacts'
 import { useContactInfoStore } from '../../js/stores/contactInfo'
+import { useFavoritesStore } from '../../js/stores/favorites'
 import { computed, ref } from 'vue'
+
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 const contactInfoStore = useContactInfoStore()
+const favoritesStore = useFavoritesStore()
 
 const isDropdownMenuOpen = ref(false);
 
@@ -29,6 +32,11 @@ const activeContactName = computed(() => {
 const openContactInfo = () => {
     contactInfoStore.contactInfo = true;
 };
+
+const addFavorite = () => {
+    favoritesStore.favorites.push(contactsStore.contacts[activeIndexStore.activeIndex])
+    console.log('favoritesStore.favorites', favoritesStore.favorites)
+}
 
 </script>
 
@@ -55,7 +63,7 @@ const openContactInfo = () => {
                     <li @click="openContactInfo">
                         <p>Contact info</p>
                     </li>
-                    <li class="d-flex align-items-center gap-2">
+                    <li @click="addFavorite" class="d-flex align-items-center gap-2">
                         <p>Add to favorites</p>
                         <i class="fas fa-plus mt-1"></i>
                     </li>

@@ -2,25 +2,19 @@
 import AppMainContactsListItem from './AppMainContactsListItem.vue'
 import { useContactsStore } from '../../js/stores/contacts'
 import { useLabelsStore } from '../../js/stores/labels'
+import { useFavoritesStore } from '../../js/stores/favorites'
 import { onMounted, computed } from 'vue'
 
 const contactsStore = useContactsStore()
+const favoritesStore = useFavoritesStore()
 const labelsStore = useLabelsStore()
 
-const label = computed(() => {
-    return labelsStore.labels.find(label => label.active)
-})
-
-// Ritorno tutti i contatti se la label è 'All'
-// Ritorno i contatti con la i messaggi non letti se la label è 'Unread'
-// Ritorno i contatti preferiti se la label è 'Favorites'
-function filterContacts() {
-    if (label.value.name === 'All') {
-        return contactsStore.contacts
-    } else if (label.value.name === 'Unread') {
-        return contactsStore.contacts.filter(contact => lastMessage.status === 'received')
+const isFavorites = computed(() => {
+    if (labelsStore.labelActive.name === 'Favorites') {
+        return favoritesStore.favorites
     }
-}
+    return contactsStore.contacts
+})
 
 onMounted(() => {
     // console.log('contactsStore.contacts', contactsStore.contacts)
@@ -32,8 +26,7 @@ onMounted(() => {
         <!-- Contacts List -->
         <ul v-if="contactsStore.contacts.length" class="p-0 m-0">
             <!-- Contact -->
-            <AppMainContactsListItem v-for="(contact, i) in contactsStore.contacts" :contact="contact" :i="i"
-                :key="contact.id" />
+            <AppMainContactsListItem v-for="(contact, i) in isFavorites" :contact="contact" :i="i" :key="contact.id" />
         </ul>
         <div v-else class="d-flex justify-content-center align-items-center h-100">
             <p class="text-secondary">Aggiungi un nuovo contatto
