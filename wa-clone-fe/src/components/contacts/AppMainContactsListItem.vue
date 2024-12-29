@@ -3,7 +3,7 @@ import { useContactsStore } from '../../js/stores/contacts'
 import { useActiveIndexStore } from '../../js/stores/active_index'
 import { useLabelsStore } from '../../js/stores/labels'
 import BaseNumbLastMessReceived from '../general/BaseNumbLastMessReceived.vue'
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, onBeforeMount } from 'vue'
 
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
@@ -42,7 +42,7 @@ const lastMessage = computed(() => {
     return props.contact.messages[props.contact.messages.length - 1]
 })
 
-function numberLastMessageReceived(i) {
+const numberLastMessageReceived = computed(() => {
     const messages = props.contact.messages;
 
     // Se non ci sono messaggi, ritorna 0
@@ -64,10 +64,14 @@ function numberLastMessageReceived(i) {
         .slice(lastSentIndex + 1)
         .filter(msg => msg.status === 'received')
         .length;
-}
+})
+
+onBeforeMount(() => {
+    contactsStore.totalNumberLastMessageReceived = 0
+})
 
 onMounted(() => {
-    contactsStore.totalNumberLastMessageReceived += parseInt(numberLastMessageReceived(props.i))
+    contactsStore.totalNumberLastMessageReceived += parseInt(numberLastMessageReceived.value)
 })
 
 const labelActive = computed(() => {
@@ -79,6 +83,7 @@ const labelActive = computed(() => {
     }
     return true
 })
+
 
 </script>
 
@@ -106,7 +111,7 @@ const labelActive = computed(() => {
             {{ numberLastMessageReceived(props.i) }}
         </div> -->
         <BaseNumbLastMessReceived v-if="props.contact.messages.length && lastMessage.status === 'received'"
-            :class="classNumberLastMessageReceived" :numberLastMessageReceived="numberLastMessageReceived(props.i)" />
+            :class="classNumberLastMessageReceived" :numberLastMessageReceived="numberLastMessageReceived" />
     </li>
 
 </template>
