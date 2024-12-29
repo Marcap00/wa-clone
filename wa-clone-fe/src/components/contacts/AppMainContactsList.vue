@@ -50,7 +50,7 @@ onMounted(() => {
     background-color: $bg-dark-contacts-active;
 }
 
-.contacts-list>ul li:hover {
+.contacts-list>ul>li:hover {
     background-color: $bg-dark-contacts-hover;
 }
 
