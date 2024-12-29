@@ -3,22 +3,25 @@ import { reactive, onMounted } from 'vue'
 import { useLabelsStore } from '../../js/stores/labels'
 
 const labelsStore = useLabelsStore()
-
 const labels = reactive([
-    { name: 'All', active: true },
-    { name: 'Unread', active: false },
-    { name: 'Favorites', active: false }
+    { id: 1, name: 'All', active: true },
+    { id: 2, name: 'Unread', active: false },
+    // { id: 3, name: 'Favorites', active: false }
 ])
-
 
 // Solo un label può essere attivo
 const toggleLabel = (label) => {
     labels.forEach(l => l.active = false)
     label.active = !label.active
+    labelsStore.labels = labels
+    labelsStore.labelActive = labelsStore.labels.find(label => label.active)
+    // console.log('labelsStore.labelActive', labelsStore.labelActive)
 }
 
 onMounted(() => {
     labelsStore.labels = labels
+    labelsStore.labelActive = labelsStore.labels.find(label => label.active)
+    // console.log('labelsStore.labelActive', labelsStore.labelActive)
 })
 
 </script>
