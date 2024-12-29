@@ -3,14 +3,11 @@ import { useContactsStore } from '../../js/stores/contacts'
 import { useActiveIndexStore } from '../../js/stores/active_index'
 import { useLabelsStore } from '../../js/stores/labels'
 import BaseNumbLastMessReceived from '../general/BaseNumbLastMessReceived.vue'
-import { computed, onMounted, ref, onUpdated } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted } from 'vue'
 
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 const labelsStore = useLabelsStore()
-const router = useRouter()
-const displayedOnlyUnread = ref(false)
 
 const props = defineProps({
     contact: {
@@ -27,9 +24,9 @@ const classNumberLastMessageReceived = computed(() => {
     return 'number-last-message-received-position'
 })
 
-function getImagePath(imagePath) {
+/* function getImagePath(imagePath) {
     return new URL(`../../assets/img/${imagePath}`, import.meta.url).href;
-}
+} */
 
 function setActiveContact(i) {
     activeIndexStore.activeIndex = i
@@ -69,31 +66,24 @@ function numberLastMessageReceived(i) {
         .length;
 }
 
-const label = computed(() => {
-    return labelsStore.labels.find(label => label.active)
-})
-
-
 onMounted(() => {
     contactsStore.totalNumberLastMessageReceived += parseInt(numberLastMessageReceived(props.i))
-    if (label.value.name === 'Unread') {
-        displayedOnlyUnread.value = true
-        console.log('displayedOnlyUnread', displayedOnlyUnread.value)
-    }
 })
 
-onUpdated(() => {
-    if (label.value.name === 'Unread') {
-        displayedOnlyUnread.value = true
-        console.log('displayedOnlyUnread', displayedOnlyUnread.value)
-        contactsStore.getContacts(router)
+const labelActive = computed(() => {
+    /* console.log('labelsStore.labelActive', labelsStore.labelActive)
+    console.log('labelsStore.labelActive === Unread', labelsStore.labelActive.name === 'Unread')
+    console.log('lastMessage.status === received', lastMessage.status === 'received') */
+    if (labelsStore.labelActive.name === 'Unread') {
+        return lastMessage.value && lastMessage.value.status === 'received'
     }
+    return true
 })
 
 </script>
 
 <template>
-    <li v-if="!displayedOnlyUnread" @click="setActiveContact(props.i)"
+    <li v-if="labelActive" @click="setActiveContact(props.i)"
         :class="props.i === activeIndexStore.activeIndex ? 'active' : '', !props.contact.visible ? 'd-none' : ''"
         class="d-flex align-items-center p-3">
         <img class="img-avatar me-2" :src="props.contact.avatar" alt="#">
