@@ -17,7 +17,7 @@ class ContactFactory extends Factory
      */
     public function definition(): array
     {
-        $avatarPlaceholders = [
+        /* $avatarPlaceholders = [
             "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -29,11 +29,11 @@ class ContactFactory extends Factory
             "https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "https://images.pexels.com/photos/227294/pexels-photo-227294.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "https://images.pexels.com/photos/211050/pexels-photo-211050.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        ];
+        ]; */
         return [
             'user_id' => User::inRandomOrder()->first(),
             'name' => fake()->name(),
-            'avatar' => fake()->randomElement($avatarPlaceholders),
+            'avatar' => fake()->randomElement(config('avatars_placeholders')),
             'phone_number' => fake()->phoneNumber(),
             'biography' => fake()->text(),
             'visible' => true,

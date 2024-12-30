@@ -23,7 +23,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $avatarPlaceholders = [
+        /* $avatarPlaceholders = [
             "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -35,7 +35,8 @@ class UserFactory extends Factory
             "https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "https://images.pexels.com/photos/227294/pexels-photo-227294.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             "https://images.pexels.com/photos/211050/pexels-photo-211050.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        ];
+        ]; */
+
         $userNames = [
             "Alexander Thompson",
             "Benjamin Walker",
@@ -68,7 +69,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'phone_number' => fake()->phoneNumber(),
             'avatar' => null,
-            'avatar_placeholder' => fake()->randomElement($avatarPlaceholders),
+            'avatar_placeholder' => fake()->randomElement(config('avatars_placeholders')),
             'biography' => fake()->text(),
         ];
     }
