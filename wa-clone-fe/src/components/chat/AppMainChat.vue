@@ -5,8 +5,10 @@ import AppMainChatMessagesList from './AppMainChatMessagesList.vue';
 import AppMainChatEmpty from './AppMainChatEmpty.vue';
 import { useContactsStore } from '../../js/stores/contacts';
 import { useContactInfoStore } from '../../js/stores/contactInfo';
+import { useNewContactStore } from '../../js/stores/newContact';
 const contactsStore = useContactsStore()
 const contactInfoStore = useContactInfoStore()
+const newContactStore = useNewContactStore()
 
 </script>
 

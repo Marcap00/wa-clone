@@ -5,6 +5,13 @@ import { useLabelsStore } from '../../js/stores/labels'
 import { useFavoritesStore } from '../../js/stores/favorites'
 import { onMounted, computed } from 'vue'
 
+const props = defineProps({
+    isNewContact: {
+        type: Boolean,
+        required: true
+    }
+})
+
 const contactsStore = useContactsStore()
 const favoritesStore = useFavoritesStore()
 const labelsStore = useLabelsStore()
@@ -16,13 +23,16 @@ const isFavorites = computed(() => {
     return contactsStore.contacts
 })
 
+
+
 onMounted(() => {
     // console.log('contactsStore.contacts', contactsStore.contacts)
 })
 </script>
 
 <template>
-    <div class="contacts-list overflow-y-scroll" :class="{ 'closed-alert': !contactsStore.showAlerts }">
+    <div class="contacts-list"
+        :class="{ 'closed-alert': !contactsStore.showAlerts, 'overflow-y-scroll': !props.isNewContact }">
         <!-- Contacts List -->
         <ul v-if="contactsStore.contacts.length" class="p-0 m-0">
             <!-- Contact -->

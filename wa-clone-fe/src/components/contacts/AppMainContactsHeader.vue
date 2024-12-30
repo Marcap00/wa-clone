@@ -1,9 +1,11 @@
 <script setup>
 import { useAuthStore } from '../../js/stores/auth';
+import { useNewContactStore } from '../../js/stores/newContact';
 import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
 import { ref } from 'vue';
 const authStore = useAuthStore();
+const newContactStore = useNewContactStore();
 const router = useRouter();
 
 const isDropdownMenuOpen = ref(false);
@@ -21,6 +23,10 @@ function reload() {
 function logout() {
     authStore.logout();
     router.push({ name: 'login' });
+}
+
+function displayNewContact() {
+    newContactStore.newContactDisplayed = true;
 }
 
 onMounted(async () => {
@@ -42,7 +48,7 @@ onMounted(async () => {
         <!-- Icons Column Left -->
         <div class="icons d-flex align-items-center">
             <i @click="reload()" class="fas fa-circle-notch mx-3" title="Reload"></i>
-            <i class="far fa-message mx-3" title="New chat"></i>
+            <i @click="displayNewContact" class="far fa-message mx-3" title="New chat"></i>
             <div class="dropdown-menu" :class="{ 'bg-custom-icon': isDropdownMenuOpen }"
                 @click="isDropdownMenuOpen = !isDropdownMenuOpen">
                 <i class="fas fa-ellipsis-v" title="Menu"></i>

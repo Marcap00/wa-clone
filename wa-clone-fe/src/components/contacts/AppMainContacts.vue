@@ -21,7 +21,7 @@ import AppMainContactsFilterLabels from './AppMainContactsFilterLabels.vue';
             <AppMainContactsDesktopAlerts />
         </div>
         <!-- Section contacts list -->
-        <AppMainContactsList />
+        <AppMainContactsList :isNewContact="false" />
     </div>
 </template>
 

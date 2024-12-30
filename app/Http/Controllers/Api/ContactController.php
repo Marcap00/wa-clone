@@ -47,7 +47,43 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|string|unique:contacts,phone_number|max:255',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        /* $user = User::find($data['user_id']);  // !! Nel caso in cui vogliamo controllare se l'utente esiste
+
+        if (!$user) {
+            return response()->json([
+                'error' => 'User not found'
+            ], 404);
+        } */
+
+        $contact = Contact::create([
+            'user_id' => $data['user_id'],
+            'name' => $data['name'],
+            'phone_number' => $data['phone_number'],
+            'visible' => true,
+            'avatar' => fake()->randomElement(config('avatars_placeholders')),
+            'biography' => fake()->text(100),
+        ]);
+
+
+        if (!$contact) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Error in creating contact',
+                'message' => 'Contact not created'
+            ], 500);
+        }
+
+        return response()->json([
+            'success' => true,
+            'results' => $contact,
+            'message' => 'Contact created successfully!',
+        ]);
     }
 
     /**
