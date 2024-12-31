@@ -51,15 +51,15 @@ async function login() {
 
 <template>
     <main class="h-main d-flex justify-content-center align-items-center p-4">
-        <div class="alert alert-success" v-if="successMessage">
-            {{ successMessage }}
-        </div>
-        <div class="alert alert-danger" v-if="errorMessage">
-            {{ errorMessage }}
-            <br>
-            Le credenziali potrebbero essere non corrette o potresti essere non registrato
-        </div>
         <div class="container">
+            <div class="alert alert-success" v-if="successMessage">
+                {{ successMessage }}
+            </div>
+            <div class="alert alert-danger" v-if="errorMessage">
+                {{ errorMessage }}
+                <br>
+                Le credenziali potrebbero essere non corrette o potresti essere non registrato
+            </div>
             <form @submit.prevent="login" class="d-flex flex-column align-items-center card p-3 rounded-4">
                 <h1 class="mb-4">Login</h1>
                 <!-- <div class="col-6 mb-3">

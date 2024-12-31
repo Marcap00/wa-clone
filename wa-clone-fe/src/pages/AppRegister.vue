@@ -125,6 +125,10 @@ p {
     color: $text-title;
 }
 
+p>a {
+    color: $text-label-active;
+}
+
 .custom-label {
     color: #9DA0A4;
     background-color: #212529;
