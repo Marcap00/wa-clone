@@ -48,7 +48,7 @@ const handleAvatarChange = (event) => {
 
 <template>
     <AppHeader />
-    <main class="h-main overflow-y-scroll p-3">
+    <main class="h-main overflow-y-scroll p-4">
         <div class="container">
             <div class="alert alert-success" v-if="successMessage">
                 {{ successMessage }}
