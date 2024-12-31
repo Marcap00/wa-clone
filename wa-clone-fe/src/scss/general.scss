@@ -43,6 +43,24 @@
     object-fit: cover;
 }
 
+.btn-custom {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: $bg-label-active;
+    border: 3px solid $text-label-active;
+    color: $text-label-active;
+
+    &:hover {
+        background-color: $bg-label-active-hover;
+        scale: 1.05;
+        transition: all 0.3s ease;
+    }
+
+    &:active {
+        scale: 1;
+    }
+}
+
 /* % GENERAL */
 a {
     text-decoration: none;
