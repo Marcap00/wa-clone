@@ -53,7 +53,7 @@ async function login() {
 
 <template>
     <AppHeader />
-    <main class="h-main">
+    <main class="h-main d-flex justify-content-center align-items-center p-4">
         <div class="alert alert-success" v-if="successMessage">
             {{ successMessage }}
         </div>
@@ -63,23 +63,34 @@ async function login() {
             Le credenziali potrebbero essere non corrette o potresti essere non registrato
         </div>
         <div class="container">
-            <h1>Login</h1>
-            <form @submit.prevent="login" class="d-flex flex-column">
-                <div class="col-5 mb-3">
+            <form @submit.prevent="login" class="d-flex flex-column align-items-center card p-3 rounded-4">
+                <h1 class="mb-4">Login</h1>
+                <!-- <div class="col-6 mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" placeholder="Email" id="email" name="email" class="form-control" required
                         autofocus autocomplete="username" v-model="email">
+                </div> -->
+                <div data-bs-theme="dark" class="col-6 form-floating mb-4">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
+                        v-model="email" autocomplete="off" required autofocus>
+                    <label for="email">Email address</label>
                 </div>
-                <div class="col-5 mb-3">
+                <!-- <div class="col-6 mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" placeholder="Password" id="password" name="password" class="form-control"
                         required autocomplete="current-password" v-model="password">
+                </div> -->
+                <div data-bs-theme="dark" class="col-6 form-floating mb-3">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                        v-model="password" autocomplete="off" required>
+                    <label for="password">Password</label>
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary">Accedi</button>
+                    <button type="submit" class="btn-custom text-white mb-3 me-3">Login</button>
+                    <button type="reset" class="btn-custom text-white mb-3">Reset</button>
                 </div>
                 <div class="col">
-                    <p>Non hai un account? <RouterLink to="/register">Registrati</RouterLink>
+                    <p>Don't have an account? <RouterLink to="/register">Register</RouterLink>
                     </p>
                 </div>
             </form>
@@ -90,4 +101,54 @@ async function login() {
 
 <style lang="scss" scoped>
 @use "bootstrap/scss/bootstrap.scss" as *;
+@import '../scss/_variables.scss';
+
+main {
+    background-color: $bg-dark-searchbar;
+}
+
+.card {
+    background-color: $bg-dark-contacts;
+    border: 3px solid $text-label-active;
+    box-shadow: 0 0 10px 0.25rem $text-label-active;
+
+}
+
+h1 {
+    text-align: center;
+    color: $text-label-active;
+}
+
+
+label,
+p {
+    color: $text-title;
+}
+
+p>a {
+    color: $text-label-active;
+}
+
+.btn-custom {
+    padding: 10px 20px;
+    border-radius: 10px !important;
+    background-color: $bg-label-active !important;
+    border: 3px solid $text-label-active !important;
+
+    &:hover {
+        background-color: $bg-label-active-hover !important;
+        scale: 1.05 !important;
+        transition: all 0.3s ease !important;
+    }
+
+    &:active {
+        scale: 1 !important;
+    }
+}
+
+input {
+    &:focus {
+        box-shadow: 0 0 10px 0.25rem $text-label-active !important;
+    }
+}
 </style>

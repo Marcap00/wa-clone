@@ -48,7 +48,7 @@ const handleAvatarChange = (event) => {
 
 <template>
     <AppHeader />
-    <main class="h-main">
+    <main class="h-main overflow-y-scroll p-3">
         <div class="container">
             <div class="alert alert-success" v-if="successMessage">
                 {{ successMessage }}
@@ -59,47 +59,54 @@ const handleAvatarChange = (event) => {
             <div class="title">
                 <h1>Registrati</h1>
             </div>
-            <form class="row" @submit.prevent="register" enctype="multipart/form-data">
-                <div class="col-6 mb-3">
-                    <label for="name">Nome</label>
-                    <input type="text" class="form-control" id="name" name="name" v-model="form.name" required
-                        autocomplete="name">
-                </div>
-
-                <div class="col-6 mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" v-model="form.email" required
-                        autocomplete="email">
-                </div>
-
-                <div class="col-6 mb-3">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" v-model="form.password"
-                        required autocomplete="current-password">
-                </div>
-
-                <div class="col-6 mb-3">
-                    <label for="phone_number">Numero di telefono</label>
-                    <input type="text" class="form-control" id="phone_number" name="phone_number"
-                        v-model="form.phone_number" required>
-                </div>
-
-                <div class="col-6 mb-3">
-                    <label for="biography">Biografia</label>
-                    <textarea class="form-control" id="biography" name="biography" v-model="form.biography"></textarea>
-                </div>
-
-                <div class="col-6 mb-3">
-                    <label for="avatar">Avatar</label>
-                    <input type="file" class="form-control" id="avatar" name="avatar" @change="handleAvatarChange"
-                        accept="image/*">
-                    <div v-if="form.avatar" class="mt-2">
-                        File selezionato: {{ form.avatar.name }}
+            <form class="row justify-content-center" @submit.prevent="register" enctype="multipart/form-data">
+                <div data-bs-theme="dark" class="col-12 d-flex justify-content-center mb-3 p-0">
+                    <div class="w-50">
+                        <label class="custom-label" for="avatar">Avatar</label>
+                        <input type="file" class="form-control" id="avatar" name="avatar" @change="handleAvatarChange"
+                            accept="image/*">
+                        <div v-if="form.avatar" class="mt-2">
+                            File selezionato: {{ form.avatar.name }}
+                        </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <button type="submit" class="btn btn-primary me-2">Register</button>
-                    <button type="reset" class="btn btn-secondary me-2">Cancel</button>
+                <div class="col-12 d-flex justify-content-center">
+                    <div data-bs-theme="dark" class="form-floating col-4 mb-3 me-4 p-0">
+                        <input type="text" class="form-control" id="name" name="name" v-model="form.name" required
+                            autocomplete="off">
+                        <label for="name">Name</label>
+                    </div>
+
+                    <div data-bs-theme="dark" class="form-floating col-4 mb-3 p-0">
+                        <input type="email" class="form-control" id="email" name="email" v-model="form.email" required
+                            autocomplete="off">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <div data-bs-theme="dark" class="col-4 form-floating mb-3 me-4 p-0">
+                        <input type="password" class="form-control" id="password" name="password"
+                            v-model="form.password" required autocomplete="off">
+                        <label for="password">Password</label>
+                    </div>
+
+                    <div data-bs-theme="dark" class="col-4 form-floating mb-3 p-0">
+                        <input type="text" class="form-control" id="phone_number" name="phone_number"
+                            v-model="form.phone_number" required>
+                        <label for="phone_number">Phone Number</label>
+                    </div>
+                </div>
+                <div data-bs-theme="dark" class="col-6 form-floating mb-4 p-0">
+                    <textarea class="form-control" id="biography" name="biography" v-model="form.biography"
+                        style="height: 100px"></textarea>
+                    <label for="biography">Biography</label>
+                </div>
+
+                <div class="col-12 d-flex justify-content-center mb-3">
+                    <button type="submit" class="btn-custom me-3">Register</button>
+                    <button type="reset" class="btn-custom me-2">Reset</button>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
                     <p>Already have an account? <a href="/login">Login</a></p>
                 </div>
             </form>
@@ -110,4 +117,65 @@ const handleAvatarChange = (event) => {
 
 <style lang="scss" scoped>
 @use "bootstrap/scss/bootstrap.scss" as *;
+@import '../scss/_variables.scss';
+
+h1 {
+    text-align: center;
+    color: $text-label-active;
+}
+
+label,
+p {
+    color: $text-title;
+}
+
+.custom-label {
+    color: #9DA0A4;
+    background-color: #212529;
+    border-radius: 10px;
+    padding: 2px 7px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+form {
+    background-color: $bg-dark-contacts;
+    border: 3px solid $text-label-active;
+    box-shadow: 0 0 10px 0.25rem $text-label-active;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+main {
+    background-color: $bg-dark-searchbar;
+}
+
+.btn-custom {
+    padding: 10px 20px;
+    border-radius: 10px !important;
+    background-color: $bg-label-active !important;
+    border: 3px solid $text-label-active !important;
+
+    &:hover {
+        background-color: $bg-label-active-hover !important;
+        scale: 1.05 !important;
+        transition: all 0.3s ease !important;
+    }
+
+    &:active {
+        scale: 1 !important;
+    }
+}
+
+input {
+    &:focus {
+        box-shadow: 0 0 10px 0.25rem $text-label-active !important;
+    }
+}
+
+textarea {
+    &:focus {
+        box-shadow: 0 0 10px 0.25rem $text-label-active !important;
+    }
+}
 </style>
