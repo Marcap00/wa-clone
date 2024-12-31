@@ -1,6 +1,4 @@
 <script setup>
-import AppHeader from '../components/general/AppHeader.vue'
-import AppFooter from '../components/general/AppFooter.vue'
 import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -52,7 +50,6 @@ async function login() {
 </script>
 
 <template>
-    <AppHeader />
     <main class="h-main d-flex justify-content-center align-items-center p-4">
         <div class="alert alert-success" v-if="successMessage">
             {{ successMessage }}
@@ -96,7 +93,6 @@ async function login() {
             </form>
         </div>
     </main>
-    <AppFooter />
 </template>
 
 <style lang="scss" scoped>
