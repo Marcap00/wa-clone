@@ -1,6 +1,4 @@
 <script setup>
-import AppHeader from '../components/general/AppHeader.vue'
-import AppFooter from '../components/general/AppFooter.vue'
 import { useAuthStore } from '../js/stores/auth'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -47,7 +45,6 @@ const handleAvatarChange = (event) => {
 </script>
 
 <template>
-    <AppHeader />
     <main class="h-main overflow-y-scroll p-4">
         <div class="container">
             <div class="alert alert-success" v-if="successMessage">
@@ -112,7 +109,6 @@ const handleAvatarChange = (event) => {
             </form>
         </div>
     </main>
-    <AppFooter />
 </template>
 
 <style lang="scss" scoped>

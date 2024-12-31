@@ -3,7 +3,7 @@
 
 <template>
     <main class="h-main overflow-y-scroll">
-        <section class="hero py-5">
+        <section id="hero" class="hero py-5">
             <div class="container h-100">
                 <div class="hero-content h-100 d-flex flex-column justify-content-center align-items-center">
                     <h1 class="mb-3">
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </section>
-        <section class="services py-5">
+        <section id="services" class="services py-5">
             <div class="container">
                 <h2 class="text-center mb-5">
                     Services🧾
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </section>
-        <section class="contacts py-5">
+        <section id="contacts" class="contacts py-5">
             <div class="container">
                 <h2 class="text-center mb-5">
                     Contacts👥
