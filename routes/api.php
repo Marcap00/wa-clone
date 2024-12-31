@@ -28,3 +28,4 @@ Route::apiResource('contacts', ContactController::class);
 /* Route::apiResource('messages', MessageController::class); */
 
 Route::post('/messages/store', [MessageController::class, 'store']);
+Route::delete('/messages/delete/{id}', [MessageController::class, 'destroy']);
