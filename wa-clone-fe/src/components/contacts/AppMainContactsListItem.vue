@@ -59,6 +59,7 @@ const numberLastMessageReceived = computed(() => {
         return messages.filter(msg => msg.status === 'received').length;
     }
 
+
     // Conta solo i messaggi ricevuti che vengono dopo l'ultimo inviato
     return messages
         .slice(lastSentIndex + 1)
