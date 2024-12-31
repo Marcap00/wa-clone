@@ -1,9 +1,16 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
+import { computed } from 'vue'
+
+const route = useRoute()
+
+const isLoginPage = computed(() => route.path.includes('login'))
+
+
 </script>
 
 <template>
-    <header>
+    <header class="box-shadow">
         <nav class="d-flex justify-content-between align-items-center p-3">
             <div class="nav-right d-flex align-items-center gap-3">
                 <RouterLink to="/">
@@ -19,9 +26,9 @@ import { RouterLink } from 'vue-router'
                 <RouterLink to="/">About</RouterLink>
                 <RouterLink to="/">Contacts</RouterLink>
             </div>
-            <div class="nav-left d-flex align-items-center gap-3">
-                <RouterLink class="btn" to="/login">Login</RouterLink>
-                <RouterLink class="btn" to="/register">Register</RouterLink>
+            <div v-if="!isLoginPage" class="nav-left d-flex align-items-center gap-3">
+                <RouterLink class="btn-custom" to="/login">Login</RouterLink>
+                <RouterLink class="btn-custom" to="/register">Register</RouterLink>
             </div>
         </nav>
     </header>
@@ -43,7 +50,7 @@ header {
         }
 
         img {
-            width: 50px;
+            width: 30px;
         }
 
         a {
@@ -65,22 +72,6 @@ header {
         }
     }
 
-    .btn {
-        padding: 10px 20px;
-        border-radius: 10px;
-        background-color: $bg-label-active;
-        border: 3px solid $text-label-active;
-        color: $text-label-active;
 
-        &:hover {
-            background-color: $bg-label-active-hover;
-            scale: 1.05;
-            transition: all 0.3s ease;
-        }
-
-        &:active {
-            scale: 1;
-        }
-    }
 }
 </style>
