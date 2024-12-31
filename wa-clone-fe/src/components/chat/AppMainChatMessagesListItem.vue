@@ -3,6 +3,8 @@ import { useActiveIndexStore } from '../../js/stores/active_index'
 import { useContactsStore } from '../../js/stores/contacts'
 import { useAuthStore } from '../../js/stores/auth'
 import { computed } from 'vue';
+import axios from 'axios';
+
 const authStore = useAuthStore()
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
@@ -45,7 +47,15 @@ const isMessageSent = computed(() => {
     return props.message.status === 'sent'
 })
 
-
+async function deleteMessage(id) {
+    try {
+        const response = await axios.delete(`http://localhost:8000/api/messages/delete/${id}`);
+        console.log(response);
+        contactsStore.getContacts();
+    } catch (error) {
+        console.error(error);
+    }
+}
 </script>
 
 <template>
@@ -62,10 +72,10 @@ const isMessageSent = computed(() => {
                     </time>
                     <i @click="toggleMenuActive(props.index)" class="fas fa-chevron-down"></i>
                     <ul class="menu">
-                        <li class="mb-3">Info messaggio</li>
-                        <li @click="deleteMessage(props.index)" class="mb-2 text-danger">
-                            Elimina
-                            messaggio</li>
+                        <li class="mb-3">Message Info</li>
+                        <li @click="deleteMessage(props.message.id)" class="mb-2 text-danger">
+                            Delete Message
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -107,7 +117,6 @@ const isMessageSent = computed(() => {
     right: 5px;
     color: #b1b1b1;
     cursor: pointer;
-
     display: none;
 }
 
@@ -125,6 +134,7 @@ const isMessageSent = computed(() => {
     border-radius: 10px;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
     display: none;
+    z-index: 1000;
 }
 
 .message-chat .menu.active {
