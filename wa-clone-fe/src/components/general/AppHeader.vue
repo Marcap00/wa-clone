@@ -5,12 +5,12 @@ import { computed } from 'vue'
 const route = useRoute()
 
 const isLoginPage = computed(() => route.path.includes('login'))
-
-
+const isRegisterPage = computed(() => route.path.includes('register'))
+const isLoginOrRegisterPage = computed(() => isLoginPage.value || isRegisterPage.value)
 </script>
 
 <template>
-    <header class="box-shadow">
+    <header class="sticky-top">
         <nav class="d-flex justify-content-between align-items-center p-3">
             <div class="nav-right d-flex align-items-center gap-3">
                 <RouterLink to="/">
@@ -23,10 +23,10 @@ const isLoginPage = computed(() => route.path.includes('login'))
             </div>
             <div class="nav-center d-flex align-items-center gap-3">
                 <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/">About</RouterLink>
+                <RouterLink to="/">Services</RouterLink>
                 <RouterLink to="/">Contacts</RouterLink>
             </div>
-            <div v-if="!isLoginPage" class="nav-left d-flex align-items-center gap-3">
+            <div v-if="!isLoginOrRegisterPage" class="nav-left d-flex align-items-center gap-3">
                 <RouterLink class="btn-custom" to="/login">Login</RouterLink>
                 <RouterLink class="btn-custom" to="/register">Register</RouterLink>
             </div>
@@ -40,6 +40,7 @@ const isLoginPage = computed(() => route.path.includes('login'))
 header {
     background-color: $bg-dark-contacts;
     color: $text-title;
+    box-shadow: $text-label-active 0px 10px 20px 0px;
 
     nav {
         height: 70px;
