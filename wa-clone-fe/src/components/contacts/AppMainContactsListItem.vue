@@ -1,12 +1,14 @@
 <script setup>
 import { useContactsStore } from '../../js/stores/contacts'
 import { useActiveIndexStore } from '../../js/stores/active_index'
+import { useFavoritesStore } from '../../js/stores/favorites'
 import { useLabelsStore } from '../../js/stores/labels'
 import BaseNumbLastMessReceived from '../general/BaseNumbLastMessReceived.vue'
 import { computed, onMounted, onBeforeMount } from 'vue'
 
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
+const favoritesStore = useFavoritesStore()
 const labelsStore = useLabelsStore()
 
 const props = defineProps({
@@ -30,6 +32,7 @@ const classNumberLastMessageReceived = computed(() => {
 
 function setActiveContact(i) {
     activeIndexStore.activeIndex = i
+    contactsStore.closeChat = false
     // console.log(activeIndexStore.activeIndex)
 }
 
@@ -67,6 +70,10 @@ const numberLastMessageReceived = computed(() => {
         .length;
 })
 
+const isFavorite = computed(() => {
+    return favoritesStore.favorites.some(favorite => favorite.id === props.contact.id)
+})
+
 onBeforeMount(() => {
     contactsStore.totalNumberLastMessageReceived = 0
 })
@@ -97,6 +104,7 @@ const labelActive = computed(() => {
             <li>
                 <h3 :class="{ 'fw-semibold': lastMessage?.status === 'received' }" class="mb-1">
                     {{ props.contact.name }}
+                    <i v-if="isFavorite" class="far fa-star highlighted-text"></i>
                 </h3>
             </li>
             <li v-if="props.contact.messages.length" class="text-small last-message"
