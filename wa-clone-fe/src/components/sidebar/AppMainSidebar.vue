@@ -2,14 +2,22 @@
 import BaseNumbLastMessReceived from '../general/BaseNumbLastMessReceived.vue'
 import { computed } from 'vue'
 import { useAuthStore } from '../../js/stores/auth'
+import { useSettingsStore } from '../../js/stores/settings'
 import { useContactsStore } from '../../js/stores/contacts'
+
 const authStore = useAuthStore()
+const settingsStore = useSettingsStore()
 const contactsStore = useContactsStore()
+
 const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user;
 
 const classNumberLastMessageReceived = computed(() => {
     return 'number-last-message-received-position-2'
 })
+
+const showSettings = () => {
+    settingsStore.showSettings = true
+}
 
 </script>
 
@@ -149,7 +157,7 @@ const classNumberLastMessageReceived = computed(() => {
             </span>
         </div>
         <div class="d-flex flex-column align-items-center gap-3">
-            <span>
+            <span @click="showSettings">
                 <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class=""
                     fill="none">
                     <title>Settings</title>
