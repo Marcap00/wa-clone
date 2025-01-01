@@ -97,7 +97,6 @@ i {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 10000;
 }
 
 .dropdown-menu-list {
@@ -107,7 +106,8 @@ i {
     background-color: $bg-dark-searchbar;
     border-radius: 10px;
     width: 250px;
-    z-index: 10000;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
     li {
         margin: 5px 0;

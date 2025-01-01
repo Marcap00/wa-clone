@@ -87,11 +87,16 @@ async function deleteMessage(id) {
 <style lang="scss" scoped>
 @use "../../scss/_variables.scss" as *;
 
+.message-chat {
+    position: relative;
+    z-index: 1;
+}
+
 .message-chat .message {
     width: 250px;
     padding: .8rem 1rem;
-
     position: relative;
+    z-index: 1;
 }
 
 .message-chat .sent {

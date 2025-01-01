@@ -29,4 +29,9 @@ import AppMainContactsFilterLabels from './AppMainContactsFilterLabels.vue';
 .col-lft {
     width: 30%;
 }
+
+.col-lft-top {
+    position: relative;
+    z-index: 1000;
+}
 </style>

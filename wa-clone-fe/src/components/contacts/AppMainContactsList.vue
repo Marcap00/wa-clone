@@ -75,7 +75,6 @@ onMounted(() => {
 .contacts-list li {
     position: relative;
     cursor: pointer;
-    z-index: 1;
 }
 
 .contacts-list time {

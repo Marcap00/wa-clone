@@ -95,6 +95,8 @@ const addFavorite = () => {
 header {
     height: 70px;
     background-color: $bg-dark-searchbar;
+    position: relative;
+    z-index: 9999;
 
     h3 {
         color: $text-contacts;
@@ -131,7 +133,8 @@ header {
         background-color: $bg-dark-contacts;
         border-radius: 10px;
         width: 250px;
-        z-index: 1000;
+        z-index: 10000;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
         li {
             margin: 5px 0;
