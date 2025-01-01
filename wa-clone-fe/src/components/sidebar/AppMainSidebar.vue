@@ -1,7 +1,9 @@
 <script setup>
 import BaseNumbLastMessReceived from '../general/BaseNumbLastMessReceived.vue'
 import { computed } from 'vue'
+import { useAuthStore } from '../../js/stores/auth'
 import { useContactsStore } from '../../js/stores/contacts'
+const authStore = useAuthStore()
 const contactsStore = useContactsStore()
 const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user;
 
@@ -167,8 +169,8 @@ const classNumberLastMessageReceived = computed(() => {
                     </g>
                 </svg>
             </span>
-            <img v-if="user.avatar" class="img-avatar" :src="user.avatar" alt="Avatar">
-            <img v-else class="img-avatar" :src="user.avatar_placeholder" alt="Avatar">
+            <img v-if="user?.avatar" class="img-avatar" :src="user?.avatar" alt="Avatar">
+            <img v-else class="img-avatar" :src="user?.avatar_placeholder" alt="Avatar">
         </div>
     </div>
 </template>

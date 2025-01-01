@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('name')->nullable(false);
             $table->text('avatar')->nullable();
-            $table->string('phone_number')->nullable(false)->unique();
+            $table->string('phone_number')->nullable(false);
             $table->string('biography')->nullable();
             $table->boolean('visible')->default(true);
             $table->softDeletes();

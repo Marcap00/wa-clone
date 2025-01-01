@@ -49,10 +49,32 @@ class ContactController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'phone_number' => 'required|string|unique:contacts,phone_number|max:255',
+            'phone_number' => 'required|string|max:255',
             'user_id' => 'required|exists:users,id',
         ]);
+        $contactAlreadyExists = Contact::where('user_id', $data['user_id'])->where('phone_number', $data['phone_number'])->first();
+        if ($contactAlreadyExists) {
+            return response()->json([
+                'error' => 'Contact already exists',
+                'message' => 'Contact already exists'
+            ], 400);
 
+
+            $contact = Contact::create([
+                'user_id' => $data['user_id'],
+                'name' => $data['name'],
+                'phone_number' => $data['phone_number'],
+                'visible' => true,
+                'avatar' => $contactAlreadyExists->avatar,
+                'biography' => $contactAlreadyExists->biography,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'results' => $contact,
+                'message' => 'Contact created successfully!',
+            ]);
+        }
         /* $user = User::find($data['user_id']);  // !! Nel caso in cui vogliamo controllare se l'utente esiste
 
         if (!$user) {
