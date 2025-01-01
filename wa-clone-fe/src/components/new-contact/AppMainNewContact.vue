@@ -23,8 +23,8 @@ function closeNewContact() {
 }
 
 async function addNewContact() {
-    console.log(dataForm.value);
-    console.log(user.value.id);
+    /* console.log(dataForm.value);
+    console.log(user.value.id); */
     try {
         const response = await axios.post('http://localhost:8000/api/contacts', dataForm.value);
         console.log(response);
