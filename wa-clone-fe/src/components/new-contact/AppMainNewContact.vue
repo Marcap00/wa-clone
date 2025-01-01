@@ -1,5 +1,6 @@
 <script setup>
 import AppMainContactsList from '../contacts/AppMainContactsList.vue';
+import BaseLogo from '../general/BaseLogo.vue';
 import { useNewContactStore } from '../../js/stores/newContact';
 import { useContactsStore } from '../../js/stores/contacts';
 import { useAuthStore } from '../../js/stores/auth';
@@ -52,6 +53,7 @@ const errorName = computed(() => {
     <div class="col-new-contact">
         <header class="d-flex align-items-center gap-3 p-3">
             <i @click="closeNewContact" class="fas fa-arrow-left"></i>
+            <BaseLogo />
             <h5>New Chat</h5>
         </header>
         <div class="content-new-contact">

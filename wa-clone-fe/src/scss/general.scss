@@ -28,6 +28,11 @@
     color: #b1b1b1;
 }
 
+.custom-section-title {
+    color: $text-title;
+    font-size: 2.5rem;
+}
+
 /* % Avatar Circle Img */
 .img-avatar {
     width: 40px;
@@ -87,6 +92,12 @@ input:focus {
 }
 
 .h-main {
+    height: calc(100vh - 120px);
+}
+
+.home section.hero,
+.home section.contacts,
+.home section.services {
     height: calc(100vh - 120px);
 }
 

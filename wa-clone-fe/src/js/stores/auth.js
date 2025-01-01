@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useContactsStore } from './contacts';
+import { useContactInfoStore } from './contactInfo';
 
 import axios from 'axios';
 export const useAuthStore = defineStore('auth', {
@@ -7,7 +8,8 @@ export const useAuthStore = defineStore('auth', {
         user: null,
         userId: null,
         isAuthenticated: false,
-        contactsStore: useContactsStore()
+        contactsStore: useContactsStore(),
+        contactInfoStore: useContactInfoStore()
     }),
     actions: {
         setUser(user) {
@@ -23,6 +25,7 @@ export const useAuthStore = defineStore('auth', {
             this.userId = null;
             this.isAuthenticated = false;
             this.contactsStore.totalNumberLastMessageReceived = 0
+            this.contactInfoStore.contactInfo = false
             localStorage.removeItem('token');
             localStorage.removeItem('user_id');
             localStorage.removeItem('user');

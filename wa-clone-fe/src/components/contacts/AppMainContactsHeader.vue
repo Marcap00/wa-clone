@@ -1,4 +1,5 @@
 <script setup>
+import BaseLogo from '../general/BaseLogo.vue'
 import { useAuthStore } from '../../js/stores/auth';
 import { useNewContactStore } from '../../js/stores/newContact';
 import { useRouter } from 'vue-router';
@@ -12,9 +13,9 @@ const isDropdownMenuOpen = ref(false);
 
 const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user;
 
-function getImagePath(imagePath) {
+/* function getImagePath(imagePath) {
     return new URL(`../../assets/img/${imagePath}`, import.meta.url).href;
-}
+} */
 
 function reload() {
     location.reload();
@@ -43,6 +44,7 @@ onMounted(async () => {
             <img v-else class="img-avatar me-2" :src="user.avatar_placeholder" alt="Avatar"> -->
             <!-- Name Avatar -->
             <!-- <h3>{{ user.name }}</h3> -->
+            <BaseLogo />
             <h2>Chats</h2>
         </div>
         <!-- Icons Column Left -->

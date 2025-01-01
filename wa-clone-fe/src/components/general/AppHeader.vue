@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, useRoute } from 'vue-router'
 import { computed } from 'vue'
-
+import BaseLogo from './BaseLogo.vue'
 const route = useRoute()
 
 const isLoginPage = computed(() => route.path.includes('login'))
@@ -14,7 +14,7 @@ const isLoginOrRegisterPage = computed(() => isLoginPage.value || isRegisterPage
         <nav class="d-flex justify-content-between align-items-center p-3">
             <div class="nav-left d-flex align-items-center">
                 <RouterLink to="/">
-                    <img src="/src/assets/img/whatsapp.png" alt="Logo" class="img-fluid me-2">
+                    <BaseLogo />
                 </RouterLink>
                 <RouterLink to="/">
                     <h1 class="mb-1">WA Clone</h1>
@@ -53,10 +53,6 @@ header {
         h1 {
             font-size: 1.5rem;
             font-weight: 600;
-        }
-
-        img {
-            width: 30px;
         }
 
         a {

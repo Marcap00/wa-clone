@@ -1,12 +1,13 @@
 <script setup>
+import BaseLogo from './BaseLogo.vue'
 </script>
 
 <template>
     <footer class="footer">
-        <div class="footer-content d-flex justify-content-between align-items-center gap-3 h-100 p-3">
+        <div class="footer-content d-flex justify-content-between align-items-center h-100 p-3">
             <div>
-                <div class="d-flex align-items-center gap-3">
-                    <img src="/src/assets/img/whatsapp.png" alt="Logo" class="img-fluid">
+                <div class="d-flex align-items-center">
+                    <BaseLogo />
                     <address>Created by Marco Cappellato</address>
                 </div>
             </div>
@@ -29,10 +30,6 @@ footer {
     height: 50px;
     background-color: $bg-dark-contacts;
     color: $text-title;
-
-    img {
-        width: 30px;
-    }
 
     i:hover {
         color: $text-label-active;

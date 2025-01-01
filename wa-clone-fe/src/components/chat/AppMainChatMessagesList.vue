@@ -27,7 +27,7 @@ const activeContact = computed(() => {
                 :message="message" :index="index" />
         </ul>
         <div v-if="activeContact.messages.length == 0" class="d-flex justify-content-center align-items-center h-100">
-            <h3>Write your first message to start the conversation ✍️</h3>
+            <h3 class="fw-semibold">Write your first message to start the conversation ✍️</h3>
         </div>
     </div>
 </template>
