@@ -77,7 +77,7 @@ const errorAvatar = computed(() => {
                 {{ errorMessage }}
             </div>
             <div class="title">
-                <h1>Registrati</h1>
+                <h1 class="my-3">Registrati</h1>
             </div>
             <form class="row justify-content-center" @submit.prevent="register" enctype="multipart/form-data">
                 <div data-bs-theme="dark" class="col-12 d-flex justify-content-center mb-3 p-0">
