@@ -1,4 +1,5 @@
 <script setup>
+import BaseLogo from '../general/BaseLogo.vue'
 import BaseLogoText from '../general/BaseLogoText.vue'
 </script>
 
@@ -6,6 +7,7 @@ import BaseLogoText from '../general/BaseLogoText.vue'
     <section id="hero" class="hero py-5">
         <div class="container h-100">
             <div class="hero-content h-100 d-flex flex-column justify-content-center align-items-center">
+                <BaseLogo />
                 <div class="d-flex align-items-center gap-2 mb-3">
                     <h1 class="mb-1">Welcome to</h1>
                     <BaseLogoText />
