@@ -10,7 +10,8 @@ export const useContactsStore = defineStore('contacts', {
         apiUrlContacts: 'http://localhost:8000/api/contacts',
         textToFind: '',
         totalNumberLastMessageReceived: 0,
-        showAlerts: true
+        showAlerts: true,
+        closeChat: false
     }),
     actions: {
         async getContacts(router = null) {
