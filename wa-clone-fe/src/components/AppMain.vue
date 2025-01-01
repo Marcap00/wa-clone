@@ -4,13 +4,16 @@ import AppMainContacts from './contacts/AppMainContacts.vue';
 import AppMainChat from './chat/AppMainChat.vue';
 import AppMainContactInfo from './contact-info/AppMainContactInfo.vue';
 import AppMainNewContact from './new-contact/AppMainNewContact.vue';
+import AppMainSettings from './settings/AppMainSettings.vue';
 import { onMounted } from 'vue';
 import { useContactsStore } from '../js/stores/contacts';
 import { useContactInfoStore } from '../js/stores/contactInfo';
 import { useNewContactStore } from '../js/stores/newContact';
+import { useSettingsStore } from '../js/stores/settings';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+const settingsStore = useSettingsStore();
 const contactsStore = useContactsStore();
 const contactInfoStore = useContactInfoStore();
 const newContactStore = useNewContactStore();
@@ -30,8 +33,9 @@ onMounted(() => {
                 <!-- Sidebar -->
                 <AppMainSidebar />
                 <!-- Left Column -->
-                <AppMainContacts v-if="!newContactStore.newContactDisplayed" />
-                <AppMainNewContact v-else />
+                <AppMainContacts v-if="!newContactStore.newContactDisplayed && !settingsStore.showSettings" />
+                <AppMainNewContact v-else-if="newContactStore.newContactDisplayed" />
+                <AppMainSettings v-else-if="settingsStore.showSettings" />
                 <!-- Right Column -->
                 <AppMainChat />
                 <!-- Contact Info -->
