@@ -18,7 +18,7 @@ const favoritesStore = useFavoritesStore()
 const labelsStore = useLabelsStore()
 const newContactStore = useNewContactStore()
 const isFavorites = computed(() => {
-    if (labelsStore.labelActive.name === 'Favorites') {
+    if (labelsStore.labelActive?.name === 'Favorites') {
         return favoritesStore.favorites
     }
     return contactsStore.contacts
