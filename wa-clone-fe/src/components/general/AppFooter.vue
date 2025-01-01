@@ -26,7 +26,7 @@
 @import '../../scss/_variables.scss';
 
 footer {
-    height: 70px;
+    height: 50px;
     background-color: $bg-dark-contacts;
     color: $text-title;
 
