@@ -1,11 +1,13 @@
 <script setup>
 import AppMainContactsList from '../contacts/AppMainContactsList.vue';
 import { useNewContactStore } from '../../js/stores/newContact';
+import { useContactsStore } from '../../js/stores/contacts';
 import { useAuthStore } from '../../js/stores/auth';
 import axios from 'axios';
 import { ref, computed } from 'vue';
 
 const newContactStore = useNewContactStore();
+const contactsStore = useContactsStore();
 const authStore = useAuthStore();
 const user = ref(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user);
 const dataForm = ref({
@@ -26,6 +28,7 @@ async function addNewContact() {
     try {
         const response = await axios.post('http://localhost:8000/api/contacts', dataForm.value);
         console.log(response);
+        contactsStore.getContacts();
         successMessage.value = response.data.message;
         errorMessage.value = '';
     } catch (error) {

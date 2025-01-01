@@ -1,6 +1,7 @@
 <script setup>
 import AppMainContactsListItem from './AppMainContactsListItem.vue'
 import { useContactsStore } from '../../js/stores/contacts'
+import { useNewContactStore } from '../../js/stores/newContact'
 import { useLabelsStore } from '../../js/stores/labels'
 import { useFavoritesStore } from '../../js/stores/favorites'
 import { onMounted, computed } from 'vue'
@@ -15,13 +16,17 @@ const props = defineProps({
 const contactsStore = useContactsStore()
 const favoritesStore = useFavoritesStore()
 const labelsStore = useLabelsStore()
-
+const newContactStore = useNewContactStore()
 const isFavorites = computed(() => {
     if (labelsStore.labelActive.name === 'Favorites') {
         return favoritesStore.favorites
     }
     return contactsStore.contacts
 })
+
+function displayNewContact() {
+    newContactStore.newContactDisplayed = true;
+}
 
 
 
@@ -39,7 +44,7 @@ onMounted(() => {
             <AppMainContactsListItem v-for="(contact, i) in isFavorites" :contact="contact" :i="i" :key="contact.id" />
         </ul>
         <div v-else class="d-flex justify-content-center align-items-center h-100">
-            <p class="text-secondary">Aggiungi un nuovo contatto
+            <p @click="displayNewContact" class="chat-empty text-secondary">Add a new contact
                 <i class="fa-solid fa-user-plus text-secondary"></i>
             </p>
         </div>
@@ -104,5 +109,14 @@ onMounted(() => {
 .contacts-list .highlighted-text {
     color: $text-last-message-received;
     font-weight: 700;
+}
+
+.chat-empty {
+    cursor: pointer;
+    font-weight: 600;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 </style>
