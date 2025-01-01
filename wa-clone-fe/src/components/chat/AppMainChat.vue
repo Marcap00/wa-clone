@@ -5,14 +5,26 @@ import AppMainChatMessagesList from './AppMainChatMessagesList.vue';
 import AppMainChatContactEmpty from './AppMainChatContactEmpty.vue';
 import { useContactsStore } from '../../js/stores/contacts';
 import { useContactInfoStore } from '../../js/stores/contactInfo';
+import { computed } from 'vue';
+
 const contactsStore = useContactsStore()
 const contactInfoStore = useContactInfoStore()
+
+const isContactEmpty = computed(() => {
+    if (!contactsStore.contacts.length) {
+        return false
+    }
+    if (contactsStore.closeChat) {
+        return false
+    }
+    return true
+})
 
 </script>
 
 <template>
     <div class="col-rght" :class="{ 'info-displayed': contactInfoStore.contactInfo }">
-        <div class="h-100" v-if="contactsStore.contacts.length">
+        <div class="h-100" v-if="isContactEmpty">
             <!-- Header Right -->
             <AppMainChatHeader />
             <!-- Section of chat -->

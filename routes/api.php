@@ -25,6 +25,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::apiResource('contacts', ContactController::class);
+Route::delete('/contacts/delete/{id}', [ContactController::class, 'destroy']);
 /* Route::apiResource('messages', MessageController::class); */
 
 Route::post('/messages/store', [MessageController::class, 'store']);

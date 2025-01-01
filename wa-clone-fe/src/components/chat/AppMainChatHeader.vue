@@ -4,17 +4,19 @@ import { useContactsStore } from '../../js/stores/contacts'
 import { useContactInfoStore } from '../../js/stores/contactInfo'
 import { useFavoritesStore } from '../../js/stores/favorites'
 import { computed, ref } from 'vue'
-
+import axios from 'axios'
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 const contactInfoStore = useContactInfoStore()
 const favoritesStore = useFavoritesStore()
 
 const isDropdownMenuOpen = ref(false);
+const successMessage = ref('')
+const errorMessage = ref('')
 
-function getImagePath(imagePath) {
+/* function getImagePath(imagePath) {
     return new URL(`../../assets/img/${imagePath}`, import.meta.url).href;
-}
+} */
 
 function formatDate(date) {
     return new Date(date).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
@@ -36,6 +38,25 @@ const openContactInfo = () => {
 const addFavorite = () => {
     favoritesStore.favorites.push(contactsStore.contacts[activeIndexStore.activeIndex])
     console.log('favoritesStore.favorites', favoritesStore.favorites)
+}
+
+const deleteChat = async () => {
+    try {
+        const contactId = contactsStore.contacts[activeIndexStore.activeIndex].id
+        const response = await axios.delete(`http://localhost:8000/api/contacts/delete/${contactId}`)
+        console.log('response', response)
+        contactsStore.getContacts()
+        if (response.status === 200) {
+            successMessage.value = response.data.message
+        }
+    } catch (error) {
+        console.log('error', error)
+        errorMessage.value = error.response.data.message
+    }
+}
+
+const closeChat = () => {
+    contactsStore.closeChat = true
 }
 
 </script>
@@ -67,7 +88,7 @@ const addFavorite = () => {
                         <p>Add to favorites</p>
                         <i class="fas fa-plus mt-1"></i>
                     </li>
-                    <li>
+                    <li @click="closeChat">
                         <p>Close chat</p>
                     </li>
                     <li>
@@ -79,7 +100,7 @@ const addFavorite = () => {
                     <li>
                         <p>Clear chat</p>
                     </li>
-                    <li>
+                    <li @click="deleteChat">
                         <p class="text-danger">Delete chat</p>
                     </li>
                 </ul>
