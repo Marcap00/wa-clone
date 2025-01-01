@@ -39,11 +39,15 @@
 </template>
 
 <style lang="scss" scoped>
+@use "../../scss/_variables.scss" as *;
+
 img {
     width: 350px;
 }
 
 .contacts {
+    background-color: $bg-dark-contacts-active;
+
     i:hover {
         color: #FF7300;
     }
