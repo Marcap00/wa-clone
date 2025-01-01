@@ -112,24 +112,9 @@ const errorName = computed(() => {
     }
 
     input {
-        /* background-color: $bg-dark-searchbar !important; */
-        /* color: $text-title !important; */
-
-
-        /* &::placeholder {
-            color: $text-title !important;
-        } */
-
         &:focus {
-            /* border: 3px solid $text-label-active !important;
-            outline: none !important; */
             box-shadow: 0 0 10px 0.25rem $text-label-active !important;
-
         }
-
-        /* &:active {
-            border: 3px solid $text-label-active !important;
-        } */
     }
 
     .content-new-contact {
