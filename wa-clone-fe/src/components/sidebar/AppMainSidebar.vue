@@ -177,8 +177,8 @@ const showSettings = () => {
                     </g>
                 </svg>
             </span>
-            <img v-if="user?.avatar" class="img-avatar" :src="user?.avatar" alt="Avatar">
-            <img v-else class="img-avatar" :src="user?.avatar_placeholder" alt="Avatar">
+            <img v-if="user?.avatar" @click="showSettings" class="img-avatar" :src="user?.avatar" alt="Avatar">
+            <img v-else @click="showSettings" class="img-avatar" :src="user?.avatar_placeholder" alt="Avatar">
         </div>
     </div>
 </template>
