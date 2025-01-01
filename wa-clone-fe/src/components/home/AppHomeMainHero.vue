@@ -1,13 +1,15 @@
 <script setup>
+import BaseLogoText from '../general/BaseLogoText.vue'
 </script>
 
 <template>
     <section id="hero" class="hero py-5">
         <div class="container h-100">
             <div class="hero-content h-100 d-flex flex-column justify-content-center align-items-center">
-                <h1 class="mb-3">
-                    Welcome to WhatsApp Clone
-                </h1>
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <h1 class="mb-1">Welcome to</h1>
+                    <BaseLogoText />
+                </div>
                 <p class="mb-3 text-center">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem,
                     ipsum

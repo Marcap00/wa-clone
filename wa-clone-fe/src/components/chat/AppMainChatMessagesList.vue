@@ -1,5 +1,7 @@
 <script setup>
 import AppMainChatMessagesListItem from './AppMainChatMessagesListItem.vue';
+import BaseLogoText from '../general/BaseLogoText.vue';
+import BaseLogo from '../general/BaseLogo.vue';
 import { useActiveIndexStore } from '../../js/stores/active_index'
 import { useContactsStore } from '../../js/stores/contacts'
 import { computed } from 'vue';
@@ -26,8 +28,13 @@ const activeContact = computed(() => {
             <AppMainChatMessagesListItem v-for="(message, index) in activeContact.messages" :key="index"
                 :message="message" :index="index" />
         </ul>
-        <div v-if="activeContact.messages.length == 0" class="d-flex justify-content-center align-items-center h-100">
-            <h3 class="fw-semibold">Write your first message to start the conversation ✍️</h3>
+        <div v-if="activeContact.messages.length == 0"
+            class="d-flex flex-column justify-content-center align-items-center h-100">
+            <div class="d-flex align-items-center gap-2">
+                <BaseLogo />
+                <BaseLogoText />
+            </div>
+            <h3 class="fw-semibold">Write your first message to start the conversation! ✍️</h3>
         </div>
     </div>
 </template>
@@ -37,7 +44,7 @@ const activeContact = computed(() => {
 
 .chat {
     height: calc(100% - 120px);
-    background-image: url('../../assets/img/mine-dark.jpg');
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.721) 100%, transparent), url('../../assets/img/custom_mine.jpg');
     background-size: contain;
 }
 

@@ -2,7 +2,7 @@
 import AppMainChatHeader from './AppMainChatHeader.vue';
 import AppMainChatInput from './AppMainChatInput.vue';
 import AppMainChatMessagesList from './AppMainChatMessagesList.vue';
-import AppMainChatEmpty from './AppMainChatEmpty.vue';
+import AppMainChatContactEmpty from './AppMainChatContactEmpty.vue';
 import { useContactsStore } from '../../js/stores/contacts';
 import { useContactInfoStore } from '../../js/stores/contactInfo';
 const contactsStore = useContactsStore()
@@ -20,7 +20,7 @@ const contactInfoStore = useContactInfoStore()
             <!-- Input -->
             <AppMainChatInput />
         </div>
-        <AppMainChatEmpty v-else />
+        <AppMainChatContactEmpty v-else />
     </div>
 </template>
 

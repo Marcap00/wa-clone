@@ -2,6 +2,7 @@
 import { RouterLink, useRoute } from 'vue-router'
 import { computed } from 'vue'
 import BaseLogo from './BaseLogo.vue'
+import BaseLogoText from './BaseLogoText.vue'
 const route = useRoute()
 
 const isLoginPage = computed(() => route.path.includes('login'))
@@ -17,7 +18,8 @@ const isLoginOrRegisterPage = computed(() => isLoginPage.value || isRegisterPage
                     <BaseLogo />
                 </RouterLink>
                 <RouterLink to="/">
-                    <h1 class="mb-1">WA Clone</h1>
+                    <!-- <h1 class="mb-1">WA Clone</h1> -->
+                    <BaseLogoText />
                 </RouterLink>
                 <!-- <RouterLink to="/dashboard">Dashboard</RouterLink> -->
             </div>
