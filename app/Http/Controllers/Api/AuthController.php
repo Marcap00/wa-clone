@@ -46,7 +46,7 @@ class AuthController extends Controller
         ]);
 
         if ($request->hasFile('avatar')) {
-            $imagePath = $request->file('avatar')->store('avatars', 'public');
+            $imagePath = url('storage/' . $request->file('avatar')->store('avatars', 'public'));
         } else {
             $imagePath = null;
         }
@@ -58,7 +58,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'phone_number' => $request->phone_number,
             'biography' => $request->biography,
-            'avatar' => url('storage/' . $imagePath),
+            'avatar' => $imagePath,
             'avatar_placeholder' => "https://cdn-icons-png.flaticon.com/512/149/149071.png",
         ]);
 
