@@ -30,23 +30,24 @@ async function login() {
             // Imposta l'utente nello store
             authStore.setUser(user);
 
-            successMessage.value = "Login effettuato con successo";
+            successMessage.value = "Login made successfully!";
 
             setTimeout(() => {
                 router.push('/dashboard');
             }, 1000);
         }
     } catch (error) {
-        console.error('Errore durante il login:', error);
-        errorMessage.value = "Errore durante il login";
+        console.error('Error during login:', error);
+        errorMessage.value = "Error during login";
 
         if (error.response?.data?.message) {
             errorServerMessage.value = error.response.data.message;
         } else {
-            errorServerMessage.value = "Errore di connessione al server";
+            errorServerMessage.value = "Connection error to server";
         }
     }
 }
+
 </script>
 
 <template>
@@ -58,7 +59,7 @@ async function login() {
             <div class="alert alert-danger" v-if="errorMessage">
                 {{ errorMessage }}
                 <br>
-                Le credenziali potrebbero essere non corrette o potresti essere non registrato
+                Credentials may be incorrect or you may not be registered
             </div>
             <form @submit.prevent="login" class="d-flex flex-column align-items-center card p-3 rounded-4">
                 <h1 class="mb-4">Login</h1>
@@ -68,8 +69,9 @@ async function login() {
                         autofocus autocomplete="username" v-model="email">
                 </div> -->
                 <div data-bs-theme="dark" class="col-6 form-floating mb-4">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
-                        v-model="email" autocomplete="off" required autofocus>
+                    <input type="email" class="form-control" :class="{ 'is-invalid': errorMessage }" id="email"
+                        name="email" placeholder="name@example.com" v-model="email" autocomplete="off" required
+                        autofocus>
                     <label for="email">Email address</label>
                 </div>
                 <!-- <div class="col-6 mb-3">
@@ -78,8 +80,8 @@ async function login() {
                         required autocomplete="current-password" v-model="password">
                 </div> -->
                 <div data-bs-theme="dark" class="col-6 form-floating mb-3">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                        v-model="password" autocomplete="off" required>
+                    <input type="password" class="form-control" :class="{ 'is-invalid': errorMessage }" id="password"
+                        name="password" placeholder="Password" v-model="password" autocomplete="off" required>
                     <label for="password">Password</label>
                 </div>
                 <div class="col">

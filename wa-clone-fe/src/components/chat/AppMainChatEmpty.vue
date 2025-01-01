@@ -57,13 +57,13 @@
                     d="M208.184 87.1094L204.777 84.3593C204.777 84.359 204.776 84.3587 204.776 84.3583C203.957 83.6906 202.744 83.8012 202.061 84.6073C201.374 85.4191 201.486 86.6265 202.31 87.2997L202.312 87.3011L207.389 91.4116C207.389 91.4119 207.389 91.4121 207.389 91.4124C208.278 92.1372 209.611 91.9373 210.242 90.9795L218.283 78.77C218.868 77.8813 218.608 76.6968 217.71 76.127C216.817 75.5606 215.624 75.8109 215.043 76.6939L208.184 87.1094Z"
                     fill="white" stroke="#316474"></path>
             </svg>
-            <h1 class="mb-3 fw-light">Whatsapp Web</h1>
+            <h1 class="mb-3 fw-light">Wa Clone</h1>
             <div class="w-75 text-center">
                 <p>
-                    Invia e ricevi messaggi senza mantenere il telefono connesso a Internet.
+                    Send and receive messages without keeping the phone connected to the Internet.
                 </p>
                 <p>
-                    Usa WhatsApp su un massimo di 4 dispositivi collegati e 1 telefono contemporaneamente.
+                    Use WhatsApp on a maximum of 4 devices connected and 1 phone at the same time.
                 </p>
             </div>
         </div>

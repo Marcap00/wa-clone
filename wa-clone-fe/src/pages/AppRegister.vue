@@ -1,6 +1,6 @@
 <script setup>
 import { useAuthStore } from '../js/stores/auth'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -22,13 +22,13 @@ const register = async () => {
     try {
         console.log(form.value)
         const response = await authStore.register(form.value)
-        successMessage.value = "Registrazione effettuata con successo"
+        successMessage.value = "Registration made successfully!"
         setTimeout(() => {
             router.push('/login');
         }, 1000);
         // console.log(response)
     } catch (error) {
-        errorMessage.value = error.response?.data?.message || error.message
+        errorMessage.value = error.response?.data?.message || error.message || "Error during registration"
     }
 }
 
@@ -41,6 +41,29 @@ const handleAvatarChange = (event) => {
     }
 }
 
+const errorName = computed(() => {
+    return errorMessage.value.includes('name');
+});
+
+const errorEmail = computed(() => {
+    return errorMessage.value.includes('email');
+});
+
+const errorPassword = computed(() => {
+    return errorMessage.value.includes('password');
+});
+
+const errorPhoneNumber = computed(() => {
+    return errorMessage.value.includes('phone');
+});
+
+const errorBiography = computed(() => {
+    return errorMessage.value.includes('biography');
+});
+
+const errorAvatar = computed(() => {
+    return errorMessage.value.includes('avatar');
+});
 
 </script>
 
@@ -69,33 +92,33 @@ const handleAvatarChange = (event) => {
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                     <div data-bs-theme="dark" class="form-floating col-4 mb-3 me-4 p-0">
-                        <input type="text" class="form-control" id="name" name="name" v-model="form.name" required
-                            autocomplete="off">
+                        <input type="text" class="form-control" :class="{ 'is-invalid': errorName }" id="name"
+                            name="name" v-model="form.name" required autocomplete="off">
                         <label for="name">Name</label>
                     </div>
 
                     <div data-bs-theme="dark" class="form-floating col-4 mb-3 p-0">
-                        <input type="email" class="form-control" id="email" name="email" v-model="form.email" required
-                            autocomplete="off">
+                        <input type="email" class="form-control" :class="{ 'is-invalid': errorEmail }" id="email"
+                            name="email" v-model="form.email" required autocomplete="off">
                         <label for="email">Email</label>
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                     <div data-bs-theme="dark" class="col-4 form-floating mb-3 me-4 p-0">
-                        <input type="password" class="form-control" id="password" name="password"
-                            v-model="form.password" required autocomplete="off">
+                        <input type="password" class="form-control" :class="{ 'is-invalid': errorPassword }"
+                            id="password" name="password" v-model="form.password" required autocomplete="off">
                         <label for="password">Password</label>
                     </div>
 
                     <div data-bs-theme="dark" class="col-4 form-floating mb-3 p-0">
-                        <input type="text" class="form-control" id="phone_number" name="phone_number"
-                            v-model="form.phone_number" required>
+                        <input type="text" class="form-control" :class="{ 'is-invalid': errorPhoneNumber }"
+                            id="phone_number" name="phone_number" v-model="form.phone_number" required>
                         <label for="phone_number">Phone Number</label>
                     </div>
                 </div>
                 <div data-bs-theme="dark" class="col-6 form-floating mb-4 p-0">
-                    <textarea class="form-control" id="biography" name="biography" v-model="form.biography"
-                        style="height: 100px"></textarea>
+                    <textarea class="form-control" :class="{ 'is-invalid': errorBiography }" id="biography"
+                        name="biography" v-model="form.biography" style="height: 100px"></textarea>
                     <label for="biography">Biography</label>
                 </div>
 
