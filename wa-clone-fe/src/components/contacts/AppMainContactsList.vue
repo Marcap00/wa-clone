@@ -19,6 +19,7 @@ const labelsStore = useLabelsStore()
 const newContactStore = useNewContactStore()
 const isFavorites = computed(() => {
     if (labelsStore.labelActive?.name === 'Favorites') {
+        localStorage.setItem('favorites', JSON.stringify(favoritesStore.favorites))
         return favoritesStore.favorites
     }
     return contactsStore.contacts
@@ -108,6 +109,10 @@ onMounted(() => {
 .contacts-list .highlighted-text {
     color: $text-last-message-received;
     font-weight: 700;
+}
+
+.contacts-list .highlighted-text.fa-star {
+    color: $text-last-message-received;
 }
 
 .chat-empty {
