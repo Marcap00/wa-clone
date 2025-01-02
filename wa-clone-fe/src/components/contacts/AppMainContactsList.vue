@@ -40,7 +40,7 @@ onMounted(() => {
     <div class="contacts-list"
         :class="{ 'closed-alert': !contactsStore.showAlerts, 'overflow-y-scroll': !props.isNewContact }">
         <!-- Contacts List -->
-        <ul v-if="contactsStore.contacts.length" class="p-0 m-0 mt-1">
+        <ul v-if="contactsStore.contacts.length" class="p-0 m-1">
             <!-- Contact -->
             <AppMainContactsListItem v-for="(contact, i) in isFavorites" :contact="contact" :i="i" :key="contact.id" />
         </ul>

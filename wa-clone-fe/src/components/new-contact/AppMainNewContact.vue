@@ -91,7 +91,7 @@ const now = computed(() => {
         <header class="d-flex align-items-center gap-3 p-3">
             <i @click="closeNewContact" class="fas fa-arrow-left"></i>
             <BaseLogo />
-            <h5>New Chat</h5>
+            <h5 class="mb-0">New Chat</h5>
         </header>
         <div class="content-new-contact">
             <div class="container-fluid">
@@ -114,7 +114,7 @@ const now = computed(() => {
                     {{ successMessage || errorMessage }}
                 </div> -->
                 <h5 class="mb-3">Add new contact</h5>
-                <form @submit.prevent="addNewContact" data-bs-theme="dark" class="row row-cols-1 mb-4">
+                <form @submit.prevent="addNewContact" data-bs-theme="dark" class="row row-cols-1 mb-3">
                     <div class="col mb-3">
                         <div class="form-floating">
                             <input type="text" class="form-control focus-none" :class="{ 'is-invalid': errorName }"
@@ -143,9 +143,9 @@ const now = computed(() => {
                         </button>
                     </div>
                 </form>
-                <h5 class="mb-3">Contacts</h5>
-                <AppMainContactsList :isNewContact="true" />
+                <h5 class="mb-2">Contacts</h5>
             </div>
+            <AppMainContactsList :isNewContact="true" />
         </div>
     </div>
 </template>
@@ -182,7 +182,7 @@ const now = computed(() => {
     .content-new-contact {
         background-color: $bg-dark-contacts;
         height: calc(100% - 70px);
-        overflow-y: scroll;
+        overflow-y: hidden;
     }
 
     .toast {
