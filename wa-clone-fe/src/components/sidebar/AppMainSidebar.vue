@@ -4,10 +4,12 @@ import { computed } from 'vue'
 import { useAuthStore } from '../../js/stores/auth'
 import { useSettingsStore } from '../../js/stores/settings'
 import { useContactsStore } from '../../js/stores/contacts'
+import { useNewContactStore } from '../../js/stores/newContact'
 
 const authStore = useAuthStore()
 const settingsStore = useSettingsStore()
 const contactsStore = useContactsStore()
+const newContactStore = useNewContactStore()
 
 const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user;
 
@@ -16,7 +18,14 @@ const classNumberLastMessageReceived = computed(() => {
 })
 
 const showSettings = () => {
+    if (newContactStore.newContactDisplayed) {
+        console.log('newContactStore.newContactDisplayed', newContactStore.newContactDisplayed);
+        newContactStore.newContactDisplayed = false
+        console.log('newContactStore.newContactDisplayed', newContactStore.newContactDisplayed);
+    }
+    console.log('settingsStore.showSettings', settingsStore.showSettings);
     settingsStore.showSettings = true
+    console.log('settingsStore.showSettings', settingsStore.showSettings);
 }
 
 </script>
