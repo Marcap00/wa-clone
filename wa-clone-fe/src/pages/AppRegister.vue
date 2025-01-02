@@ -1,8 +1,8 @@
 <script setup>
 import { useAuthStore } from '../js/stores/auth'
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-
+import { Toast } from 'bootstrap';
 const router = useRouter()
 const authStore = useAuthStore()
 
@@ -23,12 +23,22 @@ const register = async () => {
         console.log(form.value)
         const response = await authStore.register(form.value)
         successMessage.value = "Registration made successfully!"
+        nextTick(() => {
+            const toast = document.querySelector('.toast')
+            const toastInstance = new Toast(toast)
+            toastInstance.show()
+        })
         setTimeout(() => {
             router.push('/login');
         }, 1000);
         // console.log(response)
     } catch (error) {
         errorMessage.value = error.response?.data?.message || error.message || "Error during registration"
+        nextTick(() => {
+            const toast = document.querySelector('.toast')
+            const toastInstance = new Toast(toast)
+            toastInstance.show()
+        })
     }
 }
 
@@ -65,17 +75,44 @@ const errorAvatar = computed(() => {
     return errorMessage.value.includes('avatar');
 });
 
+const successOrErrorMessage = computed(() => {
+    if (successMessage.value) {
+        errorMessage.value = false
+        return successMessage.value
+    } else if (errorMessage.value) {
+        successMessage.value = false
+        return errorMessage.value
+    }
+})
+
+const now = computed(() => {
+    return new Date().toLocaleString('it-IT', { hour: '2-digit', minute: '2-digit' })
+})
 </script>
 
 <template>
     <main class="h-main overflow-y-scroll p-4">
         <div class="container">
-            <div class="alert alert-success" v-if="successMessage">
+            <div v-if="successOrErrorMessage" class="toast"
+                :class="{ 'text-bg-success': successMessage, 'text-bg-danger': errorMessage }" role="alert"
+                aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <!-- <img src="..." class="rounded me-2" alt="..."> -->
+                    <strong v-if="successMessage" class="me-auto">Success!</strong>
+                    <strong v-else class="me-auto">Error!</strong>
+                    <small class="fw-bold">{{ now }}</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body text-white">
+                    {{ successOrErrorMessage }}!
+                </div>
+            </div>
+            <!-- <div class="alert alert-success" v-if="successMessage">
                 {{ successMessage }}
             </div>
             <div class="alert alert-danger" v-if="errorMessage">
                 {{ errorMessage }}
-            </div>
+            </div> -->
             <div class="title">
                 <h1 class="my-3">Registrati</h1>
             </div>
@@ -88,32 +125,46 @@ const errorAvatar = computed(() => {
                         <div v-if="form.avatar" class="mt-2">
                             File selezionato: {{ form.avatar.name }}
                         </div>
+                        <p class="text-lightgrey fst-italic mb-0">* Max file size 2MB</p>
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                     <div data-bs-theme="dark" class="form-floating col-4 mb-3 me-4 p-0">
                         <input type="text" class="form-control" :class="{ 'is-invalid': errorName }" id="name"
                             name="name" v-model="form.name" required autocomplete="off">
-                        <label for="name">Name</label>
+                        <label for="name">Name*</label>
+                        <div class="col-6 text-helper fst-italic text-lightgrey mt-1">
+                            <p class="mb-0">* Name is required</p>
+                        </div>
                     </div>
 
                     <div data-bs-theme="dark" class="form-floating col-4 mb-3 p-0">
                         <input type="email" class="form-control" :class="{ 'is-invalid': errorEmail }" id="email"
                             name="email" v-model="form.email" required autocomplete="off">
-                        <label for="email">Email</label>
+                        <label for="email">Email*</label>
+                        <div class="col-6 text-helper fst-italic text-lightgrey mt-1">
+                            <p class="mb-0">* Email is required</p>
+                            <p class="mb-0">* Email required an @</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                     <div data-bs-theme="dark" class="col-4 form-floating mb-3 me-4 p-0">
                         <input type="password" class="form-control" :class="{ 'is-invalid': errorPassword }"
                             id="password" name="password" v-model="form.password" required autocomplete="off">
-                        <label for="password">Password</label>
+                        <label for="password">Password*</label>
+                        <div class="col-6 text-helper fst-italic text-lightgrey mt-1">
+                            <p class="mb-0">* Password is required</p>
+                        </div>
                     </div>
 
                     <div data-bs-theme="dark" class="col-4 form-floating mb-3 p-0">
                         <input type="text" class="form-control" :class="{ 'is-invalid': errorPhoneNumber }"
                             id="phone_number" name="phone_number" v-model="form.phone_number" required>
-                        <label for="phone_number">Phone Number</label>
+                        <label for="phone_number">Phone Number*</label>
+                        <div class="col-6 text-helper fst-italic text-lightgrey mt-1">
+                            <p class="mb-0">* Phone number is required</p>
+                        </div>
                     </div>
                 </div>
                 <div data-bs-theme="dark" class="col-6 form-floating mb-4 p-0">
@@ -196,9 +247,24 @@ input {
     }
 }
 
+.text-helper {
+    display: none;
+}
+
+input:focus~.text-helper {
+    display: block;
+}
+
 textarea {
     &:focus {
         box-shadow: 0 0 10px 0.25rem $text-label-active !important;
     }
+}
+
+.toast {
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    z-index: 1000;
 }
 </style>
