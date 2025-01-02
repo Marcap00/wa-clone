@@ -5,7 +5,8 @@ import { useNewContactStore } from '../../js/stores/newContact';
 import { useContactsStore } from '../../js/stores/contacts';
 import { useAuthStore } from '../../js/stores/auth';
 import axios from 'axios';
-import { ref, computed } from 'vue';
+import { ref, computed, nextTick } from 'vue';
+import { Toast } from 'bootstrap';
 
 const newContactStore = useNewContactStore();
 const contactsStore = useContactsStore();
@@ -30,22 +31,53 @@ async function addNewContact() {
         const response = await axios.post('http://localhost:8000/api/contacts', dataForm.value);
         console.log(response);
         contactsStore.getContacts();
+        if (errorMessage.value) {
+            errorMessage.value = '';
+        }
+        console.log(response.data.message);
         successMessage.value = response.data.message;
-        errorMessage.value = '';
+        nextTick(() => {
+            const toast = document.querySelector('.toast')
+            const toastInstance = new Toast(toast)
+            toastInstance.show()
+        })
     } catch (error) {
         console.log(error);
-        errorMessage.value = error.response.data.message;
         successMessage.value = '';
+        errorMessage.value = error.response.data.message;
+        nextTick(() => {
+            const toast = document.querySelector('.toast')
+            const toastInstance = new Toast(toast)
+            toastInstance.show()
+        })
     }
 }
 
 const errorPhoneNumber = computed(() => {
-    return errorMessage.value.includes('phone');
+    if (errorMessage.value) {
+        return errorMessage.value.includes('phone');
+    }
 });
 
 const errorName = computed(() => {
-    return errorMessage.value.includes('name');
+    if (errorMessage.value) {
+        return errorMessage.value.includes('name');
+    }
 });
+
+const successOrErrorMessage = computed(() => {
+    if (successMessage.value) {
+        errorMessage.value = false
+        return successMessage.value
+    } else if (errorMessage.value) {
+        successMessage.value = false
+        return errorMessage.value
+    }
+})
+
+const now = computed(() => {
+    return new Date().toLocaleString('it-IT', { hour: '2-digit', minute: '2-digit' })
+})
 
 </script>
 
@@ -58,18 +90,34 @@ const errorName = computed(() => {
         </header>
         <div class="content-new-contact">
             <div class="container-fluid">
-                <div v-if="successMessage || errorMessage" class="alert w-75"
+                <div v-if="successOrErrorMessage" class="toast"
+                    :class="{ 'text-bg-success': successMessage, 'text-bg-danger': errorMessage }" role="alert"
+                    aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <!-- <img src="..." class="rounded me-2" alt="..."> -->
+                        <strong v-if="successMessage" class="me-auto">Success!</strong>
+                        <strong v-else class="me-auto">Error!</strong>
+                        <small class="fw-bold">{{ now }}</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body text-white fw-semibold">
+                        {{ successOrErrorMessage }}!
+                    </div>
+                </div>
+                <!-- <div v-if="successMessage || errorMessage" class="alert w-75"
                     :class="{ 'alert-success': successMessage, 'alert-danger': errorMessage }">
                     {{ successMessage || errorMessage }}
-                </div>
+                </div> -->
                 <h5 class="mb-3">Add new contact</h5>
-                <form @submit.prevent="addNewContact" data-bs-theme="dark"
-                    class="row row-cols-1 row-cols-xxl-3 align-items-center mb-4">
+                <form @submit.prevent="addNewContact" data-bs-theme="dark" class="row row-cols-1 mb-4">
                     <div class="col mb-3">
                         <div class="form-floating">
                             <input type="text" class="form-control focus-none" :class="{ 'is-invalid': errorName }"
                                 id="contactName" name="contactName" placeholder="Contact Name" v-model="dataForm.name">
-                            <label class="text-white" for="contactName">Contact Name</label>
+                            <label class="text-white" for="contactName">Contact Name*</label>
+                            <div class="col text-helper fst-italic text-lightgrey mt-1">
+                                <p class="mb-0">* Contact name is required</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col mb-3">
@@ -77,7 +125,10 @@ const errorName = computed(() => {
                             <input type="text" class="form-control" :class="{ 'is-invalid': errorPhoneNumber }"
                                 id="phoneNumber" name="phoneNumber" placeholder="Phone Number"
                                 v-model="dataForm.phone_number">
-                            <label class="text-white" for="phoneNumber">Phone Number</label>
+                            <label class="text-white" for="phoneNumber">Phone Number*</label>
+                            <div class="col text-helper fst-italic text-lightgrey mt-1">
+                                <p class="mb-0">* Phone number is required</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col text-center mb-3">
@@ -117,10 +168,23 @@ const errorName = computed(() => {
         }
     }
 
+
+
+    input:focus~.text-helper {
+        display: block;
+    }
+
     .content-new-contact {
         background-color: $bg-dark-contacts;
         height: calc(100% - 70px);
         overflow-y: scroll;
+    }
+
+    .toast {
+        position: fixed;
+        top: 30px;
+        left: 20%;
+        z-index: 10000;
     }
 }
 </style>

@@ -103,7 +103,7 @@ const now = computed(() => {
                     <small class="fw-bold">{{ now }}</small>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-                <div class="toast-body text-white">
+                <div class="toast-body text-white fw-semibold">
                     {{ successOrErrorMessage }}!
                 </div>
             </div>
@@ -245,10 +245,6 @@ input {
     &:focus {
         box-shadow: 0 0 10px 0.25rem $text-label-active !important;
     }
-}
-
-.text-helper {
-    display: none;
 }
 
 input:focus~.text-helper {

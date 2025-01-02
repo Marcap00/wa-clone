@@ -200,10 +200,6 @@ input {
     }
 }
 
-.text-helper {
-    display: none;
-}
-
 input:focus~.text-helper {
     display: block;
 }

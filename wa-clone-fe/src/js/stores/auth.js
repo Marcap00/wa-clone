@@ -26,6 +26,8 @@ export const useAuthStore = defineStore('auth', {
             this.isAuthenticated = false;
             this.contactsStore.totalNumberLastMessageReceived = 0
             this.contactInfoStore.contactInfo = false
+            this.contactsStore.closeChat = true
+            console.log('closeChat', this.contactsStore.closeChat)
             localStorage.removeItem('token');
             localStorage.removeItem('user_id');
             localStorage.removeItem('user');
