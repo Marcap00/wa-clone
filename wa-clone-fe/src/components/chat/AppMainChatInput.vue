@@ -63,5 +63,10 @@ async function addMessage(message, index) {
         color: $text-secondary;
         font-size: 16px;
     }
+
+    &:focus {
+        box-shadow: 0 0 10px 0.25rem $text-label-active !important;
+        outline: none !important;
+    }
 }
 </style>

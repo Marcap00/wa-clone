@@ -58,8 +58,8 @@ main {
         background-color: #fff;
     } */
 
-    .wrapper {
+    /* .wrapper {
         box-shadow: 0 0 10px 0.25rem $text-label-active !important;
-    }
+    } */
 }
 </style>
