@@ -42,14 +42,14 @@
 @use "../../scss/_variables.scss" as *;
 
 img {
-    width: 350px;
+    width: 300px;
 }
 
 .contacts {
     background-color: $bg-dark-contacts-active;
 
     i:hover {
-        color: #FF7300;
+        color: $color-github-profile;
     }
 }
 </style>
