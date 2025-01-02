@@ -4,7 +4,7 @@
 <template>
     <section id="contacts" class="contacts py-5">
         <div class="container">
-            <h2 class="custom-section-title text-center mb-5">
+            <h2 class="custom-section-title text-center my-5">
                 Contacts👥
             </h2>
             <div class="d-flex align-items-center p-3">
