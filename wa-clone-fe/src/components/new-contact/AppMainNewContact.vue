@@ -41,6 +41,11 @@ async function addNewContact() {
             const toastInstance = new Toast(toast)
             toastInstance.show()
         })
+        dataForm.value = {
+            name: '',
+            phone_number: '',
+            user_id: user.value.id
+        }
     } catch (error) {
         console.log(error);
         successMessage.value = '';
