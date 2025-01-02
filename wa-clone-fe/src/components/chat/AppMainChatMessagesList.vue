@@ -2,7 +2,7 @@
 import AppMainChatMessagesListItem from './AppMainChatMessagesListItem.vue';
 import BaseLogoText from '../general/BaseLogoText.vue';
 import BaseLogo from '../general/BaseLogo.vue';
-import { useActiveIndexStore } from '../../js/stores/active_index'
+import { useActiveIndexStore } from '../../js/stores/activeIndex'
 import { useContactsStore } from '../../js/stores/contacts'
 import { computed } from 'vue';
 

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useContactsStore } from '../../js/stores/contacts';
-import { useActiveIndexStore } from '../../js/stores/active_index';
+import { useActiveIndexStore } from '../../js/stores/activeIndex';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 

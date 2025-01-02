@@ -1,5 +1,5 @@
 <script setup>
-import { useActiveIndexStore } from '../../js/stores/active_index'
+import { useActiveIndexStore } from '../../js/stores/activeIndex'
 import { useContactsStore } from '../../js/stores/contacts'
 import { useContactInfoStore } from '../../js/stores/contactInfo'
 import { useFavoritesStore } from '../../js/stores/favorites'

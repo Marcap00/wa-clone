@@ -1,5 +1,5 @@
 <script setup>
-import { useActiveIndexStore } from '../../js/stores/active_index'
+import { useActiveIndexStore } from '../../js/stores/activeIndex'
 import { useContactsStore } from '../../js/stores/contacts'
 import { useAuthStore } from '../../js/stores/auth'
 import { computed } from 'vue';

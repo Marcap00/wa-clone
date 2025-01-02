@@ -1,6 +1,6 @@
 <script setup>
 import { useContactsStore } from '../../js/stores/contacts';
-import { useActiveIndexStore } from '../../js/stores/active_index';
+import { useActiveIndexStore } from '../../js/stores/activeIndex';
 import { useContactInfoStore } from '../../js/stores/contactInfo';
 import { computed } from 'vue';
 const contactsStore = useContactsStore();

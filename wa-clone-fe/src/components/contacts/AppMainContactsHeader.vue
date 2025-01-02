@@ -2,11 +2,14 @@
 import BaseLogo from '../general/BaseLogo.vue'
 import { useAuthStore } from '../../js/stores/auth';
 import { useNewContactStore } from '../../js/stores/newContact';
+import { useSettingsStore } from '../../js/stores/settings';
 import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
 import { ref } from 'vue';
+
 const authStore = useAuthStore();
 const newContactStore = useNewContactStore();
+const settingsStore = useSettingsStore();
 const router = useRouter();
 
 const isDropdownMenuOpen = ref(false);
@@ -27,7 +30,14 @@ function logout() {
 }
 
 function displayNewContact() {
+    if (settingsStore.showSettings) {
+        // console.log('settingsStore.showSettings', settingsStore.showSettings);
+        settingsStore.showSettings = false
+        // console.log('settingsStore.showSettings', settingsStore.showSettings);
+    }
+    // console.log('newContactStore.newContactDisplayed', newContactStore.newContactDisplayed);
     newContactStore.newContactDisplayed = true;
+    // console.log('newContactStore.newContactDisplayed', newContactStore.newContactDisplayed);
 }
 
 onMounted(async () => {
