@@ -58,21 +58,21 @@ const errorName = computed(() => {
         </header>
         <div class="content-new-contact">
             <div class="container-fluid">
+                <div v-if="successMessage || errorMessage" class="alert w-75"
+                    :class="{ 'alert-success': successMessage, 'alert-danger': errorMessage }">
+                    {{ successMessage || errorMessage }}
+                </div>
+                <h5 class="mb-3">Add new contact</h5>
                 <form @submit.prevent="addNewContact" data-bs-theme="dark"
-                    class="row justify-content-center align-items-center mb-5">
-                    <h5 class="mb-3">Add new contact</h5>
-                    <div v-if="successMessage || errorMessage" class="alert w-75"
-                        :class="{ 'alert-success': successMessage, 'alert-danger': errorMessage }">
-                        {{ successMessage || errorMessage }}
-                    </div>
-                    <div class="col-4">
+                    class="row row-cols-1 row-cols-xxl-3 align-items-center mb-4">
+                    <div class="col mb-3">
                         <div class="form-floating">
                             <input type="text" class="form-control focus-none" :class="{ 'is-invalid': errorName }"
                                 id="contactName" name="contactName" placeholder="Contact Name" v-model="dataForm.name">
                             <label class="text-white" for="contactName">Contact Name</label>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col mb-3">
                         <div class="form-floating">
                             <input type="text" class="form-control" :class="{ 'is-invalid': errorPhoneNumber }"
                                 id="phoneNumber" name="phoneNumber" placeholder="Phone Number"
@@ -80,7 +80,7 @@ const errorName = computed(() => {
                             <label class="text-white" for="phoneNumber">Phone Number</label>
                         </div>
                     </div>
-                    <div class="col-4 text-center">
+                    <div class="col text-center mb-3">
                         <button type="submit" class="btn btn-success w-100 py-3">
                             <span class="me-2 fw-semibold">Add Contact</span>
                             <i class="fas fa-plus text-white fa-lg"></i>
@@ -100,7 +100,7 @@ const errorName = computed(() => {
 @use "../../scss/_variables.scss" as *;
 
 .col-new-contact {
-    width: 30%;
+    width: 40%;
 
     h5 {
         color: $text-title;
