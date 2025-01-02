@@ -41,6 +41,7 @@ const isContactEmpty = computed(() => {
 
 .col-rght {
     width: 65%;
+    flex-grow: 1;
 
     &.info-displayed {
         width: 35%;

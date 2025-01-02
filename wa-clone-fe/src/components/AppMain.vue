@@ -57,5 +57,9 @@ main {
     /* .wrapper>* {
         background-color: #fff;
     } */
+
+    .wrapper {
+        box-shadow: 0 0 10px 0.25rem $text-label-active !important;
+    }
 }
 </style>

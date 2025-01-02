@@ -40,7 +40,7 @@ onMounted(() => {
     <div class="contacts-list"
         :class="{ 'closed-alert': !contactsStore.showAlerts, 'overflow-y-scroll': !props.isNewContact }">
         <!-- Contacts List -->
-        <ul v-if="contactsStore.contacts.length" class="p-0 m-0">
+        <ul v-if="contactsStore.contacts.length" class="p-0 m-0 mt-1">
             <!-- Contact -->
             <AppMainContactsListItem v-for="(contact, i) in isFavorites" :contact="contact" :i="i" :key="contact.id" />
         </ul>
@@ -57,10 +57,12 @@ onMounted(() => {
 
 .contacts-list>ul li.active {
     background-color: $bg-dark-contacts-active;
+    box-shadow: 0 0 10px 0.25rem $text-label-active !important;
 }
 
 .contacts-list>ul>li:hover {
     background-color: $bg-dark-contacts-hover;
+    box-shadow: 0 0 10px 0.25rem $text-label-active !important;
 }
 
 .contacts-list {

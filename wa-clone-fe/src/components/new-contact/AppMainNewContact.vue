@@ -156,7 +156,7 @@ const now = computed(() => {
 @use "../../scss/_variables.scss" as *;
 
 .col-new-contact {
-    width: 40%;
+    width: 30%;
 
     h5 {
         color: $text-title;

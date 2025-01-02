@@ -33,7 +33,7 @@ const showSettings = () => {
 <template>
     <div class="sidebar d-flex flex-column justify-content-between align-items-center p-2">
         <div class="d-flex flex-column align-items-center gap-3">
-            <span class="active position-relative">
+            <span class="position-relative" :class="{ 'active': !settingsStore.showSettings }">
                 <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" fill="none">
                     <title>Chats</title>
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -166,7 +166,7 @@ const showSettings = () => {
             </span>
         </div>
         <div class="d-flex flex-column align-items-center gap-3">
-            <span @click="showSettings">
+            <span @click="showSettings" :class="{ 'active': settingsStore.showSettings }">
                 <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class=""
                     fill="none">
                     <title>Settings</title>
@@ -220,6 +220,8 @@ div.sidebar {
     span.active {
         background-color: #bebebe28;
         border-radius: 50%;
+        box-shadow: 0 0 10px 0.25rem $text-label-active !important;
+        transition: all 0.2s ease;
     }
 
     img.img-avatar {
