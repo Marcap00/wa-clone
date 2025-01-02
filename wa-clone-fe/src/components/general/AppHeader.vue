@@ -67,6 +67,15 @@ header {
             scale: 1.05;
             transition: all 0.3s ease;
         }
+
+        .nav-center a:hover {
+            background: linear-gradient(to right, #76ffe1, #00a884);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            text-decoration: underline;
+        }
     }
 }
 </style>
