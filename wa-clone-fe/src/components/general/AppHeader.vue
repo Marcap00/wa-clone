@@ -48,6 +48,7 @@ header {
     background-color: $bg-dark-contacts;
     color: $text-title;
     box-shadow: $text-label-active 0px 10px 20px 0px;
+    z-index: 1;
 
     nav {
         height: 70px;
