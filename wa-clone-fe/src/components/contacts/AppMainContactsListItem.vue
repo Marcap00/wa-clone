@@ -4,7 +4,7 @@ import { useActiveIndexStore } from '../../js/stores/activeIndex'
 import { useFavoritesStore } from '../../js/stores/favorites'
 import { useLabelsStore } from '../../js/stores/labels'
 import BaseNumbLastMessReceived from '../general/BaseNumbLastMessReceived.vue'
-import { computed, onMounted, onBeforeMount } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
@@ -74,12 +74,11 @@ const isFavorite = computed(() => {
     return favoritesStore.favorites.some(favorite => favorite.id === props.contact.id)
 })
 
-onBeforeMount(() => {
-    contactsStore.totalNumberLastMessageReceived = 0
-})
-
-onMounted(() => {
-    contactsStore.totalNumberLastMessageReceived += parseInt(numberLastMessageReceived.value)
+// Watch per aggiornare il totale quando cambia numberLastMessageReceived
+watch(numberLastMessageReceived, (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+        contactsStore.updateTotalNumberLastMessageReceived()
+    }
 })
 
 const labelActive = computed(() => {
@@ -92,6 +91,9 @@ const labelActive = computed(() => {
     return true
 })
 
+onMounted(() => {
+    contactsStore.updateTotalNumberLastMessageReceived()
+})
 
 </script>
 

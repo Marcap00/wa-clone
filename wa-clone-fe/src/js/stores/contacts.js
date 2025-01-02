@@ -35,7 +35,7 @@ export const useContactsStore = defineStore('contacts', {
 
                 if (response.data?.success) {
                     this.contacts = response.data.results;
-                    // console.log(this.contacts);
+                    this.updateTotalNumberLastMessageReceived();
                 }
             } catch (error) {
                 console.error('Errore nel caricamento dei contatti:', error);
@@ -54,6 +54,26 @@ export const useContactsStore = defineStore('contacts', {
                 contact.visible = this.isInclude(contact.name, this.textToFind);
                 contact.name = this.capitalize(contact.name);
             });
+        },
+        updateTotalNumberLastMessageReceived() {
+            this.totalNumberLastMessageReceived = this.contacts.reduce((total, contact) => {
+                const messages = contact.messages
+                if (!messages.length) return total
+
+                const lastSentIndex = messages
+                    .map((msg, index) => ({ status: msg.status, index }))
+                    .filter(msg => msg.status === 'sent')
+                    .sort((a, b) => b.index - a.index)[0]?.index ?? -1
+
+                if (lastSentIndex === -1) {
+                    return total + messages.filter(msg => msg.status === 'received').length
+                }
+
+                return total + messages
+                    .slice(lastSentIndex + 1)
+                    .filter(msg => msg.status === 'received')
+                    .length
+            }, 0)
         }
     }
 });
