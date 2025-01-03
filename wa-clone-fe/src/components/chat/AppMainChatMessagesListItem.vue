@@ -65,7 +65,12 @@ function showMessageInfo() {
     if (contactInfoStore.contactInfo) {
         contactInfoStore.contactInfo = false
     }
-    messageInfoStore.showMessageInfo = true
+    if (messageInfoStore.showMessageInfo) {
+        messageInfoStore.showMessageInfo = false
+    }
+    setTimeout(() => {
+        messageInfoStore.showMessageInfo = true
+    }, 200)
     toggleMenuActive(props.index)
 }
 </script>
