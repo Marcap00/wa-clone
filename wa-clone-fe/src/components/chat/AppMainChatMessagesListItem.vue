@@ -2,13 +2,16 @@
 import { useActiveIndexStore } from '../../js/stores/activeIndex'
 import { useContactsStore } from '../../js/stores/contacts'
 import { useAuthStore } from '../../js/stores/auth'
+import { useMessageInfoStore } from '../../js/stores/messageInfo'
+import { useContactInfoStore } from '../../js/stores/contactInfo'
 import { computed } from 'vue';
 import axios from 'axios';
 
 const authStore = useAuthStore()
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
-
+const messageInfoStore = useMessageInfoStore()
+const contactInfoStore = useContactInfoStore()
 const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : authStore.user;
 
 const props = defineProps({
@@ -22,9 +25,9 @@ const props = defineProps({
     }
 })
 
-function getImagePath(imagePath) {
+/* function getImagePath(imagePath) {
     return new URL(`../../assets/img/${imagePath}`, import.meta.url).href;
-}
+} */
 
 function formatDate(date) {
     return new Date(date).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
@@ -56,6 +59,15 @@ async function deleteMessage(id) {
         console.error(error);
     }
 }
+
+function showMessageInfo() {
+    messageInfoStore.dataSingleMessage = props.message
+    if (contactInfoStore.contactInfo) {
+        contactInfoStore.contactInfo = false
+    }
+    messageInfoStore.showMessageInfo = true
+    toggleMenuActive(props.index)
+}
 </script>
 
 <template>
@@ -72,7 +84,7 @@ async function deleteMessage(id) {
                     </time>
                     <i @click="toggleMenuActive(props.index)" class="fas fa-chevron-down"></i>
                     <ul class="menu">
-                        <li class="mb-3">Message Info</li>
+                        <li class="mb-3" @click="showMessageInfo">Message Info</li>
                         <li @click="deleteMessage(props.message.id)" class="mb-2 text-danger">
                             Delete Message
                         </li>
@@ -84,69 +96,4 @@ async function deleteMessage(id) {
 
 </template>
 
-<style lang="scss" scoped>
-@use "../../scss/_variables.scss" as *;
-
-.message-chat {
-    position: relative;
-    z-index: 1;
-}
-
-.message-chat .message {
-    width: 250px;
-    padding: .8rem 1rem;
-    position: relative;
-    z-index: 1;
-}
-
-.message-chat .sent {
-    background-color: $bg-sent-message;
-    color: $text-title;
-}
-
-.message-chat .received {
-    background-color: $bg-dark-searchbar;
-    color: $text-title;
-}
-
-.message-chat .message time {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-weight: 600;
-}
-
-.message-chat .message i {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    color: #b1b1b1;
-    cursor: pointer;
-    display: none;
-}
-
-.message-chat .message:hover i {
-    display: block;
-}
-
-.message-chat .menu {
-    position: absolute;
-    top: 20px;
-    right: 5px;
-    background-color: $bg-dark-contacts;
-    width: 180px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-    display: none;
-    z-index: 2;
-}
-
-.message-chat .menu.active {
-    display: block;
-}
-
-.message-chat .menu li {
-    cursor: pointer;
-}
-</style>
+<style lang="scss" scoped></style>

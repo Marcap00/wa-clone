@@ -3,12 +3,15 @@ import { useActiveIndexStore } from '../../js/stores/activeIndex'
 import { useContactsStore } from '../../js/stores/contacts'
 import { useContactInfoStore } from '../../js/stores/contactInfo'
 import { useFavoritesStore } from '../../js/stores/favorites'
+import { useMessageInfoStore } from '../../js/stores/messageInfo'
 import { computed, ref } from 'vue'
 import axios from 'axios'
+
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
 const contactInfoStore = useContactInfoStore()
 const favoritesStore = useFavoritesStore()
+const messageInfoStore = useMessageInfoStore()
 
 const isDropdownMenuOpen = ref(false);
 const successMessage = ref('')
@@ -32,6 +35,9 @@ const activeContactName = computed(() => {
 })
 
 const openContactInfo = () => {
+    if (messageInfoStore.showMessageInfo) {
+        messageInfoStore.showMessageInfo = false
+    }
     contactInfoStore.contactInfo = true;
 };
 
