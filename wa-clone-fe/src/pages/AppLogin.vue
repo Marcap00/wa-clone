@@ -90,7 +90,8 @@ const now = computed(() => {
                 <div class="toast-body text-white">
                     {{ successOrErrorMessage }}!
                     <br>
-                    <span class="fw-semibold">Credentials may be incorrect or you may not be registered</span>
+                    <span v-if="errorMessage" class="fw-semibold">Credentials may be incorrect or you may not be
+                        registered</span>
                 </div>
             </div>
             <!--  <div class="alert alert-success" v-if="successMessage">
