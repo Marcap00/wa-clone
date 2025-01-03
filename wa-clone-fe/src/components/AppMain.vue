@@ -5,14 +5,17 @@ import AppMainChat from './chat/AppMainChat.vue';
 import AppMainContactInfo from './contact-info/AppMainContactInfo.vue';
 import AppMainNewContact from './new-contact/AppMainNewContact.vue';
 import AppMainSettings from './settings/AppMainSettings.vue';
+import AppMainMessageInfo from './message-info/AppMainMessageInfo.vue';
 import { onMounted } from 'vue';
 import { useContactsStore } from '../js/stores/contacts';
 import { useContactInfoStore } from '../js/stores/contactInfo';
 import { useNewContactStore } from '../js/stores/newContact';
 import { useSettingsStore } from '../js/stores/settings';
+import { useMessageInfoStore } from '../js/stores/messageInfo';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+const messageInfoStore = useMessageInfoStore();
 const settingsStore = useSettingsStore();
 const contactsStore = useContactsStore();
 const contactInfoStore = useContactInfoStore();
@@ -40,6 +43,8 @@ onMounted(() => {
                 <AppMainChat />
                 <!-- Contact Info -->
                 <AppMainContactInfo v-if="contactInfoStore.contactInfo" />
+                <!-- Message Info -->
+                <AppMainMessageInfo v-if="messageInfoStore.showMessageInfo" />
             </div>
         </div>
     </main>
