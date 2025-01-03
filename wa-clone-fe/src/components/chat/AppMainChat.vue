@@ -31,8 +31,9 @@ const isContactEmpty = computed(() => {
             <AppMainChatMessagesList />
             <!-- Input -->
             <AppMainChatInput />
+            <!-- Message Info -->
         </div>
-        <AppMainChatContactEmpty v-else />
+        <AppMainChatContactEmpty v-if="!isContactEmpty" />
     </div>
 </template>
 
