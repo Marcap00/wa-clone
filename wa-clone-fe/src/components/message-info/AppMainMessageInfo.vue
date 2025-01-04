@@ -3,10 +3,10 @@ import { useMessageInfoStore } from '../../js/stores/messageInfo'
 import { computed } from 'vue'
 
 const messageInfoStore = useMessageInfoStore()
-const message = messageInfoStore.dataSingleMessage
+const message = computed(() => messageInfoStore.dataSingleMessage)
 
 const capitalizedMessageStatus = computed(() => {
-    return message.status.charAt(0).toUpperCase() + message.status.slice(1)
+    return message.value.status.charAt(0).toUpperCase() + message.value.status.slice(1)
 })
 
 function closeMessageInfo() {
@@ -21,6 +21,7 @@ function formatDateStatus(date) {
     // Devo formattare la data in modo che il risultato sia "Tuesday at 10:30"
     return new Date(date).toLocaleDateString('en-US', { weekday: 'long', hour: '2-digit', minute: '2-digit' });
 }
+
 </script>
 
 <template>
@@ -31,7 +32,7 @@ function formatDateStatus(date) {
         </header>
         <div class="bg-custom mb-3">
             <div class="message-info-content p-3">
-                <div class="message-chat">
+                <div v-if="messageInfoStore.isShowMessageInfo" class="message-chat">
                     <div :class="message.status" class="message rounded-3 text-md">
                         {{ message.message }}
                         <time>
@@ -41,7 +42,7 @@ function formatDateStatus(date) {
                 </div>
             </div>
         </div>
-        <div class="message-info-status p-4">
+        <div v-if="messageInfoStore.isShowMessageInfo" class="message-info-status p-4">
             <div class="d-flex align-items-center gap-2">
                 <i class="fas fa-check-double"></i>
                 <p>{{ capitalizedMessageStatus }}</p>
