@@ -1,4 +1,5 @@
 <script setup>
+import BaseLoader from '../general/BaseLoader.vue';
 import { useContactsStore } from '../../js/stores/contacts';
 import { useActiveIndexStore } from '../../js/stores/activeIndex';
 import { useContactInfoStore } from '../../js/stores/contactInfo';
@@ -28,14 +29,15 @@ const closeContactInfo = () => {
                 <h3>Contact Info</h3>
             </div>
             <div class="content-info">
-                <div class="user-info d-flex flex-column align-items-center mb-2">
+                <BaseLoader v-if="!contact" />
+                <div v-if="contact" class="user-info d-flex flex-column align-items-center mb-2">
                     <img :src="contact.avatar" alt="Avatar" class="img-avatar-lg my-3">
                     <div class="info-item text-center mb-3">
                         <h2>{{ contact.name }}</h2>
                         <p>{{ contact.phone_number }}</p>
                     </div>
                 </div>
-                <div class="bio p-4 mb-2">
+                <div v-if="contact" class="bio p-4 mb-2">
                     <h4 class="mb-2 fw-normal">About</h4>
                     <p class="text-white">{{ contact.biography }}</p>
                 </div>

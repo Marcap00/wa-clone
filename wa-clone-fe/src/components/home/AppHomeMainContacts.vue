@@ -23,14 +23,14 @@
                     <h4 class="text-white mb-2">
                         Junior Web Developer
                     </h4>
-                    <p class="text-white mb-2">
+                    <p class="text-white mb-3">
                         cappellatomarco00@gmail.com
                     </p>
-                    <p class="text-white mb-2">
-                        Tech Stack:
-                        <span class="fw-semibold">
-                            HTML, CSS, Bootstrap, JavaScript, Vue.js (Composition API), Pinia, PHP, MySQL, Laravel
-                        </span>
+                    <p class="fw-semibold fs-5 mb-2 color-text-label-active">
+                        Wa Clone Tech Stack:
+                    </p>
+                    <p class="text-white mb-2 fw-semibold">
+                        HTML, CSS, Bootstrap, JavaScript, Vue.js (Composition API), Pinia, PHP, MySQL, Laravel
                     </p>
                 </div>
             </div>
@@ -50,6 +50,10 @@ img {
 
     i:hover {
         color: $color-github-profile;
+    }
+
+    .color-text-label-active {
+        color: $text-label-active;
     }
 }
 </style>

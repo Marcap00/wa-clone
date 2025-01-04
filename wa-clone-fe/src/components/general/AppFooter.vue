@@ -27,7 +27,7 @@ import BaseLogo from './BaseLogo.vue'
 @import '../../scss/_variables.scss';
 
 footer {
-    height: 50px;
+    height: 60px;
     background-color: $bg-dark-contacts;
     color: $text-title;
 

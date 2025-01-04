@@ -2,6 +2,7 @@
 import AppMainChatMessagesListItem from './AppMainChatMessagesListItem.vue';
 import BaseLogoText from '../general/BaseLogoText.vue';
 import BaseLogo from '../general/BaseLogo.vue';
+import BaseLoader from '../general/BaseLoader.vue';
 import { useActiveIndexStore } from '../../js/stores/activeIndex'
 import { useContactsStore } from '../../js/stores/contacts'
 import { computed } from 'vue';
@@ -25,8 +26,13 @@ const activeContact = computed(() => {
                     listen to them. Click to learn more
                 </h6>
             </li>
-            <AppMainChatMessagesListItem v-for="(message, index) in activeContact.messages" :key="index"
-                :message="message" :index="index" />
+            <li>
+                <BaseLoader v-if="!activeContact.messages.length" />
+            </li>
+            <li>
+                <AppMainChatMessagesListItem v-for="(message, index) in activeContact.messages" :key="index"
+                    :message="message" :index="index" />
+            </li>
         </ul>
         <div v-if="activeContact.messages.length == 0"
             class="d-flex flex-column justify-content-center align-items-center h-100">

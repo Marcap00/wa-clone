@@ -1,4 +1,5 @@
 <script setup>
+import BaseLoader from '../general/BaseLoader.vue';
 import { useMessageInfoStore } from '../../js/stores/messageInfo'
 import { computed } from 'vue'
 
@@ -11,6 +12,7 @@ const capitalizedMessageStatus = computed(() => {
 
 function closeMessageInfo() {
     messageInfoStore.showMessageInfo = false
+    messageInfoStore.isShowMessageInfo = false
 }
 
 function formatDate(date) {
@@ -30,7 +32,8 @@ function formatDateStatus(date) {
             <i class="fas fa-xmark" @click="closeMessageInfo"></i>
             <h5>Message Info</h5>
         </header>
-        <div class="bg-custom mb-3">
+        <BaseLoader v-if="!message" />
+        <div v-if="message" class="bg-custom mb-3">
             <div class="message-info-content p-3">
                 <div v-if="messageInfoStore.isShowMessageInfo" class="message-chat">
                     <div :class="message.status" class="message rounded-3 text-md">
@@ -42,7 +45,7 @@ function formatDateStatus(date) {
                 </div>
             </div>
         </div>
-        <div v-if="messageInfoStore.isShowMessageInfo" class="message-info-status p-4">
+        <div v-if="messageInfoStore.isShowMessageInfo && message" class="message-info-status p-4">
             <div class="d-flex align-items-center gap-2">
                 <i class="fas fa-check-double"></i>
                 <p>{{ capitalizedMessageStatus }}</p>

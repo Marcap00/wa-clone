@@ -1,6 +1,7 @@
 <script setup>
 import AppMainContactsList from '../contacts/AppMainContactsList.vue';
 import BaseLogo from '../general/BaseLogo.vue';
+import BaseLoader from '../general/BaseLoader.vue';
 import { useNewContactStore } from '../../js/stores/newContact';
 import { useContactsStore } from '../../js/stores/contacts';
 import { useAuthStore } from '../../js/stores/auth';
@@ -109,10 +110,6 @@ const now = computed(() => {
                         {{ successOrErrorMessage }}!
                     </div>
                 </div>
-                <!-- <div v-if="successMessage || errorMessage" class="alert w-75"
-                    :class="{ 'alert-success': successMessage, 'alert-danger': errorMessage }">
-                    {{ successMessage || errorMessage }}
-                </div> -->
                 <h5 class="mb-3">Add new contact</h5>
                 <form @submit.prevent="addNewContact" data-bs-theme="dark" class="row row-cols-1 mb-3">
                     <div class="col mb-3">
@@ -145,7 +142,8 @@ const now = computed(() => {
                 </form>
                 <h5 class="mb-2">Contacts</h5>
             </div>
-            <AppMainContactsList :isNewContact="true" />
+            <BaseLoader v-if="!contactsStore.contacts.length" />
+            <AppMainContactsList v-else :isNewContact="true" />
         </div>
     </div>
 </template>
@@ -172,8 +170,6 @@ const now = computed(() => {
             box-shadow: 0 0 10px 0.25rem $text-label-active !important;
         }
     }
-
-
 
     input:focus~.text-helper {
         display: block;

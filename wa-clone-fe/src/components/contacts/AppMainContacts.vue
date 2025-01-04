@@ -4,7 +4,10 @@ import AppMainContactsDesktopAlerts from './AppMainContactsDesktopAlerts.vue';
 import AppMainContactsSearchbar from './AppMainContactsSearchbar.vue';
 import AppMainContactsList from './AppMainContactsList.vue';
 import AppMainContactsFilterLabels from './AppMainContactsFilterLabels.vue';
+import BaseLoader from '../general/BaseLoader.vue';
+import { useContactsStore } from '../../js/stores/contacts';
 
+const contactsStore = useContactsStore()
 </script>
 
 <template>
@@ -20,8 +23,9 @@ import AppMainContactsFilterLabels from './AppMainContactsFilterLabels.vue';
             <!-- Section desktop alerts -->
             <AppMainContactsDesktopAlerts />
         </div>
+        <BaseLoader v-if="!contactsStore.contacts.length" />
         <!-- Section contacts list -->
-        <AppMainContactsList :isNewContact="false" />
+        <AppMainContactsList v-else :isNewContact="false" />
     </div>
 </template>
 
