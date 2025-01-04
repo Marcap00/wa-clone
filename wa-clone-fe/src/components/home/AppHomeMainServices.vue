@@ -1,5 +1,41 @@
 <script setup>
 import BaseLogoXL from '../general/BaseLogoXL.vue'
+import { ref, reactive } from 'vue'
+
+const description = ref('Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.')
+
+const services = reactive([
+    {
+        id: 1,
+        title: 'Chat in tempo reale',
+        description,
+    },
+    {
+        id: 2,
+        title: 'Lista di contatti personali',
+        description,
+    },
+    {
+        id: 3,
+        title: 'Sistema di autenticazione sicuro',
+        description,
+    },
+    {
+        id: 4,
+        title: 'Gestione profilo utente',
+        description,
+    },
+    {
+        id: 5,
+        title: 'Gestione contatti',
+        description,
+    },
+    {
+        id: 6,
+        title: "Gestione stato dell'applicazione con Pinia🍍",
+        description,
+    },
+])
 </script>
 
 <template>
@@ -15,52 +51,12 @@ import BaseLogoXL from '../general/BaseLogoXL.vue'
                 <div class="col-7">
                     <div class="services-list p-3">
                         <ul>
-                            <li>
+                            <li v-for="service in services" :key="service.id">
                                 <span class="fw-semibold">
-                                    Chat in tempo reale
+                                    {{ service.title }}
                                 </span>
                                 <p class="text-secondary">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                                </p>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">
-                                    Lista di contatti personali
-                                </span>
-                                <p class="text-secondary">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                                </p>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">
-                                    Sistema di autenticazione sicuro
-                                </span>
-                                <p class="text-secondary">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                                </p>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">
-                                    Gestione profilo utente
-                                </span>
-                                <p class="text-secondary">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                                </p>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">
-                                    Gestione contatti
-                                </span>
-                                <p class="text-secondary">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                                </p>
-                            </li>
-                            <li>
-                                <span class="fw-semibold">
-                                    Gestione stato dell'applicazione con Pinia🍍
-                                </span>
-                                <p class="text-secondary">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+                                    {{ service.description }}
                                 </p>
                             </li>
                         </ul>
