@@ -27,7 +27,7 @@ const activeContact = computed(() => {
                 </h6>
             </li>
             <li>
-                <BaseLoader v-if="!activeContact.messages.length" />
+                <BaseLoader v-if="!activeContact.messages.length" /> <!-- !! Error -->
             </li>
             <li>
                 <AppMainChatMessagesListItem v-for="(message, index) in activeContact.messages" :key="index"
