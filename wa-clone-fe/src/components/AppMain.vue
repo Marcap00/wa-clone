@@ -6,7 +6,7 @@ import AppMainContactInfo from './contact-info/AppMainContactInfo.vue';
 import AppMainNewContact from './new-contact/AppMainNewContact.vue';
 import AppMainSettings from './settings/AppMainSettings.vue';
 import AppMainMessageInfo from './message-info/AppMainMessageInfo.vue';
-import { onMounted } from 'vue';
+import { onMounted, Transition } from 'vue';
 import { useContactsStore } from '../js/stores/contacts';
 import { useContactInfoStore } from '../js/stores/contactInfo';
 import { useNewContactStore } from '../js/stores/newContact';
@@ -42,9 +42,13 @@ onMounted(() => {
                 <!-- Right Column -->
                 <AppMainChat />
                 <!-- Contact Info -->
-                <AppMainContactInfo v-if="contactInfoStore.contactInfo" />
+                <Transition name="fade-right">
+                    <AppMainContactInfo v-if="contactInfoStore.contactInfo" />
+                </Transition>
                 <!-- Message Info -->
-                <AppMainMessageInfo v-if="messageInfoStore.showMessageInfo" />
+                <Transition name="fade-right">
+                    <AppMainMessageInfo v-if="messageInfoStore.showMessageInfo" />
+                </Transition>
             </div>
         </div>
     </main>
@@ -66,5 +70,19 @@ main {
     /* .wrapper {
         box-shadow: 0 0 10px 0.25rem $text-label-active !important;
     } */
+    // Transizione dove entra da destra
+
+    .fade-right-enter-active,
+    .fade-right-leave-active {
+        /* transition: opacity 0.6s ease; */
+        transition: all 0.8s ease-in-out;
+    }
+
+    .fade-right-enter-from,
+    .fade-right-leave-to {
+        opacity: 0;
+        // transform: translateX(100%);
+        transform: translateX(10%);
+    }
 }
 </style>
