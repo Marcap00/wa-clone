@@ -33,6 +33,7 @@ const classNumberLastMessageReceived = computed(() => {
 function setActiveContact(i) {
     activeIndexStore.activeIndex = i
     contactsStore.closeChat = false
+    localStorage.setItem('closeChat', JSON.stringify(false))
     // console.log(activeIndexStore.activeIndex)
 }
 
