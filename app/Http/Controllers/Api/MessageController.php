@@ -44,12 +44,23 @@ class MessageController extends Controller
                 'date' => 'nullable|date',
             ]);
 
-            $message = Message::create([
-                'message' => $validated['message'],
-                'contact_id' => $validated['contact_id'],
-                'status' => $validated['status'],
-                'date' => $validated['date'] ?? now(),
-            ]);
+            if ($validated['status'] == 'received') {
+                $message = Message::create([
+                    'message' => fake()->sentence(),
+                    'contact_id' => $validated['contact_id'],
+                    'status' => $validated['status'],
+                    'date' => $validated['date'] ?? now(),
+                ]);
+            }
+
+            if ($validated['status'] == 'sent') {
+                $message = Message::create([
+                    'message' => $validated['message'],
+                    'contact_id' => $validated['contact_id'],
+                    'status' => $validated['status'],
+                    'date' => $validated['date'] ?? now(),
+                ]);
+            }
 
             $message->contact()->attach($validated['contact_id']);
 
