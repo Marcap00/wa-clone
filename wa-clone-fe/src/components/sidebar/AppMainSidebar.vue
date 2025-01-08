@@ -221,7 +221,7 @@ div.sidebar {
         background-color: #bebebe28;
         border-radius: 50%;
         box-shadow: 0 0 10px 0.25rem $text-label-active !important;
-        transition: all 0.2s ease;
+        transition: all 0.1s ease;
     }
 
     img.img-avatar {
