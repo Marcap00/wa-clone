@@ -32,6 +32,7 @@ export const useAuthStore = defineStore('auth', {
             localStorage.removeItem('user_id');
             localStorage.removeItem('user');
             localStorage.removeItem('favorites');
+            localStorage.removeItem('closeChat');
         },
         initializeFromStorage() {
             const storedUser = localStorage.getItem('user');
