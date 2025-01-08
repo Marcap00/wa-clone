@@ -11,7 +11,7 @@ export const useContactsStore = defineStore('contacts', {
         textToFind: '',
         totalNumberLastMessageReceived: 0,
         showAlerts: true,
-        closeChat: true
+        closeChat: localStorage.getItem('closeChat') ? JSON.parse(localStorage.getItem('closeChat')) : true
     }),
     actions: {
         async getContacts(router = null) {
