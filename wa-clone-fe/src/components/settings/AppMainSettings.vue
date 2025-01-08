@@ -1,11 +1,13 @@
 <script setup>
 import { useSettingsStore } from '../../js/stores/settings'
+import { useContactInfoStore } from '../../js/stores/contactInfo'
 import { useAuthStore } from '../../js/stores/auth'
 import BaseLogo from '../general/BaseLogo.vue'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const settingsStore = useSettingsStore()
+const contactInfoStore = useContactInfoStore()
 const authStore = useAuthStore()
 const router = useRouter()
 
@@ -22,7 +24,7 @@ const logout = () => {
 </script>
 
 <template>
-    <div class="col-settings">
+    <div class="col-settings" :class="{ 'info-displayed': contactInfoStore.contactInfo }">
         <header class="d-flex align-items-center gap-3 p-3">
             <i @click="closeSettings" class="fas fa-arrow-left"></i>
             <BaseLogo />
@@ -61,8 +63,12 @@ const logout = () => {
 @use "../../scss/_variables.scss" as *;
 
 .col-settings {
-    width: 30%;
+    width: 44.3%;
     background-color: $bg-dark-contacts;
+
+    &.info-displayed {
+        width: 30%;
+    }
 
     header {
         height: 70px;
