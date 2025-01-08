@@ -1,5 +1,6 @@
 <script setup>
 import BaseLoader from '../general/BaseLoader.vue';
+import AppMainContactInfoHeader from './AppMainContactInfoHeader.vue';
 import { useContactsStore } from '../../js/stores/contacts';
 import { useActiveIndexStore } from '../../js/stores/activeIndex';
 import { useContactInfoStore } from '../../js/stores/contactInfo';
@@ -15,19 +16,12 @@ const contact = computed(() => {
 
 contactInfoStore.contact = contact.value;
 
-const closeContactInfo = () => {
-    contactInfoStore.contactInfo = false;
-};
-
 </script>
 
 <template>
     <div v-if="contact" class="col-info">
         <div class="bg-custom-info h-100">
-            <div class="header-info d-flex align-items-center gap-3 px-3 py-3">
-                <i class="fas fa-xmark fa-lg" @click="closeContactInfo"></i>
-                <h3>Contact Info</h3>
-            </div>
+            <AppMainContactInfoHeader />
             <div class="content-info">
                 <BaseLoader v-if="!contact" />
                 <div v-if="contact" class="user-info d-flex flex-column align-items-center mb-2">
