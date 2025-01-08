@@ -2,10 +2,10 @@
 import AppMainChatMessagesListItem from './AppMainChatMessagesListItem.vue';
 import BaseLogoText from '../general/BaseLogoText.vue';
 import BaseLogo from '../general/BaseLogo.vue';
-import BaseLoader from '../general/BaseLoader.vue';
+/* import BaseLoader from '../general/BaseLoader.vue'; */
 import { useActiveIndexStore } from '../../js/stores/activeIndex'
 import { useContactsStore } from '../../js/stores/contacts'
-import { computed } from 'vue';
+import { computed, ref, onMounted, watch } from 'vue';
 
 const contactsStore = useContactsStore()
 const activeIndexStore = useActiveIndexStore()
@@ -13,6 +13,28 @@ const activeIndexStore = useActiveIndexStore()
 const activeContact = computed(() => {
     return contactsStore.contacts[activeIndexStore.activeIndex]
 })
+
+const scrollToBottom = () => {
+    const chat = document.querySelector('.chat')
+    if (chat) {
+        setTimeout(() => {
+            chat.scrollTop = chat.scrollHeight
+        }, 0)
+    }
+}
+
+onMounted(() => {
+    scrollToBottom()
+})
+
+watch(
+    () => activeContact.value?.messages,
+    () => {
+        scrollToBottom()
+    },
+    { deep: true }
+)
+
 
 </script>
 
