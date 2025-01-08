@@ -41,7 +41,8 @@ const isContactEmpty = computed(() => {
 @use "../../scss/_variables.scss" as *;
 
 .col-rght {
-    width: 65%;
+    /* width: 65%; */
+    width: 100%;
     flex-grow: 1;
 
     &.info-displayed {
