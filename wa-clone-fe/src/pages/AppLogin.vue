@@ -1,4 +1,5 @@
 <script setup>
+import BaseLoaderSpinner from '../components/general/BaseLoaderSpinner.vue';
 import axios from 'axios';
 import { ref, computed, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
@@ -13,13 +14,16 @@ const password = ref('')
 const successMessage = ref('')
 const errorMessage = ref('')
 const errorServerMessage = ref('')
+const isLoading = ref(false)
 
 async function login() {
     try {
+        isLoading.value = true
         const response = await axios.post(ApiUrl, {
             email: email.value,
             password: password.value,
         });
+
 
         if (response.status === 200) {
             const { token, user } = response.data;
@@ -135,9 +139,15 @@ const now = computed(() => {
                         <p class="mb-0">* Password is required</p>
                     </div>
                 </div>
-                <div class="col">
-                    <button type="submit" class="btn-custom text-white mb-3 me-3">Login</button>
-                    <button type="reset" class="btn-custom text-white mb-3">Reset</button>
+                <div class="col d-flex align-items-center">
+                    <button id="btn-login" type="submit" class="btn-custom my-3 mx-3" :class="{ 'disabled': isLoading }"
+                        :disabled="isLoading">
+                        <BaseLoaderSpinner v-if="isLoading" />
+                        <span v-else>Login</span>
+                    </button>
+                    <button id="btn-reset" type="reset" class="btn-custom my-3 mx-3" :disabled="isLoading">
+                        <span>Reset</span>
+                    </button>
                 </div>
                 <div class="col">
                     <p>Don't have an account? <RouterLink to="/register">Register</RouterLink>
@@ -210,5 +220,10 @@ input:focus~.text-helper {
     top: 70px;
     right: 10px;
     z-index: 1000;
+}
+
+button#btn-login.disabled {
+    cursor: not-allowed !important;
+    opacity: 0.5 !important;
 }
 </style>

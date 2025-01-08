@@ -1,11 +1,12 @@
 <script setup>
+import BaseLoaderSpinner from '../components/general/BaseLoaderSpinner.vue';
 import { useAuthStore } from '../js/stores/auth'
 import { ref, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { Toast } from 'bootstrap';
 const router = useRouter()
 const authStore = useAuthStore()
-
+const isLoading = ref(false)
 const form = ref({
     name: '',
     email: '',
@@ -20,6 +21,7 @@ const successMessage = ref('')
 
 const register = async () => {
     try {
+        isLoading.value = true
         console.log(form.value)
         const response = await authStore.register(form.value)
         successMessage.value = "Registration made successfully!"
@@ -174,8 +176,14 @@ const now = computed(() => {
                 </div>
 
                 <div class="col-12 d-flex justify-content-center mb-3">
-                    <button type="submit" class="btn-custom me-3">Register</button>
-                    <button type="reset" class="btn-custom me-2">Reset</button>
+                    <button id="btn-register" type="submit" class="btn-custom me-3" :class="{ 'disabled': isLoading }"
+                        :disabled="isLoading">
+                        <BaseLoaderSpinner v-if="isLoading" />
+                        <span v-else>Register</span>
+                    </button>
+                    <button type="reset" class="btn-custom me-2" :disabled="isLoading">
+                        <span>Reset</span>
+                    </button>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                     <p>Already have an account? <a href="/login">Login</a></p>
@@ -262,5 +270,10 @@ textarea {
     top: 80px;
     right: 10px;
     z-index: 1000;
+}
+
+button#btn-register.disabled {
+    cursor: not-allowed !important;
+    opacity: 0.5 !important;
 }
 </style>
